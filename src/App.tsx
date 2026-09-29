@@ -24,8 +24,8 @@ const editorial: Record<
   },
   tradingAlgos: {
     title: "Trading algorithms",
-    description: "A rabbit hole into trading programs and stock-data analysis.",
-    label: "RABBIT HOLE",
+    description: "Experiments in trading programs and stock-data analysis.",
+    label: "MARKET EXPERIMENTS",
   },
   FoodConnect: {
     title: "FoodConnect",
@@ -210,7 +210,7 @@ export default function App() {
                 </span>
               </h1>
               <p className="hero-description">
-                I turn rabbit holes into things you can use.
+                I build things I want to exist.
                 <br />
                 Sometimes useful. Always a little obsessive.
               </p>
@@ -359,8 +359,7 @@ export default function App() {
               <div>
                 <p className="eyebrow">03 / THE PUBLIC ARCHIVE</p>
                 <h2 id="repos-title">
-                  The rest of the{" "}
-                  <span className="serif-word">rabbit holes.</span>
+                  The public <span className="serif-word">archive.</span>
                 </h2>
               </div>
               <ExternalLink
@@ -480,7 +479,7 @@ export default function App() {
               <h2 id="outro-title">
                 Got a good
                 <br />
-                <span className="serif-word">rabbit hole?</span>
+                <span className="serif-word">idea?</span>
               </h2>
               <ExternalLink href={github} className="outro-link">
                 <span className="sr-only">Find Nimal on GitHub</span>
