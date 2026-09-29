@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.vercel/
+.env
+.env.*
+!.env.example
+local-data/
+.DS_Store
+artifacts/
+playwright-report/
+test-results/
