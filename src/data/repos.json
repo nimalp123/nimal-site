@@ -1,0 +1,95 @@
+{
+  "fetchedAt": "2026-09-29T00:00:00Z",
+  "repos": [
+    {
+      "name": "instagram-friendship-graph",
+      "description": "Map your 1st, 2nd, and 3rd degree friends and uncover hidden mutuals in Obsidian",
+      "html_url": "https://github.com/nimalp123/instagram-friendship-graph",
+      "fork": false,
+      "language": "Python",
+      "stargazers_count": 0,
+      "size": 870,
+      "updated_at": "2026-09-25T09:39:48Z"
+    },
+    {
+      "name": "openclaw",
+      "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. \ud83e\udd9e ",
+      "html_url": "https://github.com/nimalp123/openclaw",
+      "fork": true,
+      "language": null,
+      "stargazers_count": 0,
+      "size": 1390119,
+      "updated_at": "2026-05-25T20:05:00Z"
+    },
+    {
+      "name": "tradingAlgos",
+      "description": "A collection of my programs built to either trade for you, analyze stock data, and other financial related products",
+      "html_url": "https://github.com/nimalp123/tradingAlgos",
+      "fork": false,
+      "language": "Python",
+      "stargazers_count": 1,
+      "size": 210,
+      "updated_at": "2026-05-01T07:57:39Z"
+    },
+    {
+      "name": "calpeptides",
+      "description": null,
+      "html_url": "https://github.com/nimalp123/calpeptides",
+      "fork": false,
+      "language": null,
+      "stargazers_count": 0,
+      "size": 0,
+      "updated_at": "2026-04-05T21:51:50Z"
+    },
+    {
+      "name": "FoodConnect",
+      "description": null,
+      "html_url": "https://github.com/nimalp123/FoodConnect",
+      "fork": false,
+      "language": "Python",
+      "stargazers_count": 0,
+      "size": 7,
+      "updated_at": "2024-10-15T00:12:54Z"
+    },
+    {
+      "name": "mediquery",
+      "description": null,
+      "html_url": "https://github.com/nimalp123/mediquery",
+      "fork": false,
+      "language": "Python",
+      "stargazers_count": 0,
+      "size": 13,
+      "updated_at": "2024-01-08T04:52:25Z"
+    },
+    {
+      "name": "streamlit-example",
+      "description": "Example Streamlit app that you can fork to test out share.streamlit.io",
+      "html_url": "https://github.com/nimalp123/streamlit-example",
+      "fork": true,
+      "language": null,
+      "stargazers_count": 0,
+      "size": 5,
+      "updated_at": "2024-01-03T02:20:35Z"
+    },
+    {
+      "name": "django-server",
+      "description": null,
+      "html_url": "https://github.com/nimalp123/django-server",
+      "fork": false,
+      "language": "Python",
+      "stargazers_count": 0,
+      "size": 5,
+      "updated_at": "2024-01-01T00:29:07Z"
+    },
+    {
+      "name": "health-helper-v1",
+      "description": null,
+      "html_url": "https://github.com/nimalp123/health-helper-v1",
+      "fork": false,
+      "language": null,
+      "stargazers_count": 0,
+      "size": 0,
+      "updated_at": "2023-12-31T22:52:41Z"
+    }
+  ]
+}
