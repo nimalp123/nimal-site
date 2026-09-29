@@ -46,24 +46,28 @@ try {
   );
   const forks = snapshot.repos.filter((repo) => repo.fork);
   const originals = snapshot.repos.filter((repo) => !repo.fork);
-  await page
-    .getByRole("button", { name: `Forks ${countLabel(forks.length)}` })
-    .click();
-  await expect(page.locator(".repo-row")).toHaveCount(forks.length);
-  const forkLinks = await page
-    .locator(".repo-row")
-    .evaluateAll((rows) => rows.map((row) => row.getAttribute("href")));
-  assert.deepEqual(
-    new Set(forkLinks),
-    new Set(forks.map((repo) => repo.html_url)),
-  );
-  await page
-    .getByRole("button", { name: `Originals ${countLabel(originals.length)}` })
-    .click();
-  await expect(page.locator(".repo-row")).toHaveCount(originals.length);
+  if (forks.length) {
+    await page
+      .getByRole("button", { name: `Forks ${countLabel(forks.length)}` })
+      .click();
+    await expect(page.locator(".repo-row")).toHaveCount(forks.length);
+    const forkLinks = await page
+      .locator(".repo-row")
+      .evaluateAll((rows) => rows.map((row) => row.getAttribute("href")));
+    assert.deepEqual(
+      new Set(forkLinks),
+      new Set(forks.map((repo) => repo.html_url)),
+    );
+    await page
+      .getByRole("button", {
+        name: `Originals ${countLabel(originals.length)}`,
+      })
+      .click();
+    await expect(page.locator(".repo-row")).toHaveCount(originals.length);
+  }
   await page
     .getByRole("button", {
-      name: `All repos ${countLabel(snapshot.repos.length)}`,
+      name: `Selected ${countLabel(snapshot.repos.length)}`,
     })
     .click();
   await page.getByLabel("Repository sort order").selectOption("recent");
@@ -79,6 +83,28 @@ try {
       "Recent activity ordering",
     );
   await page.getByLabel("Repository sort order").selectOption("aura");
+  for (const name of [
+    "django-server",
+    "openclaw",
+    "streamlit-example",
+    "calpeptides",
+    "health-helper-v1",
+  ]) {
+    await expect(
+      page.locator(`.repo-row[href="https://github.com/nimalp123/${name}"]`),
+    ).toHaveCount(0);
+  }
+  await expect(page.locator(".rb-build")).toHaveCount(8);
+  await expect(
+    page.getByRole("link", {
+      name: "Open the live Rayaboy website in a new tab",
+    }),
+  ).toHaveAttribute("href", "https://rayaboy.com");
+  await expect(page.locator(".rb-open-site")).toContainText(
+    "Open the live site",
+  );
+  await page.locator(".rb-screenshot img").scrollIntoViewIfNeeded();
+  await page.locator(".rb-screenshot img").evaluate((image) => image.decode());
   await page.getByRole("button", { name: "1st degree", exact: true }).click();
   await expect(page.locator(".network-node")).toHaveCount(13);
   await page
@@ -144,7 +170,10 @@ try {
     await page.evaluate(() => navigator.clipboard.readText()),
     "python3 -m friendship_graph demo",
   );
-  await page.evaluate(() => scrollTo(0, 0));
+  await page.evaluate(() => {
+    window.getSelection()?.removeAllRanges();
+    scrollTo(0, 0);
+  });
   await mkdir("artifacts", { recursive: true });
   await page.screenshot({
     path: "artifacts/desktop.png",

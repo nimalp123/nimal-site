@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Network from "./Network";
+import Rayaboy from "./Rayaboy";
 import { Arrow, GitHub, Spark } from "./icons";
 import snapshot from "./data/repos.json";
 
@@ -10,11 +11,6 @@ const auraOrder = [
   "tradingAlgos",
   "FoodConnect",
   "mediquery",
-  "django-server",
-  "openclaw",
-  "streamlit-example",
-  "calpeptides",
-  "health-helper-v1",
 ];
 const editorial: Record<
   string,
@@ -41,34 +37,6 @@ const editorial: Record<
     description:
       "An early Python experiment, kept here as part of the journey.",
     label: "EXPERIMENT",
-  },
-  "django-server": {
-    title: "Django server",
-    description: "A small Python server experiment from the early days.",
-    label: "EARLY BUILD",
-  },
-  openclaw: {
-    title: "OpenClaw",
-    description:
-      "A fork of the personal AI assistant project. Credit to the upstream builders.",
-    label: "FORK",
-  },
-  "streamlit-example": {
-    title: "Streamlit example",
-    description:
-      "A forked starter app for trying Streamlit. A starting point, not an original product.",
-    label: "FORK",
-  },
-  calpeptides: {
-    title: "Calpeptides",
-    description: "An empty repository. A name waiting for its next chapter.",
-    label: "JUST A SEED",
-  },
-  "health-helper-v1": {
-    title: "Health helper",
-    description:
-      "An empty repository from the archive. Every idea starts somewhere.",
-    label: "JUST A SEED",
   },
 };
 
@@ -164,6 +132,14 @@ export default function App() {
     undefined,
   );
   useEffect(() => () => clearTimeout(copyTimer.current), []);
+  useEffect(() => {
+    const section = window.location.hash.slice(1);
+    if (!["main", "work", "rayaboy", "repos"].includes(section)) return;
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(section)?.scrollIntoView({ behavior: "instant" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
   const repositories = snapshot.repos
     .filter(
       (repo) =>
@@ -177,6 +153,13 @@ export default function App() {
       };
       return rank(a.name) - rank(b.name) || a.name.localeCompare(b.name);
     });
+  const repoFilters = snapshot.repos.some((repo) => repo.fork)
+    ? [
+        ["all", "Selected"],
+        ["originals", "Originals"],
+        ["forks", "Forks"],
+      ]
+    : [["all", "Selected"]];
   async function copyDemo() {
     try {
       await navigator.clipboard.writeText("python3 -m friendship_graph demo");
@@ -365,74 +348,7 @@ export default function App() {
             </div>
           </section>
 
-          <section
-            className="rayaboy-section section"
-            id="rayaboy"
-            aria-labelledby="rayaboy-title"
-          >
-            <div className="rayaboy-intro">
-              <p className="eyebrow">02 / BEHIND THE CURTAIN</p>
-              <h2 id="rayaboy-title">
-                One profile.
-                <br />
-                More <span className="serif-word">opportunity.</span>
-              </h2>
-              <p>
-                At Rayaboy, we’re building a better way for students to find
-                scholarships and manage applications, starting with one reusable
-                profile.
-              </p>
-              <p>
-                I build across the application hub, document processing, and
-                scholarship research tooling. Product on the surface; a lot of
-                systems work underneath.
-                <br />
-                The playbook stays with us.
-              </p>
-              <div className="rayaboy-deliverables">
-                <span>Application hub</span>
-                <span>Document processing</span>
-                <span>Research tooling</span>
-              </div>
-              <div className="rayaboy-proof">
-                <strong>2,134</strong>
-                <span>
-                  passing local checks in the research tooling
-                  <br />
-                  <small>
-                    Recorded engineering checkpoint · September 2026
-                  </small>
-                </span>
-              </div>
-              <ExternalLink
-                href="https://rayaboy.com"
-                className="text-link rayaboy-site"
-              >
-                Visit Rayaboy <span className="mono">RAYABOY.COM</span>
-                <Arrow />
-              </ExternalLink>
-            </div>
-            <ExternalLink href="https://rayaboy.com" className="rayaboy-art">
-              <div className="classified-label mono">
-                <span>R&amp;D / PRIVATE WORK</span>
-                <span>RB—001</span>
-              </div>
-              <div className="rayaboy-monogram" aria-hidden="true">
-                rb<span>✳</span>
-              </div>
-              <div className="rayaboy-name">
-                Rayaboy<span className="lime">.</span>
-              </div>
-              <div className="rayaboy-art-bottom">
-                <span className="mono">
-                  THE WORK SPEAKS.
-                  <br />
-                  THE NOTES STAY PRIVATE.
-                </span>
-                <Spark />
-              </div>
-            </ExternalLink>
-          </section>
+          <Rayaboy />
 
           <section
             className="repo-section section"
@@ -455,17 +371,13 @@ export default function App() {
               </ExternalLink>
             </div>
             <p className="repo-intro">
-              Some shipped. Some taught me something. A few are just seeds.
+              A few selected builds and early experiments.
               <br />
               Ordered by aura. Completely subjective. Completely intentional.
             </p>
             <div className="repo-toolbar">
               <div className="repo-tabs" aria-label="Filter repositories">
-                {[
-                  ["all", "All repos"],
-                  ["originals", "Originals"],
-                  ["forks", "Forks"],
-                ].map(([value, label]) => (
+                {repoFilters.map(([value, label]) => (
                   <button
                     key={value}
                     onClick={() => setFilter(value)}

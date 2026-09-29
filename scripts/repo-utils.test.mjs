@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { publicPortfolioRepos } from "./repo-utils.mjs";
+import { EXCLUDED_REPOS, publicPortfolioRepos } from "./repo-utils.mjs";
 
 test("the snapshot drops private repos, unknown visibility, other owners, and the website itself", () => {
   const base = {
@@ -14,7 +14,7 @@ test("the snapshot drops private repos, unknown visibility, other owners, and th
     { ...base, name: "internal", private: true },
     { ...base, name: "unknown", private: undefined },
     { ...base, name: "other", owner: { login: "someone-else" } },
-    { ...base, name: "nimal-site" },
+    ...[...EXCLUDED_REPOS].map((name) => ({ ...base, name })),
   ]);
   assert.deepEqual(
     result.map((repo) => repo.name),

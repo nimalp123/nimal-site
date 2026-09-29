@@ -19,4 +19,4 @@ Exact generation prompt:
 
 ## Rayaboy
 
-Brand spelling is **Rayaboy**. Link the showcase to `https://rayaboy.com`. Describe products and broad contributions, with clearly qualified engineering results. Keep source code, internal methods, learnings, provider choices, credentials, private links, and student data out of the site.
+Brand spelling is **Rayaboy**. Link the showcase to `https://rayaboy.com`. Give Rayaboy a substantial case study: specific build areas, clearly qualified engineering results, and a real, clickable homepage snapshot. Use a prominent lime action with an external-link arrow and explicit new-tab copy. Keep source code, internal methods, learnings, provider choices, credentials, private links, and student data out of the site.

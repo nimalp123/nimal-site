@@ -1,5 +1,13 @@
 export const OWNER = "nimalp123";
 export const WEBSITE_REPO = "nimal-site";
+export const EXCLUDED_REPOS = new Set([
+  WEBSITE_REPO,
+  "django-server",
+  "openclaw",
+  "streamlit-example",
+  "calpeptides",
+  "health-helper-v1",
+]);
 
 // Explicitly allow only public portfolio fields into the checked-in snapshot.
 export function publicPortfolioRepos(input) {
@@ -10,7 +18,7 @@ export function publicPortfolioRepos(input) {
       (repo) =>
         repo.private === false &&
         repo.owner?.login === OWNER &&
-        repo.name !== WEBSITE_REPO,
+        !EXCLUDED_REPOS.has(repo.name),
     )
     .map((repo) => {
       if (!/^[\w.-]+$/.test(repo.name))
