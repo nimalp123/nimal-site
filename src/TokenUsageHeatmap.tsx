@@ -44,6 +44,7 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
   const [metric, setMetric] = useState<HeatMetric>("cost");
   const [mobilePanel, setMobilePanel] = useState<"agents" | "days">("agents");
   const [scope, setScope] = useState<"day" | "week">("day");
+  const [isPinned, setIsPinned] = useState(false);
   const [chosenDate, setChosenDate] = useState<string | null>(null);
   const [chosenWeek, setChosenWeek] = useState<number | null>(null);
   const [referenceDate, setReferenceDate] = useState<string | null>(null);
@@ -117,11 +118,13 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
     return () => observer.disconnect();
   }, []);
 
-  function inspectDay(date: string) {
+  function inspectDay(date: string, pin = true) {
+    setIsPinned(pin);
     setChosenDate(date); setScope("day"); setChosenWeek(null);
   }
 
-  function inspectWeek(index: number) {
+  function inspectWeek(index: number, pin = true) {
+    setIsPinned(pin);
     setChosenWeek(index); setScope("week");
   }
 
@@ -139,19 +142,19 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
     if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
     event.preventDefault();
     const next = keyboardTarget(calendar.cells, cell.date, event.key);
-    if (next) { buttons.current.get(next)?.focus({ preventScroll: true }); revealDate(next); }
+    if (next) { inspectDay(next, isPinned); buttons.current.get(next)?.focus({ preventScroll: true }); revealDate(next); }
   }
 
   function moveWeekFocus(event: KeyboardEvent<HTMLButtonElement>, week: UsageWeek) {
     if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
     event.preventDefault();
     const next = weeklyKeyboardTarget(weeks, week.index, event.key);
-    if (next !== null) { weekButtons.current.get(next)?.focus({ preventScroll: true }); revealDate(weeks[next]?.coveredFrom ?? null); }
+    if (next !== null) { inspectWeek(next, isPinned); weekButtons.current.get(next)?.focus({ preventScroll: true }); revealDate(weeks[next]?.coveredFrom ?? null); }
   }
 
   function resetSelection(nextYear?: number) {
     if (nextYear !== undefined) setChosenYear(nextYear);
-    setChosenDate(null); setChosenWeek(null); setScope("day"); setReferenceDate(null); setReferenceWeek(null);
+    setChosenDate(null); setChosenWeek(null); setScope("day"); setIsPinned(false); setReferenceDate(null); setReferenceWeek(null);
     revealDate(latest);
   }
 
@@ -176,15 +179,15 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
               <div className="th-months" aria-hidden="true">{calendar.months.map((month) => <span key={month.label} style={{ gridColumn: month.week + 1 }}>{month.label}</span>)}</div>
               <div className="th-calendar">
                 <div className="th-weekdays" aria-hidden="true"><span>Mon</span><span>Wed</span><span>Fri</span></div>
-                <div className="th-cells">{weeks.map((week) => <div key={week.index} className={`th-week-column${activeWeek?.index === week.index ? " th-week-highlight" : ""}`} onPointerEnter={(event) => { if (event.target === event.currentTarget && event.pointerType !== "touch") inspectWeek(week.index); }}>
+                <div className="th-cells">{weeks.map((week) => <div key={week.index} className={`th-week-column${activeWeek?.index === week.index ? " th-week-highlight" : ""}`} onPointerEnter={(event) => { if (!isPinned && event.target === event.currentTarget && event.pointerType !== "touch") inspectWeek(week.index, false); }}>
                   {week.cells.map((cell) => cell.available ? <button key={cell.date}
                     ref={(node) => { if (node) buttons.current.set(cell.date, node); else buttons.current.delete(cell.date); }}
                     className={`th-cell th-level-${heatmapLevel(cell.day ? metric === "tokens" ? cell.day.totalTokens : cell.day.totalCost : 0, metric)}${scope === "day" && shownDate === cell.date ? " th-pinned" : ""}${referenceDate === cell.date ? " th-reference" : ""}`}
                     style={{ gridRow: cell.weekday + 1 }}
                     aria-label={`${dateLabel(cell.date, true)}: ${usd.format(cell.day?.totalCost ?? 0)} estimated API value, ${number.format(cell.day?.totalTokens ?? 0)} tokens. Inspect day.`}
                     aria-pressed={scope === "day" && shownDate === cell.date} tabIndex={shownDate === cell.date ? 0 : -1}
-                    onPointerEnter={(event) => { if (event.pointerType !== "touch") inspectDay(cell.date); }}
-                    onFocus={() => inspectDay(cell.date)} onClick={() => inspectDay(cell.date)} onKeyDown={(event) => moveFocus(event, cell)}
+                    onPointerEnter={(event) => { if (!isPinned && event.pointerType !== "touch") inspectDay(cell.date, false); }}
+                    onFocus={() => { if (!isPinned) inspectDay(cell.date, false); }} onClick={() => inspectDay(cell.date)} onKeyDown={(event) => moveFocus(event, cell)}
                   /> : <span key={cell.date} className="th-cell th-outside" style={{ gridRow: cell.weekday + 1 }} title={`${dateLabel(cell.date)}: outside snapshot coverage`} />)}
                 </div>)}</div>
               </div>
@@ -195,17 +198,17 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
                   const height = weekMaximum > 0 && value > 0 ? Math.max(3, value / weekMaximum * 100) : 0;
                   return week.available ? <button key={week.index}
                     ref={(node) => { if (node) weekButtons.current.set(week.index, node); else weekButtons.current.delete(week.index); }}
-                    className={`th-week-bar${activeWeek?.index === week.index ? " th-week-bar-highlight" : ""}${referenceWeek === week.start ? " th-reference" : ""}`}
+                    className={`th-week-bar${activeWeek?.index === week.index ? " th-week-bar-highlight" : ""}${isPinned && scope === "week" && shownWeek?.index === week.index ? " th-week-pinned" : ""}${referenceWeek === week.start ? " th-reference" : ""}`}
                     aria-label={`Week ${weekLabel(week)}: ${usd.format(week.totalCost)} estimated API value, ${number.format(week.totalTokens)} tokens.${week.partial ? ` Partial week: ${week.coveredDays} of 7 days covered.` : ""} Inspect week.`}
                     aria-pressed={scope === "week" && shownWeek?.index === week.index} tabIndex={shownWeek?.index === week.index ? 0 : -1}
-                    onPointerEnter={(event) => { if (event.pointerType !== "touch") inspectWeek(week.index); }}
-                    onFocus={() => inspectWeek(week.index)} onClick={() => inspectWeek(week.index)} onKeyDown={(event) => moveWeekFocus(event, week)}
+                    onPointerEnter={(event) => { if (!isPinned && event.pointerType !== "touch") inspectWeek(week.index, false); }}
+                    onFocus={() => { if (!isPinned) inspectWeek(week.index, false); }} onClick={() => inspectWeek(week.index)} onKeyDown={(event) => moveWeekFocus(event, week)}
                   ><span aria-hidden="true" style={{ height: `${height}%` }} /></button> : <span key={week.index} className="th-week-bar th-week-unavailable" title={`Week ${weekLabel(week)}: outside snapshot coverage`} />;
                 })}
               </div>
             </div>
           </div>
-          <div className="th-caption"><span><span className="th-mouse-hint">Hover to inspect. </span>Tap a day or weekly bar.</span><button onClick={() => resetSelection()}>Latest day <Arrow /></button></div>
+          <div className="th-caption"><span>{isPinned ? `${scope === "day" ? "Day" : "Week"} pinned.` : <><span className="th-mouse-hint">Hover to inspect. </span>Tap to pin.</>}</span><span className="th-caption-actions">{isPinned && <button onClick={() => setIsPinned(false)}>Resume hover</button>}<button onClick={() => resetSelection()}>Latest day <Arrow /></button></span></div>
           <div className="th-legend" aria-label={`Daily ${metric === "cost" ? "API value in US dollars" : "token usage"} legend. Colors use fixed magnitude bands.`}>
             <span className="th-legend-label">{metric === "cost" ? "USD / DAY" : "TOKENS / DAY"}</span>
             {heatmapBands[metric].map((band, index) => <span className="th-legend-band" key={index}><i className={`th-level-${index}`} aria-hidden="true" />{band.label}</span>)}
@@ -220,7 +223,7 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
         </div>
         <aside className="th-inspector" aria-label="Usage inspector">
           <div className="th-inspector-summary">
-            <div className="th-inspector-toolbar"><div className="th-scope" role="group" aria-label="Receipt period"><button aria-pressed={scope === "day"} onClick={() => { if (scope === "week" && shownWeek?.available && !shownWeek.cells.some((cell) => cell.date === shownDate)) setChosenDate(shownWeek.coveredThrough); setScope("day"); }}>Day</button><button aria-pressed={scope === "week"} onClick={() => setScope("week")}>Week</button></div><div className="th-period-nav"><button aria-label={`Previous ${scope}`} disabled={!canPrevious} onClick={() => movePeriod(-1)}>←</button><button aria-label={`Next ${scope}`} disabled={!canNext} onClick={() => movePeriod(1)}>→</button></div></div>
+            <div className="th-inspector-toolbar"><div className="th-scope" role="group" aria-label="Receipt period"><button aria-pressed={scope === "day"} onClick={() => { if (scope === "week" && shownWeek?.available && !shownWeek.cells.some((cell) => cell.date === shownDate)) setChosenDate(shownWeek.coveredThrough); setScope("day"); setIsPinned(true); }}>Day</button><button aria-pressed={scope === "week"} onClick={() => { setScope("week"); setIsPinned(true); }}>Week</button></div><div className="th-period-nav"><button aria-label={`Previous ${scope}`} disabled={!canPrevious} onClick={() => movePeriod(-1)}>←</button><button aria-label={`Next ${scope}`} disabled={!canNext} onClick={() => movePeriod(1)}>→</button></div></div>
             <div className="th-period-title" aria-live="polite" aria-atomic="true"><span className="th-kicker">{scope === "day" && shownDate === latest ? "LATEST RECORDED DAY" : scope === "week" ? "WEEKLY RECEIPT" : "DAILY RECEIPT"}</span><h3>{periodLabel}</h3><span>{scope === "week" && shownWeek ? `${shownWeek.partial ? `Partial week · ${shownWeek.coveredDays}/7 days` : "Sunday–Saturday"} · ${shownWeek.activeDays} active ${shownWeek.activeDays === 1 ? "day" : "days"}` : `${shownDate === todayInZone(snapshot.timezone) ? "Today so far · " : ""}Pacific time`}</span></div>
             <div className="th-inspector-values">
               <div className="th-inspector-cost"><span className="th-kicker">API-EQUIVALENT VALUE</span><strong>{available ? usd.format(metrics.totalCost) : "—"}</strong><Delta value={metrics.totalCost} baseline={available ? baseline?.totalCost : undefined} money /></div>
