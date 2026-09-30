@@ -23,6 +23,26 @@ Brand spelling is **Rayaboy**. Link the showcase to `https://rayaboy.com`. Keep 
 
 ## Tokenmaxxing
 
-`/tokenmaxxing` is a separate compute ledger. Use the existing dark and lime palette and locally hosted fonts, oversized token totals, an interactive daily heatmap, compact tool-level breakdowns, and precise measurement labels. Keep the main portfolio's copy unchanged; its only entry point is a small footer link.
+`/tokenmaxxing` is a separate compute ledger. Match the portfolio's uppercase wordmark, page width, gutters, and locally hosted fonts. Introduce it with restrained type and a floating chrome compute sculpture. Emphasize API-equivalent dollar value, with exact comma-separated token totals beneath it. Keep the main portfolio's copy unchanged; its only entry point is a small footer link.
+
+The heatmap uses fixed magnitude bands, with a nearly white top band for the largest bursts. Default to the most recent recorded day; hovering or keyboard focus previews another day's receipt, and clicking or tapping pins it. Keep each peak date directly above its value. Tool rows rank by estimated API value and show full token counts as secondary text.
 
 Present ccusage totals as processed tokens including cache traffic, and costs as estimated API-equivalent usage value. Preserve the actual recorded date range, timezone, unknown-pricing count, and last-sync timestamp. Never claim these numbers are an invoice, benchmark ranking, or proof of research quality. Publish only daily numeric aggregates and approved agent identifiers, with no project names, session data, prompts, paths, or individual model identifiers.
+
+### Compute artwork
+
+Generation mode: built-in `image_gen` tool. Saved asset: `public/images/token-compute.webp`. Motion comes from a subtle CSS float, with a pause control and reduced-motion support.
+
+Exact generation prompt:
+
+> Use case: stylized-concept
+> Asset type: square hero artwork for a luxurious dark editorial compute dashboard, intended as a gently floating image beside large type.
+> Primary request: a suspended polished liquid-chrome sculpture symbolizing high-throughput compute: an irregular folded ribbon and dense stack of thin mirror tiles orbiting a compact central core. The sculpture feels precise, restless, and exceptionally crafted, like an abstract instrument for sustained thought.
+> Scene/backdrop: flat continuous near-black #080a09 background with absolutely no platform, environment, horizon, or visible ground.
+> Subject: one integrated compact three-dimensional chrome sculpture, a clear irregular silhouette, densely layered reflective surfaces with a calm continuous electric-lime light path threading through a few folds.
+> Style/medium: exceptionally polished high-end CGI, museum-quality sculptural object, tactile silver mirror chrome, softly rounded edges, editorial restraint.
+> Composition/framing: square composition, object centered and occupying 65–75% of the frame; generous clean near-black negative space all around, complete unobstructed silhouette, slightly angled three-quarter view.
+> Lighting/mood: delicate silver studio reflections, sparse pale acid-lime #c5f660 highlights; dramatic but calm and controlled, no broad colored glow, retain dark dimensional interior surfaces.
+> Color palette: near-black #080a09, silver reflective chrome, sparse pale acid-lime #c5f660.
+> Constraints: no text, no numbers, no logos, no watermark, no human, no actual hardware or badge. Must be an artistic metaphor rather than a factual rendering or data visualization.
+> Avoid: blue, purple, rainbow, cyberpunk circuits, GPUs, generic computer motherboards, busy background, neon haze, floor shadows, excessive sparkle, indistinct tangled wire.

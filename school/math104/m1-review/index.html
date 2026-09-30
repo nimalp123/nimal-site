@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, nosnippet">
+<meta name="description" content="Math 104 Midterm 1 review: definitions, theorem toolkit, and worked homework problems.">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://www.nimalp123.com/school/math104/m1-review">
+<title>Math 104 · Midterm 1 review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&family=Kalam:wght@400;700&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg-full.js" defer></script>
+<style>
+/* Layout: one reading column on graph paper; "board" cards carry the professor's exact wording in chalk-on-slate, blue handwriting carries commentary — same two-ink system as the notes. */
+:root {
+  --paper: #eef1ef;
+  --paper-2: #e4e8e6;
+  --grid: rgba(40, 60, 70, 0.07);
+  --ink: #1b2327;
+  --muted: #56636a;
+  --rule: #c9d1cf;
+  --slate: #26292c;
+  --slate-2: #313539;
+  --chalk: #f1f2ee;
+  --chalk-dim: #aeb4b3;
+  --blue: #1a6fae;
+  --blue-chalk: #5cc0f2;
+  --red: #c8412f;
+  --red-soft: rgba(200, 65, 47, 0.1);
+  --green: #2f7d4f;
+  --card: #f8faf9;
+  --serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --hand: "Kalam", "Segoe Print", "Bradley Hand", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #17191b; --paper-2: #1e2124; --grid: rgba(255,255,255,0.035);
+    --ink: #e6e9e7; --muted: #9aa4a8; --rule: #33393c;
+    --slate: #232629; --slate-2: #2c3034; --chalk: #f1f2ee; --chalk-dim: #a3aaa9;
+    --blue: #6cc4f5; --blue-chalk: #6cc4f5; --red: #f0735f; --red-soft: rgba(240,115,95,0.12);
+    --green: #6fcf97; --card: #1d2023; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #17191b; --paper-2: #1e2124; --grid: rgba(255,255,255,0.035);
+  --ink: #e6e9e7; --muted: #9aa4a8; --rule: #33393c;
+  --slate: #232629; --slate-2: #2c3034; --chalk: #f1f2ee; --chalk-dim: #a3aaa9;
+  --blue: #6cc4f5; --blue-chalk: #6cc4f5; --red: #f0735f; --red-soft: rgba(240,115,95,0.12);
+  --green: #6fcf97; --card: #1d2023; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background-color: var(--paper);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.6;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 96px; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.65rem; font-weight: 700; }
+h3 { font-size: 1.2rem; font-weight: 600; }
+p { margin: 0; }
+.label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.hand { font-family: var(--hand); color: var(--blue); font-size: 1.05rem; line-height: 1.4; }
+a { color: var(--blue); }
+code { font-family: var(--mono); font-size: 0.85em; }
+
+header.top { display: grid; gap: 14px; margin-bottom: 28px; }
+header.top .sub { font-size: 1.05rem; color: var(--muted); max-width: 62ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-family: var(--mono); font-size: 0.75rem; padding: 4px 10px; border: 1px solid var(--rule); border-radius: 999px; background: var(--card); color: var(--ink); white-space: nowrap; }
+.chip.red { border-color: var(--red); color: var(--red); background: var(--red-soft); }
+
+nav.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); border-bottom: 1px solid var(--rule); margin-inline: -20px; padding: 10px 20px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+nav.toc::-webkit-scrollbar { display: none; }
+nav.toc a { font-family: var(--mono); font-size: 0.78rem; text-decoration: none; color: var(--ink); padding: 6px 10px; border-radius: 6px; white-space: nowrap; }
+nav.toc a:hover, nav.toc a:focus-visible { background: var(--paper-2); outline: none; }
+
+section { margin-top: 56px; display: grid; gap: 18px; scroll-margin-top: 64px; }
+section > header { display: grid; gap: 6px; }
+section > header p { color: var(--muted); max-width: 64ch; }
+
+/* exam map */
+.map { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); }
+.map table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 0.95rem; }
+.map th, .map td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.map th { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.map tr:last-child td { border-bottom: 0; }
+.map td a { text-decoration: none; font-weight: 600; }
+.map td .hw { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+.tier { font-family: var(--mono); font-size: 0.7rem; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+.tier.hi { background: var(--red-soft); color: var(--red); }
+.tier.md { background: var(--paper-2); color: var(--ink); }
+
+/* board cards */
+.board { background: var(--slate); color: var(--chalk); border-radius: 10px; padding: 18px 20px; display: grid; gap: 10px; }
+.board .head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.board .name { font-weight: 600; font-size: 1.08rem; }
+.board .pg { font-family: var(--mono); font-size: 0.72rem; color: var(--chalk-dim); }
+.board .star { color: #ff8a78; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.board .wording { font-size: 1.02rem; }
+.board .note { font-family: var(--hand); color: var(--blue-chalk); font-size: 1rem; line-height: 1.4; }
+.board .reveal { display: none; font-family: var(--mono); font-size: 0.8rem; color: var(--chalk-dim); background: var(--slate-2); border: 1px dashed var(--chalk-dim); border-radius: 6px; padding: 10px; cursor: pointer; text-align: left; }
+.quiz .board:not(.shown) .wording, .quiz .board:not(.shown) .note { display: none; }
+.quiz .board:not(.shown) .reveal { display: block; }
+.defs { display: grid; gap: 12px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+button.btn { font-family: var(--mono); font-size: 0.8rem; padding: 8px 14px; border-radius: 6px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; }
+button.btn.ghost { background: transparent; color: var(--ink); }
+button.btn:focus-visible, .board .reveal:focus-visible, summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* theorem toolkit */
+.tk { display: grid; gap: 22px; }
+.tk-group { display: grid; gap: 8px; }
+.tk-group h3 { font-size: 1rem; font-family: var(--mono); font-weight: 500; color: var(--muted); letter-spacing: 0.04em; }
+.tk-row { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); gap: 4px 18px; padding: 10px 0; border-top: 1px solid var(--rule); }
+.tk-row .t { font-weight: 600; }
+.tk-row .t small { display: block; font-family: var(--mono); font-weight: 400; font-size: 0.72rem; color: var(--muted); }
+.tk-row .use { grid-column: 2; font-family: var(--hand); color: var(--blue); font-size: 1rem; line-height: 1.35; }
+.tk-row.hot .t { color: var(--red); }
+@media (max-width: 620px) { .tk-row { grid-template-columns: minmax(0,1fr); } .tk-row .use { grid-column: 1; } }
+
+/* playbook */
+.fam { display: grid; gap: 14px; padding: 22px; background: var(--card); border: 1px solid var(--rule); border-radius: 10px; scroll-margin-top: 64px; }
+.fam > .top { display: grid; gap: 4px; }
+.fam .from { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+.recipe { margin: 0; padding-left: 1.4em; display: grid; gap: 6px; }
+.recipe li::marker { font-family: var(--mono); color: var(--muted); font-size: 0.85em; }
+.trap { border-left: 3px solid var(--red); padding: 6px 12px; background: var(--red-soft); border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+.trap b { color: var(--red); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px; }
+details { border-top: 1px solid var(--rule); }
+details > summary { cursor: pointer; list-style: none; padding: 10px 0; display: flex; gap: 10px; align-items: baseline; }
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before { content: "+"; font-family: var(--mono); color: var(--muted); width: 1ch; }
+details[open] > summary::before { content: "–"; }
+details > summary .q { font-weight: 600; }
+details > summary .hw { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+.sol { display: grid; gap: 10px; padding: 4px 0 16px 1.6ch; }
+.sol .prob { color: var(--muted); font-style: italic; }
+.mine { font-family: var(--mono); font-size: 0.72rem; color: var(--green); }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 2px 0; }
+mjx-container { max-width: 100%; }
+
+/* fixes */
+.fixes { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.fixes li { display: grid; grid-template-columns: 4.5rem minmax(0,1fr); gap: 12px; padding: 10px 0; border-top: 1px solid var(--rule); }
+.fixes .pg { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+.checklist { display: grid; gap: 10px; margin: 0; padding-left: 1.3em; }
+footer { margin-top: 64px; font-size: 0.9rem; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (max-width: 520px) { body { font-size: 16px; } .fam { padding: 16px; } .board { padding: 16px; } }
+</style>
+
+<link rel="stylesheet" href="/school/math104/m1-review/review.css">
+</head>
+<body>
+<div class="wrap">
+<a class="study-breadcrumb" href="/school/math104">← Math 104</a>
+<header class="top">
+  <span class="label">Math 104 · Midterm 1</span>
+  <h1>Midterm review</h1>
+  <p class="sub">Built from your lecture notes (§1–§12) and HW 1–4 plus HW5 #1–2. Page numbers like “p.30” are pages in your notes PDF. The exam has 5 questions: 1 is stating a definition, and 4 are homework-style problems.</p>
+  <div class="facts">
+    <span class="chip">In scope: §1 → §12</span>
+    <span class="chip">HW1–4 · HW5 #1–2</span>
+    <span class="chip red">Series (§14) not on Midterm 1 · p.83</span>
+  </div>
+</header>
+
+<nav class="study-controls" aria-label="Review navigation">
+  <div class="study-primary">
+    <button class="study-arrow" type="button" id="studyPrev" aria-label="Previous study section">←</button>
+    <label class="study-jump"><span class="sr-only">Study section</span><select id="studySection">
+      <option value="map">Exam map</option>
+      <option value="defs">Definitions</option>
+      <option value="tools">Theorem toolkit</option>
+      <option value="play">Problem playbook</option>
+      <option value="fixes">Fix your notes</option>
+      <option value="night">Night-before list</option>
+    </select></label>
+    <button class="study-arrow" type="button" id="studyNext" aria-label="Next study section">→</button>
+  </div>
+  <label class="study-family" id="studyFamilyRow" hidden><span class="sr-only">Problem family</span><select id="studyFamily"></select></label>
+  <div class="study-options">
+    <div class="study-mode" role="group" aria-label="Reading mode">
+      <button id="studyFocus" type="button" aria-pressed="true">One section</button>
+      <button id="studyAll" type="button" aria-pressed="false">Everything</button>
+    </div>
+    <span class="study-position" id="studyPosition" aria-live="polite"></span>
+    <button class="study-theme" id="studyTheme" type="button" aria-label="Use dark theme">◐ <span id="studyThemeLabel">Theme</span></button>
+  </div>
+</nav>
+<noscript><p class="study-nojs">All review sections are shown. Definitions and proofs remain readable; enable JavaScript for MathJax, quiz mode, and section navigation.</p></noscript>
+
+<!-- ================= EXAM MAP ================= -->
+<section id="map">
+  <header>
+    <h2>Exam map</h2>
+    <p>Every in-scope homework problem, grouped by the proof technique it tests. Each of the 4 problem slots will almost certainly be one of these families. “Likely” is my judgment from what the homework and the red notes stress.</p>
+  </header>
+  <div class="map">
+    <table>
+      <thead><tr><th>Family</th><th>Homework</th><th>Weight</th></tr></thead>
+      <tbody>
+        <tr><td data-label="Family"><a href="#f-induct">Induction</a></td><td class="hw" data-label="Homework">HW1 #1, #2, #5</td><td data-label="Weight"><span class="tier md">likely one</span></td></tr>
+        <tr><td data-label="Family"><a href="#f-irr">Irrationality (rational zeros)</a></td><td class="hw" data-label="Homework">HW1 #3</td><td data-label="Weight"><span class="tier md">possible</span></td></tr>
+        <tr><td data-label="Family"><a href="#f-abs">Absolute value / triangle inequality</a></td><td class="hw" data-label="Homework">HW1 #4, #5</td><td data-label="Weight"><span class="tier md">possible</span></td></tr>
+        <tr><td data-label="Family"><a href="#f-sup">sup / inf proofs</a></td><td class="hw" data-label="Homework">HW2 #1, #3 · HW4 #2</td><td data-label="Weight"><span class="tier hi">likely</span></td></tr>
+        <tr><td data-label="Family"><a href="#f-arch">Archimedean + well-ordering</a></td><td class="hw" data-label="Homework">HW2 #2</td><td data-label="Weight"><span class="tier md">possible</span></td></tr>
+        <tr><td data-label="Family"><a href="#f-eps">ε–N proof</a></td><td class="hw" data-label="Homework">HW2 #5</td><td data-label="Weight"><span class="tier hi">likely</span></td></tr>
+        <tr><td data-label="Family"><a href="#f-laws">Limit theorems (write-up)</a></td><td class="hw" data-label="Homework">HW2 #4a · HW3 #1, #2, #3</td><td data-label="Weight"><span class="tier hi">likely</span></td></tr>
+        <tr><td data-label="Family"><a href="#f-inf">Limits equal to +∞</a></td><td class="hw" data-label="Homework">HW3 #4, #5</td><td data-label="Weight"><span class="tier hi">likely</span></td></tr>
+        <tr><td data-label="Family"><a href="#f-mono">Monotone recursive sequence</a></td><td class="hw" data-label="Homework">HW4 #3 · lecture p.51</td><td data-label="Weight"><span class="tier hi">likely</span></td></tr>
+        <tr><td data-label="Family"><a href="#f-cauchy">Cauchy sequences</a></td><td class="hw" data-label="Homework">HW4 #1</td><td data-label="Weight"><span class="tier md">possible</span></td></tr>
+        <tr><td data-label="Family"><a href="#f-sub">Subsequences & divergence</a></td><td class="hw" data-label="Homework">HW2 #4b · HW4 #4, #5</td><td data-label="Weight"><span class="tier hi">likely</span></td></tr>
+        <tr><td data-label="Family"><a href="#f-lim">liminf / limsup</a></td><td class="hw" data-label="Homework">HW5 #1, #2 · p.73–74</td><td data-label="Weight"><span class="tier hi">likely · “IMPORTANT for Midterm”</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= DEFINITIONS ================= -->
+<section id="defs">
+  <header>
+    <h2>Definitions, in his wording</h2>
+    <p>Q1 asks you to state one of these. The chalk text is the board wording from your notes, lightly cleaned up only where the board had a slip. Blue is commentary. The red “my pick” tags are my guesses at what he’ll ask, based on what the homework leans on. They are not marks from your notes. Turn on quiz mode, try to write each one from memory, then tap to check.</p>
+  </header>
+  <div class="toolbar">
+    <button class="btn" id="quizBtn" type="button" aria-pressed="false">Quiz mode: off</button>
+    <button class="btn ghost" id="resetBtn" type="button" hidden>Hide all again</button>
+    <span class="label" id="quizCount"></span>
+  </div>
+  <div class="defs" id="defList">
+
+    <div class="board">
+      <div class="head"><span class="name">Convergence of a sequence</span><span><span class="star">my pick · </span><span class="pg">p.30</span></span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">A seq. \((s_n)_{n=1}^{\infty}\subset\mathbb{R}\) <b>converges to</b> \(s\in\mathbb{R}\) if \(\forall\,\varepsilon>0,\ \exists\,N(\varepsilon)>0\) s.t. \(n>N(\varepsilon)\Rightarrow |s_n-s|\lt\varepsilon\).<br>We write \(\lim_{n\to\infty}s_n=s\), \(\lim s_n=s\), \(s_n\to s\).</div>
+      <div class="note">Order matters: ∀ε first, then ∃N. N is allowed to depend on ε.</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">Divergence; limit equal to ±∞</span><span><span class="star">my pick · </span><span class="pg">p.30</span></span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">\((s_n)\) <b>diverges</b> if \((s_n)\) doesn't converge to any real number.<br>We write \(\lim_{n\to\infty}s_n=\infty\) if \(\forall M\in\mathbb{R},\ \exists N>0\) s.t. if \(n>N\Rightarrow s_n>M\).<br>We write \(\lim_{n\to\infty}s_n=-\infty\) if \(\forall M\in\mathbb{R},\ \exists N>0\) s.t. if \(n>N\Rightarrow s_n\lt M\).</div>
+      <div class="note">A sequence with limit +∞ still “diverges” (p.33: s_n = n diverges, but lim s_n = ∞).</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">Supremum and infimum</span><span><span class="star">my pick · </span><span class="pg">p.22</span></span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">Let \(\emptyset\neq S\subset\mathbb{R}\).<br>\(M_0\in UB(S)\) is the <b>supremum</b> of \(S\) if \(\forall M\in UB(S),\ M_0\le M\). (\(\sup S:=M_0\))<br>\(m_0\in LB(S)\) is the <b>infimum</b> of \(S\) if \(\forall m\in LB(S),\ m\le m_0\). (\(\inf S:=m_0\))</div>
+      <div class="note">In words: sup = least upper bound, inf = greatest lower bound. They don't have to be in S. Also p.28: sup S = ∞ if S isn't bounded above, inf S = −∞ if S isn't bounded below.</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">Upper / lower bound, bounded</span><span class="pg">p.21</span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">Let \(\emptyset\neq S\subset\mathbb{R}\).<br>\(M\in\mathbb{R}\) is an <b>upper bound</b> of \(S\) if \(\forall s\in S,\ s\le M\).<br>\(m\in\mathbb{R}\) is a <b>lower bound</b> of \(S\) if \(\forall s\in S,\ m\le s\).<br>If \(UB(S)\neq\emptyset\), \(S\) is bounded above; if \(LB(S)\neq\emptyset\), \(S\) is bounded below. \(S\) is <b>bounded</b> if \(S\) is bounded above &amp; below.</div>
+      <div class="note">UB(S) := {upper bounds of S}, LB(S) := {lower bounds of S}.</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">Max and min</span><span class="pg">p.21</span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">Let \(\emptyset\neq S\subset\mathbb{R}\).<br>\(s_0\in S\) is the <b>max</b> of \(S\) if \(\forall s\in S,\ s\le s_0\).<br>\(s_0\in S\) is the <b>min</b> of \(S\) if \(\forall s\in S,\ s_0\le s\).</div>
+      <div class="note">Key difference from sup/inf: max/min must be elements of S.</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">Cauchy sequence</span><span><span class="star">my pick · </span><span class="pg">p.58</span></span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">A seq \((s_n)\subset\mathbb{R}\) is <b>Cauchy</b> if \(\forall\,\varepsilon>0,\ \exists N>0\) s.t. \(m,n>N\Rightarrow|s_m-s_n|\lt\varepsilon\).</div>
+      <div class="note">No limit appears anywhere in the definition. That's the whole point.</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">Increasing / decreasing / monotone</span><span class="pg">p.48</span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">A seq \((s_n)\subset\mathbb{R}\) is<br><b>increasing</b> if \(s_n\le s_{n+1}\ \forall n\in\mathbb{N}\) (strictly increasing: \(s_n\lt s_{n+1}\)),<br><b>decreasing</b> if \(s_n\ge s_{n+1}\ \forall n\in\mathbb{N}\) (strictly decreasing: \(s_n>s_{n+1}\)),<br><b>monotone</b> if \((s_n)\) is either increasing or decreasing.</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">liminf and limsup</span><span><span class="star">my pick · </span><span class="pg">p.53</span></span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">Let \((s_n)\subset\mathbb{R}\).<br>For \(N\in\mathbb{N}\), \(u_N:=\inf\{s_n\mid n\ge N\}\), and \(\displaystyle\liminf_{n\to\infty}s_n:=\lim_{N\to\infty}u_N\in\overline{\mathbb{R}}\).<br>For \(N\in\mathbb{N}\), \(v_N:=\sup\{s_n\mid n\ge N\}\), and \(\displaystyle\limsup_{n\to\infty}s_n:=\lim_{N\to\infty}v_N\in\overline{\mathbb{R}}\).</div>
+      <div class="note">(u_N) is increasing, (v_N) is decreasing, so both limits always exist in ℝ̄ = ℝ ∪ {±∞}.</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">Subsequence</span><span><span class="star">my pick · </span><span class="pg">p.61</span></span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">A <b>subsequence</b> of \((s_n)\subset\mathbb{R}\) has the form \((s_{n_k})_{k=1}^{\infty}\), where \(n_1\lt n_2\lt n_3\lt\cdots\in\mathbb{N}\);<br>i.e. \(\exists\,\sigma:\mathbb{N}\to\mathbb{N}\) strictly increasing s.t. \(s_{n_k}=s_{\sigma(k)}\).</div>
+      <div class="note">Remark on the same page: n_k ≥ k for all k (proved by induction).</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">Subsequential limit, S(sₙ)</span><span class="pg">p.67</span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">\((s_n)\subset\mathbb{R}\). \(t\in\overline{\mathbb{R}}\) is a <b>subsequential limit</b> if \(\exists\,(s_{n_k})\): subseq of \((s_n)\) s.t. \(s_{n_k}\to t\).<br>\(S(s_n):=\{t\in\overline{\mathbb{R}}\mid t\text{ is a subsequential limit}\}\subset\overline{\mathbb{R}}\).</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">Sequence</span><span class="pg">p.29</span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">A <b>sequence</b> is a map from \(\{n\in\mathbb{N}\mid n\ge m\}\) (\(m\in\mathbb{Z}\)) to a set \(X\).</div>
+      <div class="note">Remark: (s_n) and {s_n | n ≥ m} are different. One is the ordered list, the other is the set of values.</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">Absolute value</span><span class="pg">p.12</span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording">For \(a\in\mathbb{R}\), define \(|a|:=\begin{cases}a,&amp;a\ge 0\\-a,&amp;a\lt 0\end{cases}\)</div>
+    </div>
+
+    <div class="board">
+      <div class="head"><span class="name">Axioms you might be asked to state</span><span class="pg">p.02, 07, 25, 26</span></div>
+      <button class="reveal" type="button">Write it out, then tap to check</button>
+      <div class="wording"><b>Peano axiom 5:</b> If \(S\subset\mathbb{N}\) satisfies \(1\in S\), and if \(n\in S\) then \(n+1\in S\), then \(S=\mathbb{N}\).<br><b>Well-ordering principle:</b> every \(\emptyset\ne S\subset\mathbb{N}\) has a min, i.e. \(\exists\,s\in S\) s.t. \(\forall t\in S,\ s\le t\).<br><b>Completeness Axiom:</b> every \(\emptyset\neq S\subset\mathbb{R}\) that is bounded above has a \(\sup S\) (in \(\mathbb{R}\)), i.e. \(UB(S)\) has a minimum.<br><b>Archimedean Property:</b> \(\forall\,a,b>0,\ \exists\,n\in\mathbb{N}\) s.t. \(na>b\).</div>
+      <div class="note">Your board copy of well-ordering is missing “nonempty” and the ∀ before t. Write both on the exam.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THEOREM TOOLKIT ================= -->
+<section id="tools">
+  <header>
+    <h2>Theorem toolkit</h2>
+    <p>The results you'll cite by name inside proofs. The blue line says when to reach for each one.</p>
+  </header>
+  <div class="tk">
+    <div class="tk-group">
+      <h3>§1–§3 · Numbers</h3>
+      <div class="tk-row"><div class="t">Induction <small>p.02</small></div><div>If \(P(1)\) is true and \(P(n)\Rightarrow P(n+1)\), then \(P(n)\) is true \(\forall n\in\mathbb{N}\).</div><div class="use">Any “for all n” formula or inequality.</div></div>
+      <div class="tk-row"><div class="t">Rational zeros (monic cor.) <small>p.09–10</small></div><div>If \(r\in\mathbb{Q}\) solves \(r^n+c_{n-1}r^{n-1}+\cdots+c_0=0\) with \(c_i\in\mathbb{Z}\), then \(r\in\mathbb{Z}\) and \(r\mid c_0\).</div><div class="use">Proving a number like √2 or √2+√3 is irrational.</div></div>
+      <div class="tk-row"><div class="t">Triangle inequality <small>p.12–13</small></div><div>\(|a+b|\le|a|+|b|\), and \(\big||a|-|b|\big|\le|a-b|\).</div><div class="use">Every ε-proof. The trick is adding and subtracting: |x| = |x − y + y|.</div></div>
+    </div>
+    <div class="tk-group">
+      <h3>§4 · Completeness</h3>
+      <div class="tk-row"><div class="t">Completeness Axiom <small>p.25</small></div><div>Nonempty and bounded above ⇒ \(\sup S\) exists in \(\mathbb{R}\). Same for inf when bounded below, via \(\inf S=-\sup(-S)\).</div><div class="use">When you need a sup to exist before using it.</div></div>
+      <div class="tk-row"><div class="t">Approximation property <small>used p.26, p.49</small></div><div>\(\forall\varepsilon>0,\ \exists\,s\in S\) with \(\sup S-\varepsilon\lt s\le\sup S\). (Otherwise \(\sup S-\varepsilon\) would be a smaller upper bound.)</div><div class="use">The “≥” half of any sup/inf equality, and the HW4 #2 construction.</div></div>
+      <div class="tk-row"><div class="t">Archimedean <small>p.26</small></div><div>\(\forall\,a,b>0,\ \exists n\in\mathbb{N}\) with \(na>b\). In particular, some \(N\in\mathbb{N}\) has \(N>x\) or \(1/N\lt\varepsilon\).</div><div class="use">Justifies “choose N &gt; 5/ε” in ε–N proofs.</div></div>
+    </div>
+    <div class="tk-group">
+      <h3>§7–§9 · Limits</h3>
+      <div class="tk-row"><div class="t">Uniqueness of limits <small>p.33</small></div><div>If \(s_n\to s\) and \(s_n\to t\) then \(s=t\).</div><div class="use">Ruling out a second candidate limit.</div></div>
+      <div class="tk-row"><div class="t">Convergent ⇒ bounded <small>p.39</small></div><div>\(\exists M>0\) with \(|s_n|\le M\ \forall n\). The converse fails, e.g. \((-1)^n\).</div><div class="use">Inside product proofs; to show divergence of unbounded sequences.</div></div>
+      <div class="tk-row"><div class="t">Limit laws <small>p.40–44</small></div><div>Sum, difference, \(ks_n\), product \(s_nt_n\to st\). Quotient: if \(t_n\to t\ne 0\) and \(t_n\neq0\ \forall n\), then \(s_n/t_n\to s/t\).</div><div class="use">Computing limits. Always check both quotient conditions out loud.</div></div>
+      <div class="tk-row"><div class="t">Order limit <small>p.45–46</small></div><div>\(s_n\le t_n\ \forall n\) ⇒ \(\lim s_n\le\lim t_n\). If \(a\le s_n\le b\) and \(s_n\to s\), then \(a\le s\le b\).</div><div class="use">Pinning the limit into an interval so you pick the right root (HW4 #3).</div></div>
+      <div class="tk-row"><div class="t">Squeeze <small>p.47</small></div><div>\(a_n\le s_n\le b_n\), \(a_n\to L\), \(b_n\to L\) ⇒ \(s_n\to L\).</div><div class="use">Bounding an error term: 0 ≤ |a_n − α| &lt; 2⁻ⁿ.</div></div>
+    </div>
+    <div class="tk-group">
+      <h3>§10 · Monotone &amp; Cauchy</h3>
+      <div class="tk-row"><div class="t">Monotone Convergence <small>p.48–50</small></div><div>Increasing and bounded above ⇒ converges (to the sup). Decreasing and bounded below ⇒ converges (to the inf). Increasing and unbounded ⇒ \(+\infty\).</div><div class="use">Recursive sequences. Gives convergence before you solve for L.</div></div>
+      <div class="tk-row"><div class="t">Converges ⟺ liminf = limsup <small>p.55</small></div><div>For \(L\in\overline{\mathbb{R}}\): \(s_n\to L\iff\liminf s_n=\limsup s_n=L\). Always \(\liminf\le\limsup\).</div><div class="use">Deciding whether a limit exists in ℝ̄ (HW5 #1).</div></div>
+      <div class="tk-row"><div class="t">Completeness of ℝ <small>p.58–60</small></div><div>Convergent ⇒ Cauchy, Cauchy ⇒ bounded, and \((s_n)\) converges ⟺ \((s_n)\) is Cauchy.</div><div class="use">Proving convergence when you don't know the limit (HW4 #1).</div></div>
+    </div>
+    <div class="tk-group">
+      <h3>§11 · Subsequences</h3>
+      <div class="tk-row"><div class="t">Thm 1 <small>p.62</small></div><div>If \(s_n\to L\in\overline{\mathbb{R}}\), every subsequence \(s_{n_k}\to L\).</div><div class="use">Passing a limit to a subsequence.</div></div>
+      <div class="tk-row"><div class="t">Divergence corollary <small>p.63</small></div><div>Two subsequences tending to different points of \(\overline{\mathbb{R}}\) ⇒ \((s_n)\) diverges.</div><div class="use">Every “does it converge? justify” problem with (−1)ⁿ in it.</div></div>
+      <div class="tk-row"><div class="t">ε-infinite criterion <small>p.64</small></div><div>Some subsequence \(\to t\) ⟺ \(\forall\varepsilon>0\), \(\{n:|s_n-t|\lt\varepsilon\}\) is infinite. Not bounded above ⟺ some subsequence \(\to+\infty\).</div><div class="use">Constructing subsequences one index at a time.</div></div>
+      <div class="tk-row"><div class="t">Bolzano–Weierstrass <small>p.65–66</small></div><div>Every sequence has a monotone subsequence (Thm 2), so every bounded sequence has a convergent subsequence.</div><div class="use">Existence of a convergent subsequence.</div></div>
+      <div class="tk-row"><div class="t">liminf = min S, limsup = max S <small>p.68–70</small></div><div>\(\liminf s_n=\min S(s_n)\), \(\limsup s_n=\max S(s_n)\).</div><div class="use">The fast way to compute liminf/limsup: list the subsequential limits.</div></div>
+    </div>
+    <div class="tk-group">
+      <h3>§12 · liminf / limsup rules</h3>
+      <div class="tk-row"><div class="t">Order <small>p.71</small></div><div>If \(a_n\le b_n\) eventually, then \(\liminf a_n\le\liminf b_n\) and \(\limsup a_n\le\limsup b_n\).</div><div class="use">HW5 #2 is a strengthening of this.</div></div>
+      <div class="tk-row"><div class="t">Product with a convergent factor <small>p.71–72</small></div><div>If \(a_n\to a>0\): \(\liminf a_nb_n=a\liminf b_n\), \(\limsup a_nb_n=a\limsup b_n\).</div><div class="use">Scaling by a positive convergent sequence.</div></div>
+      <div class="tk-row hot"><div class="t">Sum with a convergent term <small>p.73 · red “IMPORTANT for Midterm”</small></div><div>If \(a_n\to a\in\mathbb{R}\): \(\liminf(a_n+b_n)=a+\liminf b_n\), \(\limsup(a_n+b_n)=a+\limsup b_n\).</div><div class="use">“periodic sequence + 1/n” problems: the 1/n part drops out (p.74).</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLAYBOOK ================= -->
+<section id="play">
+  <header>
+    <h2>Problem playbook</h2>
+    <p>For each family: the recipe, the trap graders take points for, and full solutions to every homework problem in it. Solutions for HW1–4 follow your official solutions. HW5 #1–2 had no posted solutions, so those are mine and are marked.</p>
+  </header>
+
+  <!-- Induction -->
+  <div class="fam" id="f-induct">
+    <div class="top"><span class="label">Family 1</span><h3>Induction</h3><span class="from">HW1 #1, #2, #5 · lecture p.04–05</span></div>
+    <ol class="recipe">
+      <li>Name the statement \(P(n)\) explicitly.</li>
+      <li><b>Base case:</b> compute LHS and RHS separately and show they agree (or the inequality holds).</li>
+      <li><b>Inductive step:</b> “Assume \(P(k)\).” Write the goal \(P(k+1)\) out in full.</li>
+      <li>Start from \(P(k)\) and do the one natural operation (add the next term, multiply by the next factor), then use algebra to reach the goal.</li>
+      <li>Close with “By induction, \(P(n)\) holds \(\forall n\).”</li>
+    </ol>
+    <p class="trap"><b>Trap</b>If the statement starts at \(n=4\) (like \(3^n>n^3\)), the base case is \(n=4\) and small cases are checked by hand. Say which cases you checked directly.</p>
+    <details><summary><span class="q">Sum of the first n odd squares</span><span class="hw">HW1 #1</span></summary><div class="sol">
+      <p class="prob">Guess and prove a formula for \(1^2+3^2+\cdots+(2n-1)^2\).</p>
+      <p>Values for \(n=1,2,3,4\): \(1,10,35,84\). Claim: \(\;1^2+3^2+\cdots+(2n-1)^2=\dfrac{n(2n-1)(2n+1)}{3}.\)</p>
+      <p><b>Base case</b> \(n=1\): LHS \(=1\), RHS \(=\frac{1\cdot1\cdot3}{3}=1\).</p>
+      <p><b>Inductive step.</b> Assume \(P(n)\). Add \((2n+1)^2\) to both sides:</p>
+      \[\frac{n(2n-1)(2n+1)}{3}+(2n+1)^2=(2n+1)\cdot\frac{2n^2+5n+3}{3}=\frac{(n+1)(2n+1)(2n+3)}{3},\]
+      <p>which is \(P(n+1)\) (since \(2(n+1)-1=2n+1\) and \(2(n+1)+1=2n+3\)). By induction the formula holds for all \(n\). ∎</p>
+    </div></details>
+    <details><summary><span class="q">When is 3ⁿ &gt; n³?</span><span class="hw">HW1 #2</span></summary><div class="sol">
+      <p><b>Direct checks:</b> \(n=1: 3>1\) ✓. \(n=2: 9>8\) ✓. \(n=3: 27=27\), false. \(n=4: 81>64\) ✓.</p>
+      <p><b>Claim:</b> \(3^n>n^3\) for all \(n\ge4\). Base case \(n=4\) is done.</p>
+      <p><b>Inductive step</b> (\(n\ge4\)): \(\left(1+\frac1n\right)^3\le\left(\frac54\right)^3=\frac{125}{64}\lt3\), so \((n+1)^3\lt 3n^3\). Then</p>
+      \[3^{n+1}=3\cdot3^n>3n^3>(n+1)^3.\]
+      <p>So \(3^n>n^3\iff n\ne3\). ∎</p>
+    </div></details>
+    <details><summary><span class="q">Reverse triangle inequality for n terms</span><span class="hw">HW1 #5</span></summary><div class="sol">
+      <p class="prob">For \(n\ge2\): \(|a_1-a_2-\cdots-a_n|\ge|a_1|-|a_2|-\cdots-|a_n|\).</p>
+      <p><b>Lemma</b> (\(n=2\)): \(|a|=|(a-b)+b|\le|a-b|+|b|\), so \(|a-b|\ge|a|-|b|\). This is the base case \(P(2)\).</p>
+      <p><b>Inductive step.</b> Let \(S=a_1-a_2-\cdots-a_n\). By the Lemma applied to \(S\) and \(a_{n+1}\): \(|S-a_{n+1}|\ge|S|-|a_{n+1}|\). By \(P(n)\), \(|S|\ge|a_1|-\cdots-|a_n|\). Combining gives \(P(n+1)\). ∎</p>
+    </div></details>
+  </div>
+
+  <!-- Irrationality -->
+  <div class="fam" id="f-irr">
+    <div class="top"><span class="label">Family 2</span><h3>Irrationality via rational zeros</h3><span class="from">HW1 #3 · lecture p.11</span></div>
+    <ol class="recipe">
+      <li>Set \(r=\) the number. Square (and isolate, then square again) until you have a <b>monic integer polynomial</b> with \(p(r)=0\).</li>
+      <li>By the Corollary of the Rational Zeros Theorem, a rational root must be an integer dividing the constant term.</li>
+      <li>List those candidates and plug each in; none works. So \(r\notin\mathbb{Q}\).</li>
+    </ol>
+    <details><summary><span class="q">√2 + √3 is irrational</span><span class="hw">HW1 #3</span></summary><div class="sol">
+      <p>Let \(r=\sqrt2+\sqrt3\). Then \(r^2=5+2\sqrt6\), so \(r^2-5=2\sqrt6\). Squaring: \(r^4-10r^2+25=24\), i.e.</p>
+      \[p(r)=r^4-10r^2+1=0.\]
+      <p>\(p\) is monic with integer coefficients. If \(r\in\mathbb{Q}\), the Corollary gives \(r\in\mathbb{Z}\) and \(r\mid1\), so \(r=\pm1\). But \(p(\pm1)=1-10+1=-8\ne0\). Contradiction, so \(\sqrt2+\sqrt3\) is irrational. ∎</p>
+    </div></details>
+  </div>
+
+  <!-- Absolute value -->
+  <div class="fam" id="f-abs">
+    <div class="top"><span class="label">Family 3</span><h3>Absolute value and the triangle inequality</h3><span class="from">HW1 #4, #5</span></div>
+    <ol class="recipe">
+      <li>For an “iff”, prove both directions separately and label them (⇒) and (⇐).</li>
+      <li>Squaring is allowed when both sides are ≥ 0; it turns absolute values into products.</li>
+      <li>Useful facts: \(|ab|=|a||b|\), \(-|a|\le a\le|a|\), and \(|x|\lt c\iff -c\lt x\lt c\).</li>
+    </ol>
+    <details><summary><span class="q">Equality in the triangle inequality</span><span class="hw">HW1 #4</span></summary><div class="sol">
+      <p class="prob">\(|a+b|=|a|+|b|\iff ab\ge0\).</p>
+      <p><b>(⇐)</b> If \(ab\ge0\), then \(a,b\) are both \(\ge0\), both \(\le0\), or one is \(0\). In each case direct computation gives \(|a+b|=|a|+|b|\).</p>
+      <p><b>(⇒)</b> Both sides are \(\ge 0\), so square: \(a^2+2ab+b^2=a^2+2|a||b|+b^2\). Hence \(ab=|a||b|=|ab|\), which holds iff \(ab\ge0\). ∎</p>
+    </div></details>
+  </div>
+
+  <!-- sup/inf -->
+  <div class="fam" id="f-sup">
+    <div class="top"><span class="label">Family 4</span><h3>sup / inf proofs</h3><span class="from">HW2 #1, #3 · HW4 #2 · lecture p.23–24</span></div>
+    <ol class="recipe">
+      <li>To prove \(\sup S=M\): <b>(i)</b> \(M\) is an upper bound (\(s\le M\ \forall s\in S\)), and <b>(ii)</b> nothing smaller is: for every \(\varepsilon>0\) find \(s\in S\) with \(s>M-\varepsilon\).</li>
+      <li>To use a sup you already have: the approximation property gives \(s\in S\) with \(\sup S-\varepsilon\lt s\le\sup S\).</li>
+      <li>To finish “≥” from “\(>M-m-\varepsilon\) for every \(\varepsilon\)”: if it were strictly smaller, pick \(\varepsilon\) = half the gap and get a contradiction.</li>
+      <li>For “attained?”: say whether the sup/inf is an element of \(S\) (then it's a max/min).</li>
+    </ol>
+    <p class="trap"><b>Trap</b>Showing only the upper-bound half. Both halves are required.</p>
+    <details><summary><span class="q">diam(S) = sup S − inf S</span><span class="hw">HW2 #1</span></summary><div class="sol">
+      <p>Let \(m=\inf S\), \(M=\sup S\) (finite since \(S\) is nonempty and bounded), \(D=\{|s-t|:s,t\in S\}\ni0\).</p>
+      <p><b>(≤)</b> For \(s,t\in S\): \(m\le s,t\le M\), so \(s-t\le M-m\) and \(t-s\le M-m\), hence \(|s-t|\le M-m\). So \(M-m\in UB(D)\) and \(\operatorname{diam}S\le M-m\).</p>
+      <p><b>(≥)</b> Let \(\varepsilon>0\). Pick \(s_\varepsilon\in S\) with \(M-\frac\varepsilon2\lt s_\varepsilon\) and \(t_\varepsilon\in S\) with \(t_\varepsilon\lt m+\frac\varepsilon2\). Then</p>
+      \[\operatorname{diam}S\ge|s_\varepsilon-t_\varepsilon|\ge s_\varepsilon-t_\varepsilon>M-m-\varepsilon.\]
+      <p>If \(\operatorname{diam}S\lt M-m\), take \(\varepsilon=\frac{M-m-\operatorname{diam}S}{2}>0\) for a contradiction. So \(\operatorname{diam}S=M-m\). ∎</p>
+    </div></details>
+    <details><summary><span class="q">S = {x : x⁴ − 5x² + 4 &lt; 0}</span><span class="hw">HW2 #3</span></summary><div class="sol">
+      <p>\(x^4-5x^2+4=(x^2-1)(x^2-4)\). With \(y=x^2\), \((y-1)(y-4)\lt0\iff1\lt y\lt4\iff1\lt|x|\lt2\).</p>
+      <p>(a) \(S=(-2,-1)\cup(1,2)\).</p>
+      <p>(b) \(\inf S=-2\), \(\sup S=2\). Neither is attained (\(\pm2\notin S\) because the inequality is strict), so \(S\) has no min and no max.</p>
+    </div></details>
+    <details><summary><span class="q">Build aₙ ↑ α = sup A with 0 &lt; α − aₙ &lt; 2⁻ⁿ</span><span class="hw">HW4 #2</span></summary><div class="sol">
+      <p><b>Key fact.</b> For every \(t\lt\alpha\) there is \(a\in A\) with \(t\lt a\le\alpha\) (otherwise \(t\) is a smaller upper bound). Since \(\alpha\notin A\), in fact \(t\lt a\lt\alpha\).</p>
+      <p><b>Construction.</b> Choose \(a_1\in A\) with \(\alpha-2^{-1}\lt a_1\lt\alpha\). Given \(a_n\), let \(t_n=\max\{a_n,\ \alpha-2^{-(n+1)}\}\lt\alpha\) and choose \(a_{n+1}\in A\) with \(t_n\lt a_{n+1}\lt\alpha\). Then</p>
+      \[a_{n+1}>a_n,\qquad 0\lt\alpha-a_{n+1}\lt2^{-(n+1)}.\]
+      <p><b>Limit.</b> \(0\le|a_n-\alpha|\lt2^{-n}\) and \(2^{-n}\to0\), so by Squeeze \(a_n\to\alpha\). ∎</p>
+      <p class="hand">The max in t_n is what makes it strictly increasing AND close to α at the same time.</p>
+    </div></details>
+  </div>
+
+  <!-- Archimedean -->
+  <div class="fam" id="f-arch">
+    <div class="top"><span class="label">Family 5</span><h3>Archimedean property + well-ordering</h3><span class="from">HW2 #2 · lecture p.07, p.26</span></div>
+    <ol class="recipe">
+      <li><b>Existence:</b> define the set of “good” naturals. Archimedean shows it's nonempty; well-ordering gives its least element.</li>
+      <li>Minimality of that element gives the other inequality.</li>
+      <li><b>Uniqueness:</b> assume two, say \(m\lt n\), use \(m\le n-1\) for integers, and get a contradiction.</li>
+    </ol>
+    <details><summary><span class="q">Unique n with n − 1 ≤ a &lt; n</span><span class="hw">HW2 #2</span></summary><div class="sol">
+      <p>Fix \(a>0\). Let \(A=\{k\in\mathbb{N}:a\lt k\}\). By Archimedean, \(A\ne\emptyset\). By well-ordering, \(A\) has a least element \(n\), so \(a\lt n\).</p>
+      <p>If \(n=1\): \(n-1=0\le a\). If \(n>1\): \(n-1\in\mathbb{N}\) and \(n-1\notin A\) by minimality, so \(n-1\le a\). This proves existence.</p>
+      <p><b>Uniqueness.</b> Suppose \(m,n\) both work and \(m\lt n\). Then \(m\le n-1\), so \(a\lt m\le n-1\le a\), a contradiction. Symmetric for \(n\lt m\). So \(m=n\). ∎</p>
+    </div></details>
+  </div>
+
+  <!-- eps-N -->
+  <div class="fam" id="f-eps">
+    <div class="top"><span class="label">Family 6</span><h3>ε–N proof of a limit</h3><span class="from">HW2 #5 · lecture p.34–37</span></div>
+    <ol class="recipe">
+      <li><b>Scratch (not graded):</b> simplify \(|s_n-L|\) to one fraction. Drop the absolute value once you know the sign.</li>
+      <li>Bound it by something simple like \(\frac{C}{n}\). Make the numerator bigger (e.g. \(3n+17\le20n\) since \(n\ge1\)) and the denominator smaller (drop positive terms).</li>
+      <li>Solve \(\frac{C}{n}\lt\varepsilon\): that gives \(N=\frac{C}{\varepsilon}\). If a step needed “\(n\) large enough”, use \(N=\max\{\frac{C}{\varepsilon},\,\text{that threshold}\}\).</li>
+      <li><b>Write-up:</b> “Let \(\varepsilon>0\). Choose \(N\) … Let \(n>N\).” Then one chain of (in)equalities ending in \(\lt\varepsilon\).</li>
+    </ol>
+    <p class="trap"><b>Trap</b>No limit laws allowed inside an ε–N proof, and don't write the chain backwards (starting from \(\lt\varepsilon\)).</p>
+    <details><summary><span class="q">lim (3n² − 1)/(2n² + n + 5) = 3/2</span><span class="hw">HW2 #5</span></summary><div class="sol">
+      <p><b>Scratch.</b> \(\left|\frac{3n^2-1}{2n^2+n+5}-\frac32\right|=\frac{|2(3n^2-1)-3(2n^2+n+5)|}{2(2n^2+n+5)}=\frac{3n+17}{4n^2+2n+10}\le\frac{3n+17}{4n^2}\le\frac{20n}{4n^2}=\frac5n.\)</p>
+      <p><b>Proof.</b> Let \(\varepsilon>0\). By the Archimedean Property choose \(N\in\mathbb{N}\) with \(N>\frac5\varepsilon\). Let \(n\ge N\). Since \(n\ge1\), \(3n+17\le20n\), so</p>
+      \[\left|\frac{3n^2-1}{2n^2+n+5}-\frac32\right|=\frac{3n+17}{4n^2+2n+10}\le\frac{3n+17}{4n^2}\le\frac{20n}{4n^2}=\frac5n\le\frac5N\lt\varepsilon.\ \blacksquare\]
+    </div></details>
+    <details><summary><span class="q">Lecture version with a “large enough” step</span><span class="hw">p.36–37</span></summary><div class="sol">
+      <p class="prob">\(\lim\frac{4n^2+3n}{n^2-6}=4\).</p>
+      <p>\(\left|\frac{4n^2+3n}{n^2-6}-4\right|=\frac{3n+24}{n^2-6}\) for \(n\ge3\). For \(n>1\): \(3n+24\lt27n\). For \(n>4\): \(n^2-6>\frac12n^2\). So the error is \(\lt\frac{27n}{\frac12n^2}=\frac{54}{n}\).</p>
+      <p><b>Proof.</b> Let \(\varepsilon>0\), \(N:=\max\{\frac{54}\varepsilon,12\}\). Let \(n>N\). Then \(\frac{3n+24}{n^2-6}\lt\frac{27n}{n^2-6}\lt\frac{27n}{\frac12n^2}=\frac{54}{n}\lt\varepsilon.\) ∎</p>
+      <p class="hand">The 12 is only there to make the “n large enough” steps true. Any big number works.</p>
+    </div></details>
+  </div>
+
+  <!-- limit laws -->
+  <div class="fam" id="f-laws">
+    <div class="top"><span class="label">Family 7</span><h3>Limit theorems write-up</h3><span class="from">HW2 #4a · HW3 #1, #2, #3</span></div>
+    <ol class="recipe">
+      <li>For rational functions of \(n\), divide top and bottom by the highest power \(n^p\) first, so each piece has a limit.</li>
+      <li>Compute the numerator and denominator limits separately, <b>naming each rule</b> (sum, scalar multiple, product, and \(n^{-p}\to0\)).</li>
+      <li>Before the Quotient Rule, check <b>both</b>: every denominator term is \(\ne0\), and the denominator's limit is \(\ne0\).</li>
+      <li>State the answer.</li>
+    </ol>
+    <p class="trap"><b>Trap</b>“Explicitly explain why the quotient theorem applies” is where the points are. Squares are ≥ 0 is the usual reason (HW3 #3).</p>
+    <details><summary><span class="q">(11n⁶ − 4n⁵ + 9n² − 7)/(13n⁶ + 5n⁴ + 2n + 1) → 11/13</span><span class="hw">HW3 #1</span></summary><div class="sol">
+      <p>Divide by \(n^6\neq0\): \(\dfrac{11-\frac4n+\frac9{n^4}-\frac7{n^6}}{13+\frac5{n^2}+\frac2{n^5}+\frac1{n^6}}=\dfrac{A_n}{B_n}\).</p>
+      <p>By \(n^{-p}\to0\) with the scalar-multiple and Sum rules: \(A_n\to11\), \(B_n\to13\).</p>
+      <p>For every \(n\), all non-constant terms of \(B_n\) are positive, so \(B_n>13>0\). And \(\lim B_n=13\ne0\). Both Quotient Rule hypotheses hold, so the limit is \(\frac{11}{13}\). ∎</p>
+    </div></details>
+    <details><summary><span class="q">xₙ → −2, yₙ → 5: lim (2yₙ − xₙ)/(xₙ + 2yₙ)²</span><span class="hw">HW3 #2</span></summary><div class="sol">
+      <p>Scalar/Sum/Difference rules: \(2y_n-x_n\to12\) and \(x_n+2y_n\to8\). Product rule: \((x_n+2y_n)^2\to64\).</p>
+      <p>Given \(x_n+2y_n\ne0\), the square is \(\neq0\) for every \(n\), and its limit \(64\ne0\). Quotient Rule: the limit is \(\frac{12}{64}=\frac{3}{16}\). ∎</p>
+    </div></details>
+    <details><summary><span class="q">uₙ = (aₙ⁴ − 2aₙbₙ + 3)/(aₙ² + bₙ² + 1)</span><span class="hw">HW3 #3</span></summary><div class="sol">
+      <p>Product rule repeatedly: \(a_n^2\to a^2\), \(b_n^2\to b^2\), \(a_n^4=(a_n^2)(a_n^2)\to a^4\), \(a_nb_n\to ab\).</p>
+      <p>Scalar/Sum/Difference: \(A_n:=a_n^4-2a_nb_n+3\to a^4-2ab+3\) and \(B_n:=a_n^2+b_n^2+1\to a^2+b^2+1\).</p>
+      <p><b>Quotient conditions.</b> Squares are \(\ge0\), so \(B_n\ge1>0\) for every \(n\), and \(a^2+b^2+1\ge1>0\). So the Quotient Rule applies: \(\lim u_n=\dfrac{a^4-2ab+3}{a^2+b^2+1}\). ∎</p>
+    </div></details>
+    <details><summary><span class="q">aₙ = (2n³ + n)/(n³ − 5)</span><span class="hw">HW2 #4a</span></summary><div class="sol">
+      <p>Divide by \(n^3\): \(a_n=\dfrac{2+\frac1{n^2}}{1-\frac5{n^3}}\to\dfrac{2+0}{1-0}=2\). (The denominator is \(\ne0\) for every \(n\ge2\), and its limit is \(1\ne0\).)</p>
+    </div></details>
+  </div>
+
+  <!-- +infinity -->
+  <div class="fam" id="f-inf">
+    <div class="top"><span class="label">Family 8</span><h3>Limits equal to +∞</h3><span class="from">HW3 #4, #5</span></div>
+    <ol class="recipe">
+      <li>Write the definition: for every \(M\in\mathbb{R}\) find \(N\) with \(n>N\Rightarrow s_n>M\).</li>
+      <li>Get a simple lower bound by induction (e.g. \(x_n\ge3^{n-1}\ge n\)), then choose \(N>M\).</li>
+      <li>When combining with another limit, use a tolerance like \(\varepsilon=1\) and threshold \(M+1\), then take \(N=\max\) of all the \(N\)s.</li>
+    </ol>
+    <p class="trap"><b>Trap</b>Don't use “3ⁿ → ∞” as a known fact unless it's been proved. The solution proves \(3^{n-1}\ge n\) by induction.</p>
+    <details><summary><span class="q">x₁ = 1, xₙ₊₁ = 4xₙ² − xₙ → +∞</span><span class="hw">HW3 #4</span></summary><div class="sol">
+      <p><b>Step 1: \(x_n\ge3^{n-1}\) by induction.</b> \(x_1=1=3^0\). If \(x_n\ge3^{n-1}\ge1\), then \(4x_n-1\ge3\) and \(x_n>0\), so \(x_{n+1}=x_n(4x_n-1)\ge3x_n\ge3^n\).</p>
+      <p><b>Step 2: \(3^{n-1}\ge n\) by induction.</b> True at \(n=1\). If \(3^{n-1}\ge n\), then \(3^n\ge3n\ge n+1\).</p>
+      <p><b>Step 3.</b> Let \(M\in\mathbb{R}\). Choose an integer \(N>M\). For \(n>N\): \(x_n\ge3^{n-1}\ge n>N>M\). So \(x_n\to+\infty\). ∎</p>
+    </div></details>
+    <details><summary><span class="q">sₙ ≤ tₙ + rₙ, rₙ → 0, sₙ → +∞ ⇒ tₙ → +∞</span><span class="hw">HW3 #5</span></summary><div class="sol">
+      <p>Let \(M\in\mathbb{R}\). Since \(r_n\to0\) (with \(\varepsilon=1\)): \(\exists N_1\), \(n>N_1\Rightarrow|r_n|\lt1\). Since \(s_n\to+\infty\) (with threshold \(M+1\)): \(\exists N_2\), \(n>N_2\Rightarrow s_n>M+1\).</p>
+      <p>Let \(N=\max\{N_0,N_1,N_2\}\). For \(n>N\):</p>
+      \[t_n\ge s_n-r_n\ge s_n-|r_n|>s_n-1>M.\]
+      <p>\(M\) was arbitrary, so \(t_n\to+\infty\). ∎</p>
+    </div></details>
+  </div>
+
+  <!-- monotone recursive -->
+  <div class="fam" id="f-mono">
+    <div class="top"><span class="label">Family 9</span><h3>Monotone recursive sequence</h3><span class="from">HW4 #3 · lecture p.51–52</span></div>
+    <ol class="recipe">
+      <li><b>Bounds by induction.</b> Show the terms stay in an interval (and the recurrence is defined, e.g. the denominator is \(>0\)).</li>
+      <li><b>Monotone.</b> Compute \(x_{n+1}-x_n\) (or \(x_{n+1}^2-x_n^2\)) as a single factored expression and read its sign off the bounds.</li>
+      <li><b>Converges</b> by the Monotone Convergence Theorem. Call the limit \(\ell\).</li>
+      <li><b>Only now</b> take limits in the recurrence (both \(x_{n+1}\to\ell\) and \(x_n\to\ell\)), solve for \(\ell\), and use the bounds (order limit corollary) to pick the right root.</li>
+    </ol>
+    <p class="trap"><b>Trap</b>Solving \(\ell=f(\ell)\) before proving convergence is the “false argument” from p.47. It loses most of the credit.</p>
+    <details><summary><span class="q">x₁ = 4, xₙ₊₁ = (3xₙ + 4)/(xₙ + 3)</span><span class="hw">HW4 #3</span></summary><div class="sol">
+      <p><b>Step 1.</b> Claim: \(x_n\) is defined and \(2\lt x_n\le4\). True for \(n=1\). If \(2\lt x_n\le4\), then \(x_n+3>0\) so \(x_{n+1}\) is defined, and</p>
+      \[x_{n+1}-2=\frac{x_n-2}{x_n+3}>0,\qquad x_{n+1}-x_n=\frac{4-x_n^2}{x_n+3}\lt0.\]
+      <p>So \(2\lt x_{n+1}\lt x_n\le4\). This completes the induction and shows \((x_n)\) is strictly decreasing.</p>
+      <p><b>Step 2.</b> Decreasing and bounded below by 2, so by MCT \(x_n\to\ell\) with \(\ell\in[2,4]\). Now \(x_n+3\to\ell+3\ge5\ne0\), so by the Quotient Rule \(\ell=\frac{3\ell+4}{\ell+3}\). Then \(\ell^2=4\), and \(\ell\ge2\) rules out \(-2\). So \(\lim x_n=2\). ∎</p>
+    </div></details>
+    <details><summary><span class="q">x₁ = 1, xₙ₊₁ = √(6 + xₙ)</span><span class="hw">lecture p.51</span></summary><div class="sol">
+      <p><b>Bounds:</b> \(1\le x_1\le3\). If \(1\le x_k\le3\), then \(7\le6+x_k\le9\), so \(1\le\sqrt7\le x_{k+1}\le3\).</p>
+      <p><b>Increasing:</b> \(x_{n+1}^2-x_n^2=6+x_n-x_n^2=(x_n+2)(3-x_n)\ge0\), so \(x_{n+1}\ge x_n\).</p>
+      <p><b>MCT</b> gives \(x_n\to L\). Then \(L=\sqrt{6+L}\), so \(L\in\{-2,3\}\), and \(1\le L\le3\) forces \(L=3\). ∎</p>
+    </div></details>
+  </div>
+
+  <!-- Cauchy -->
+  <div class="fam" id="f-cauchy">
+    <div class="top"><span class="label">Family 10</span><h3>Cauchy sequences</h3><span class="from">HW4 #1 · lecture p.58–60</span></div>
+    <ol class="recipe">
+      <li>For \(m>n\), telescope: \(|s_m-s_n|\le\sum_{k=n}^{m-1}|s_{k+1}-s_k|\).</li>
+      <li>Bound the finite sum with a finite geometric sum: \(\sum_{k=n}^{m-1}2^{-k}=2^{1-n}(1-2^{-(m-n)})\le2^{1-n}\).</li>
+      <li>Pick \(N\) so the bound is \(\lt\varepsilon\). Say that \(m=n\) is trivial and \(n>m\) is symmetric.</li>
+      <li>Completeness of ℝ gives a limit \(L\). For an error bound, fix \(n\) and let \(m\to\infty\) in \(|s_n-s_m|\le\) bound.</li>
+    </ol>
+    <details><summary><span class="q">|sₙ₊₁ − sₙ| ≤ 1/(n·2ⁿ) ⇒ Cauchy, |sₙ − L| ≤ 1/(n·2ⁿ⁻¹)</span><span class="hw">HW4 #1</span></summary><div class="sol">
+      <p>For \(m>n\ge1\), using \(\frac1k\le\frac1n\) for \(k\ge n\):</p>
+      \[|s_m-s_n|\le\sum_{k=n}^{m-1}|s_{k+1}-s_k|\le\sum_{k=n}^{m-1}\frac1{k2^k}\le\frac1n\sum_{k=n}^{m-1}2^{-k}=\frac{1}{n2^{n-1}}\left(1-2^{-(m-n)}\right)\le\frac1{n2^{n-1}}.\]
+      <p><b>Cauchy.</b> Given \(\varepsilon>0\), choose \(N\in\mathbb{N}\) with \(\frac1N\lt\varepsilon\). For \(m>n\ge N\) the bound is \(\le\frac1n\le\frac1N\lt\varepsilon\). The case \(n>m\) is symmetric and \(m=n\) is immediate. By completeness of ℝ, \(s_n\to L\in\mathbb{R}\).</p>
+      <p><b>Error bound.</b> Fix \(n\). For all \(m>n\), \(|s_n-s_m|\le\frac1{n2^{n-1}}\). Let \(m\to\infty\): \(|s_n-L|=\lim_m|s_n-s_m|\le\frac1{n2^{n-1}}\). ∎</p>
+    </div></details>
+  </div>
+
+  <!-- subsequences -->
+  <div class="fam" id="f-sub">
+    <div class="top"><span class="label">Family 11</span><h3>Subsequences and divergence</h3><span class="from">HW2 #4b · HW4 #4, #5 · lecture p.61–64</span></div>
+    <ol class="recipe">
+      <li>To show divergence: write down two subsequences (usually even and odd indices), compute each limit, and cite the Corollary on p.63 (different limits ⇒ diverges).</li>
+      <li>Justify that they are subsequences: the index maps \(k\mapsto2k\), \(k\mapsto2k-1\) are strictly increasing.</li>
+      <li>To build a subsequence with a property: apply the definition once for each \(j\) (with \(\varepsilon=2^{-j}\) or \(1/j\)), then force the indices up with \(\max\{\cdot,\text{previous}+1\}\).</li>
+    </ol>
+    <details><summary><span class="q">bₙ = (−1)ⁿ n/(n + 1)</span><span class="hw">HW2 #4b</span></summary><div class="sol">
+      <p>\(b_{2k}=\frac{2k}{2k+1}\to1\) and \(b_{2k+1}=-\frac{2k+1}{2k+2}\to-1\). Two subsequences with different limits, so \((b_n)\) diverges.</p>
+    </div></details>
+    <details><summary><span class="q">aₙ = 2 + (−1)ⁿ + (1 + (−1)ⁿ)/n</span><span class="hw">HW4 #4</span></summary><div class="sol">
+      <p><b>Odd indices (constant):</b> \(a_{2k-1}=2-1+\frac{0}{2k-1}=1\) for all \(k\), so it converges to 1.</p>
+      <p><b>Even indices (nonconstant):</b> \(a_{2k}=3+\frac{2}{2k}=3+\frac1k\to3\). It's nonconstant since \(3+\frac1{k+1}\lt3+\frac1k\).</p>
+      <p>\(k\mapsto2k-1\) and \(k\mapsto2k\) are strictly increasing, so both are subsequences. If \((a_n)\) converged, every subsequence would have the same limit (Thm 1). Since \(1\ne3\), \((a_n)\) does not converge. ∎</p>
+    </div></details>
+    <details><summary><span class="q">Refine σ to τ with |s_{σ(τ(j))} − L| &lt; 2⁻ʲ</span><span class="hw">HW4 #5</span></summary><div class="sol">
+      <p>For each \(j\), apply \(s_{\sigma(k)}\to L\) with \(\varepsilon=2^{-j}\): there is \(K_j\) with \(k\ge K_j\Rightarrow|s_{\sigma(k)}-L|\lt2^{-j}\).</p>
+      <p><b>Define</b> \(\tau(1)=K_1\), \(\tau(j+1)=\max\{K_{j+1},\ \tau(j)+1\}\). Then \(\tau(j)\ge K_j\) (so \(|s_{\sigma(\tau(j))}-L|\lt2^{-j}\)) and \(\tau(j+1)>\tau(j)\) (so \(\tau\) is strictly increasing).</p>
+      <p><b>Composition.</b> If \(i\lt j\) then \(\tau(i)\lt\tau(j)\), and since \(\sigma\) is strictly increasing, \(\sigma(\tau(i))\lt\sigma(\tau(j))\). So \(\sigma\circ\tau\) is strictly increasing, which makes \((s_{\sigma(\tau(j))})\) a subsequence of \((s_n)\). Its error is \(\lt2^{-j}\to0\), so it converges to \(L\). ∎</p>
+    </div></details>
+  </div>
+
+  <!-- liminf limsup -->
+  <div class="fam" id="f-lim">
+    <div class="top"><span class="label">Family 12</span><h3>liminf / limsup</h3><span class="from">HW5 #1, #2 · lecture p.53–57, p.68–74</span></div>
+    <ol class="recipe">
+      <li><b>To compute:</b> split the sequence into the obvious subsequences (by residue mod 2, 3, 4…). Find each one's limit in \(\overline{\mathbb{R}}\).</li>
+      <li>Argue these are the <b>only</b> subsequential limits: any subsequence has infinitely many terms from one class, and that piece converges to that class's limit.</li>
+      <li>Then \(\liminf=\min S(s_n)\) and \(\limsup=\max S(s_n)\) (p.68). The sequence has a limit in \(\overline{\mathbb{R}}\) iff they're equal (p.55).</li>
+      <li>With a convergent add-on like \(\frac1n\), use the p.73 theorem: \(\limsup(a_n+b_n)=a+\limsup b_n\).</li>
+      <li><b>To prove inequalities:</b> work with tails. Fix \(N\), compare \(\sup\{a_n:n\ge N\}\) with \(\sup\{b_n:n\ge N\}\), then let \(N\to\infty\).</li>
+    </ol>
+    <p class="trap"><b>Trap</b>liminf/limsup can be ±∞. A sequence that is unbounded above has limsup = +∞, and that is a valid answer.</p>
+    <details><summary><span class="q">s₃ₖ₋₂ = −2 + 1/k, s₃ₖ₋₁ = 1 − 1/k, s₃ₖ = k</span><span class="hw">HW5 #1</span></summary><div class="sol">
+      <p class="mine">My solution, no official one posted</p>
+      <p><b>Three subsequences.</b> The index maps \(k\mapsto3k-2,\ 3k-1,\ 3k\) are strictly increasing, and</p>
+      \[s_{3k-2}=-2+\tfrac1k\to-2,\qquad s_{3k-1}=1-\tfrac1k\to1,\qquad s_{3k}=k\to+\infty.\]
+      <p>So \(-2,\,1,\,+\infty\in S(s_n)\).</p>
+      <p><b>No others.</b> Let \((s_{n_j})\) be any subsequence with \(s_{n_j}\to t\in\overline{\mathbb{R}}\). Infinitely many of the \(n_j\) lie in one of the three classes \(\{3k-2\}\), \(\{3k-1\}\), \(\{3k\}\). Those terms form a subsequence of \((s_{n_j})\), so they still tend to \(t\) (Thm 1). They also form a subsequence of the corresponding class, so they tend to \(-2\), \(1\), or \(+\infty\). By uniqueness, \(t\in\{-2,1,+\infty\}\). Hence</p>
+      \[S(s_n)=\{-2,\ 1,\ +\infty\}.\]
+      <p><b>liminf/limsup.</b> \(\liminf s_n=\min S(s_n)=-2\) and \(\limsup s_n=\max S(s_n)=+\infty\).</p>
+      <p class="hand">Check with tails: every tail contains −2 + 1/k for arbitrarily large k and nothing below −2, so u_N = −2. Every tail is unbounded, so v_N = +∞.</p>
+      <p><b>Limit?</b> \(\liminf s_n=-2\neq+\infty=\limsup s_n\), so by p.55 \((s_n)\) has no limit in \(\overline{\mathbb{R}}\). ∎</p>
+    </div></details>
+    <details><summary><span class="q">aₙ ≤ bₙ + rₙ eventually, rₙ ≥ 0, rₙ → 0 ⇒ liminf/limsup inequalities</span><span class="hw">HW5 #2</span></summary><div class="sol">
+      <p class="mine">My solution, no official one posted</p>
+      <p><b>Setup.</b> Since \((a_n),(b_n)\) are bounded, every tail sup and inf is a real number. Write</p>
+      \[u_N=\inf_{n\ge N}a_n,\quad v_N=\sup_{n\ge N}a_n,\quad u_N'=\inf_{n\ge N}b_n,\quad v_N'=\sup_{n\ge N}b_n.\]
+      <p>Let \(\varepsilon>0\). There is \(N_0\) with \(a_n\le b_n+r_n\) for \(n\ge N_0\), and since \(r_n\to0\) there is \(N_1\) with \(r_n\lt\varepsilon\) for \(n\ge N_1\). Let \(N'=\max\{N_0,N_1\}\). Then</p>
+      \[a_n\lt b_n+\varepsilon\qquad\text{for all } n\ge N'.\tag{★}\]
+      <p><b>limsup.</b> Fix \(N\ge N'\). For every \(n\ge N\), (★) gives \(a_n\lt b_n+\varepsilon\le v_N'+\varepsilon\). So \(v_N'+\varepsilon\) is an upper bound of \(\{a_n:n\ge N\}\), hence \(v_N\le v_N'+\varepsilon\). Letting \(N\to\infty\) (order limit theorem): \(\limsup a_n\le\limsup b_n+\varepsilon\).</p>
+      <p><b>liminf.</b> Fix \(N\ge N'\). For every \(n\ge N\), \(u_N\le a_n\lt b_n+\varepsilon\), so \(u_N-\varepsilon\lt b_n\). Thus \(u_N-\varepsilon\) is a lower bound of \(\{b_n:n\ge N\}\), hence \(u_N-\varepsilon\le u_N'\). Letting \(N\to\infty\): \(\liminf a_n\le\liminf b_n+\varepsilon\).</p>
+      <p><b>Remove ε.</b> Both hold for every \(\varepsilon>0\). If \(x\le y+\varepsilon\) for all \(\varepsilon>0\) then \(x\le y\) (otherwise take \(\varepsilon=\frac{x-y}{2}\)). So \(\liminf a_n\le\liminf b_n\) and \(\limsup a_n\le\limsup b_n\). ∎</p>
+    </div></details>
+    <details><summary><span class="q">Periodic (1,2,3,4,…) + 1/n</span><span class="hw">lecture p.74</span></summary><div class="sol">
+      <p>\(a_n=(1,2,3,4,1,2,3,4,\dots)\), \(s_n=a_n+\frac1n\). Since \(\frac1n\to0\), the p.73 theorem gives \(\liminf s_n=\liminf a_n+0=1\) and \(\limsup s_n=\limsup a_n+0=4\).</p>
+    </div></details>
+  </div>
+</section>
+
+<!-- ================= FIXES ================= -->
+<section id="fixes">
+  <header>
+    <h2>Fix these in your notes</h2>
+    <p>Spots where the board (or the copy) has a slip. Don't memorize the slip.</p>
+  </header>
+  <ul class="fixes">
+    <li><span class="pg">p.07</span><span>Well-ordering should read: every <b>nonempty</b> \(S\subset\mathbb{N}\) has a min, i.e. \(\exists s\in S\) s.t. <b>\(\forall t\in S\)</b>, \(s\le t\).</span></li>
+    <li><span class="pg">p.09</span><span>Rational zeros: the second term is \(c_{n-1}r^{n-1}\), not \(c_{n+1}r^{n+1}\).</span></li>
+    <li><span class="pg">p.31</span><span>For \(\frac{3n+1}{7n+4}\to\frac37\) the scratch work gives error \(\frac{5}{49n+28}\), so \(N=\frac{5}{49\varepsilon}\) is enough. The \(\frac{19}{49\varepsilon}+\frac47\) belongs to the \(7n-4\) example on p.35. It still works here, but it doesn't come from this example.</span></li>
+    <li><span class="pg">p.36</span><span>\(n^2-6\neq(n+3)(n-3)\). The proof never uses that line, so ignore it.</span></li>
+    <li><span class="pg">p.54–55</span><span>\(v_N:=\sup A_N\), and the chain should read \(L-\varepsilon\le\liminf s_n\le\limsup s_n\le L+\varepsilon\).</span></li>
+    <li><span class="pg">p.59</span><span>“For ε = 1, <b>∃</b>N”, not “∀N”.</span></li>
+    <li><span class="pg">p.70</span><span>Last line: \(\liminf s_n=\alpha=\min S(s_n)\). The β there is a reused letter.</span></li>
+  </ul>
+</section>
+
+<!-- ================= NIGHT BEFORE ================= -->
+<section id="night">
+  <header>
+    <h2>Night-before list</h2>
+    <p>If you only have 20 minutes left, do these in order.</p>
+  </header>
+  <ol class="checklist">
+    <li>Write my-pick definitions from memory: convergence, lim = ∞, sup/inf, Cauchy, liminf/limsup, subsequence. Check them in quiz mode.</li>
+    <li>Redo HW4 #3 on blank paper. Bounds → monotone → MCT → only then solve for ℓ.</li>
+    <li>Redo HW2 #5. Scratch work, then a clean “Let ε &gt; 0, choose N, let n &gt; N” chain.</li>
+    <li>Redo HW5 #1: list S(sₙ), then read off min and max.</li>
+    <li>Re-read the p.73 theorem (sum with a convergent sequence). It's the one the professor flagged in red.</li>
+    <li>On every quotient, write one sentence saying why the denominator and its limit are nonzero.</li>
+  </ol>
+</section>
+
+<footer>Sources: your lecture notes PDF (pages cited), HW1–5 assignments, HW1–4 official solutions. HW5 #1–2 solutions are my own work.</footer>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('defs');
+  var btn = document.getElementById('quizBtn');
+  var reset = document.getElementById('resetBtn');
+  var count = document.getElementById('quizCount');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#defList .board'));
+  function update() {
+    if (!root.classList.contains('quiz')) { count.textContent = ''; return; }
+    var shown = cards.filter(function (c) { return c.classList.contains('shown'); }).length;
+    count.textContent = shown + ' / ' + cards.length + ' checked';
+  }
+  function setQuiz(on) {
+    root.classList.toggle('quiz', on);
+    btn.textContent = on ? 'Quiz mode: on' : 'Quiz mode: off';
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    reset.hidden = !on;
+    cards.forEach(function (c) { c.classList.remove('shown'); });
+    update();
+    try { localStorage.setItem('m104quiz', on ? '1' : '0'); } catch (e) {}
+  }
+  btn.addEventListener('click', function () { setQuiz(!root.classList.contains('quiz')); });
+  reset.addEventListener('click', function () { cards.forEach(function (c) { c.classList.remove('shown'); }); update(); });
+  cards.forEach(function (c) {
+    var r = c.querySelector('.reveal');
+    r.addEventListener('click', function () { c.classList.add('shown'); update(); });
+  });
+  try { if (localStorage.getItem('m104quiz') === '1') setQuiz(true); } catch (e) {}
+})();
+</script>
+
+<script type="module" src="/school/math104/m1-review/review.js"></script>
+</body>
+</html>

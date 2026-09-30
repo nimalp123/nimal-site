@@ -1,0 +1,114 @@
+/* Phone-first reading layer. Original artifact content and mathematical notation stay intact. */
+:root { --study-offset: 148px; color-scheme: light; }
+:root[data-theme="light"] { color-scheme: light; }
+html { scroll-padding-top: var(--study-offset); }
+body { margin: 0; padding: 0; overflow-x: clip; -webkit-text-size-adjust: 100%; }
+.wrap { width: min(100%, 880px); padding: 28px max(20px, env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)); }
+.wrap, section, .fam, .sol, .board, .tk, .tk-row, .fixes li, .wording, .note, p, li, details, summary { min-width: 0; }
+p, li, .wording, .note, .q, .tk-row { overflow-wrap: anywhere; }
+.study-breadcrumb { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 10px; font: 12px var(--mono); text-decoration: none; }
+header.top { gap: 12px; margin-bottom: 24px; }
+header.top .sub { font-size: 1rem; }
+.chip { white-space: normal; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.study-controls { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; padding: 10px 0; margin-bottom: 22px; background: var(--paper); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: grid; gap: 7px; }
+.study-primary { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 7px; }
+.study-controls button, .study-controls select { min-height: 44px; border-radius: 6px; border: 1px solid var(--rule); color: var(--ink); background: var(--card); font: 14px var(--mono); }
+.study-controls button { cursor: pointer; touch-action: manipulation; }
+.study-controls button:disabled { opacity: .3; cursor: default; }
+.study-controls button:hover:not(:disabled) { border-color: var(--blue); }
+.study-controls button:focus-visible, .study-controls select:focus-visible, a:focus-visible, mjx-container:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.study-arrow { font-family: var(--serif) !important; font-size: 22px !important; }
+.study-jump, .study-family { min-width: 0; }
+.study-controls select { display: block; width: 100%; padding: 9px 32px 9px 12px; font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.study-family select { font-size: 15px; font-weight: 400; }
+.study-options { display: flex; align-items: center; gap: 10px; }
+.study-mode { display: flex; flex-shrink: 0; }
+.study-mode button { padding: 8px 12px; border-radius: 0; border-right-width: 0; font-size: 11px; }
+.study-mode button:first-child { border-radius: 6px 0 0 6px; }
+.study-mode button:last-child { border-right-width: 1px; border-radius: 0 6px 6px 0; }
+.study-mode button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.study-position { font: 10px var(--mono); color: var(--muted); margin-left: auto; white-space: nowrap; }
+.study-theme { padding: 8px 10px; font-size: 11px !important; }
+.study-nojs { border-left: 3px solid var(--blue); padding: 10px 14px; background: var(--card); }
+section { margin-top: 38px; scroll-margin-top: var(--study-offset); }
+body.study-focus section { margin-top: 0; }
+section > header h2 { outline: none; }
+section > header h2:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+.fam { scroll-margin-top: var(--study-offset); }
+.fam > .top h3 { outline: none; }
+.fam > .top h3:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+.fam .from { white-space: normal; }
+.map { overflow: visible; }
+.map table { min-width: 0; }
+.map td { overflow-wrap: anywhere; }
+.tier { white-space: normal; display: inline-block; }
+details > summary { min-height: 48px; flex-wrap: wrap; align-items: flex-start; }
+details > summary::before { flex-shrink: 0; padding-top: 1px; }
+details > summary .q { flex: 1 1 calc(100% - 2ch); min-width: 0; }
+details > summary .hw { margin-left: 2ch; }
+.sol { padding-left: 0; }
+button.btn, .board .reveal { min-height: 44px; touch-action: manipulation; }
+.board .reveal { width: 100%; }
+/* Inline math is an atomic inline block, so a long expression moves to its own
+   line instead of widening a paragraph. Only its own SVG may scroll. */
+mjx-container[jax="SVG"] { max-width: 100%; min-width: 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; scrollbar-color: var(--blue) transparent; padding: 3px 0; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+mjx-container[jax="SVG"]:not([display="true"]) { display: inline-block; vertical-align: -.15em; }
+mjx-container[jax="SVG"][display="true"] { display: block; width: 100%; margin: 12px 0 !important; text-align: left !important; }
+mjx-container[jax="SVG"] > svg { max-width: none; }
+mjx-container.math-overflow { border-bottom: 1px dashed var(--blue); }
+.math-scroll-hint { display: block; font: 10px var(--mono); color: var(--muted); margin-top: -8px; margin-bottom: 12px; }
+.study-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; padding-top: 18px; border-top: 1px solid var(--rule); }
+.study-bottom button { min-height: 48px; text-align: left; border: 1px solid var(--rule); border-radius: 7px; padding: 9px 12px; background: var(--card); color: var(--ink); cursor: pointer; }
+.study-bottom button:last-child { text-align: right; }
+.study-bottom button:disabled { opacity: .3; }
+.study-bottom button small { display: block; font: 10px var(--mono); color: var(--muted); margin-bottom: 4px; }
+.study-bottom button span { font-family: var(--serif); font-size: 14px; }
+.study-bottom button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--rule); font-size: 12px; }
+[hidden] { display: none !important; }
+@media (max-width: 600px) {
+  .wrap { padding-top: 10px; padding-inline: max(16px, env(safe-area-inset-left)); }
+  body { font-size: 17px; line-height: 1.65; }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.18rem; }
+  .label { font-size: 10px; }
+  .study-controls { margin-inline: -16px; padding-inline: 16px; }
+  .study-controls select { font-size: 16px; }
+  .study-options { gap: 7px; }
+  .study-theme span { display: none; }
+  .study-theme { min-width: 44px; font-size: 20px !important; }
+  .map { border: 0; border-radius: 0; background: transparent; }
+  .map table, .map tbody { display: block; }
+  .map thead { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  .map tbody { display: grid; gap: 10px; }
+  .map tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px 16px; padding: 16px; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); }
+  .map td { display: block; min-width: 0; padding: 0; border: 0; }
+  .map td:first-child { grid-column: 1 / -1; }
+  .map td::before { content: attr(data-label); display: block; margin-bottom: 4px; font: 9px var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+  .map td:first-child::before { display: none; }
+  .map td:first-child a { display: block; min-height: 30px; font-size: 18px; line-height: 1.3; }
+  .map td.hw { font-size: 12px; }
+  .fam, .board { padding: 16px; border-radius: 8px; }
+  .board .head { gap: 6px 12px; }
+  .board .wording { font-size: 1rem; }
+  .recipe { padding-left: 1.15em; }
+  .trap { padding: 8px 10px; }
+  .fixes li { grid-template-columns: minmax(0,1fr); gap: 4px; }
+  .fixes .pg { font-size: 11px; }
+  .tk-row { padding-block: 14px; gap: 8px; }
+  .tk-row .t { font-size: 18px; }
+  .hand, .tk-row .use { font-size: 1.02rem; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media print {
+  body { background: white; color: black; }
+  .study-controls, .study-bottom, .study-breadcrumb { display: none; }
+  section[hidden], .fam[hidden] { display: grid !important; }
+  .quiz .board .wording, .quiz .board .note { display: block !important; }
+  .board .reveal { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  details .sol { display: grid !important; }
+  mjx-container { overflow: visible !important; }
+}

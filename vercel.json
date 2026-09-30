@@ -5,9 +5,23 @@
   "rewrites": [
     { "source": "/data/token-usage.json", "destination": "/api/token-usage" },
     { "source": "/tokenmaxxing", "destination": "/tokenmaxxing/index.html" },
-    { "source": "/tokenmaxxing/", "destination": "/tokenmaxxing/index.html" }
+    { "source": "/tokenmaxxing/", "destination": "/tokenmaxxing/index.html" },
+    { "source": "/school", "destination": "/school/index.html" },
+    { "source": "/school/", "destination": "/school/index.html" },
+    { "source": "/school/:course/:artifact", "destination": "/school/:course/:artifact/index.html" },
+    { "source": "/school/:course/:artifact/", "destination": "/school/:course/:artifact/index.html" },
+    { "source": "/school/:course", "destination": "/school/:course/index.html" },
+    { "source": "/school/:course/", "destination": "/school/:course/index.html" }
   ],
   "headers": [
+    {
+      "source": "/school",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, nosnippet" }]
+    },
+    {
+      "source": "/school/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, nosnippet" }]
+    },
     {
       "source": "/(.*)",
       "headers": [
