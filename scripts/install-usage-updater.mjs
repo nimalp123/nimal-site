@@ -1,4 +1,5 @@
 import { mkdir, writeFile, unlink } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -9,6 +10,7 @@ const label = "com.nimalp123.tokenmaxxing";
 const target = resolve(homedir(), "Library/LaunchAgents", `${label}.plist`);
 const preview = resolve(root, "artifacts", `${label}.plist`);
 const service = `gui/${process.getuid()}/${label}`;
+const nodeBinary = ["/opt/homebrew/bin/node", "/usr/local/bin/node", process.execPath].find(existsSync);
 const escapeXml = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 
 if (process.platform !== "darwin") throw new Error("This updater is for the MacBook's launchd service.");
@@ -24,13 +26,13 @@ const plist = `<?xml version="1.0" encoding="UTF-8"?>
 <plist version="1.0"><dict>
   <key>Label</key><string>${label}</string>
   <key>ProgramArguments</key><array>
-    <string>${escapeXml(process.execPath)}</string>
+    <string>${escapeXml(nodeBinary)}</string>
     <string>${escapeXml(resolve(root, "scripts/sync-usage.mjs"))}</string>
     <string>--publish</string>
   </array>
   <key>WorkingDirectory</key><string>${escapeXml(root)}</string>
   <key>EnvironmentVariables</key><dict>
-    <key>PATH</key><string>${escapeXml(`${dirname(process.execPath)}:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin`)}</string>
+    <key>PATH</key><string>${escapeXml(`${dirname(nodeBinary)}:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin`)}</string>
   </dict>
   <key>StartInterval</key><integer>3600</integer>
   <key>RunAtLoad</key><true/>
