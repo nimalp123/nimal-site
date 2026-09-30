@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Network from "./Network";
 import Rayaboy from "./Rayaboy";
+import TokenMaxxingCard from "./TokenMaxxingCard";
 import { Arrow, GitHub, LinkedIn, Spark } from "./icons";
 import snapshot from "./data/repos.json";
 
@@ -382,6 +383,8 @@ export default function App() {
           </section>
 
           <Rayaboy />
+
+          <TokenMaxxingCard />
 
           <section
             className="repo-section section"

@@ -1,16 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import type { UsageMetrics as Metrics, UsageAgent as Agent, UsageSnapshot } from "./tokenmaxxing-types";
+import type { UsageMetrics as Metrics } from "./tokenmaxxing-types";
+import useUsageSnapshot from "./useUsageSnapshot";
 import TokenMaxxingHero from "./TokenMaxxingHero";
 import TokenUsageHeatmap from "./TokenUsageHeatmap";
 import { Arrow, Spark } from "./icons";
 import "./tokenmaxxing.css";
 
-const zeroMetrics: Metrics = {
-  inputTokens: 0, outputTokens: 0, cacheCreationTokens: 0,
-  cacheReadTokens: 0, totalTokens: 0, totalCost: 0,
-};
-const metricKeys = Object.keys(zeroMetrics) as (keyof Metrics)[];
 const agentNames: Record<string, string> = {
   claude: "Claude", codex: "Codex", antigravity: "Antigravity", grok: "Grok",
   hermes: "Hermes", kimi: "Kimi", opencode: "OpenCode", other: "Other",
@@ -23,7 +18,6 @@ const tokenParts = [
 ] as const;
 const fullNumber = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const usd = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 });
-const datePattern = /^\d{4}-\d{2}-\d{2}$/;
 
 function compact(value: number, precision = 2) {
   if (value >= 1e9) return `${(value / 1e9).toFixed(precision)}B`;
@@ -32,40 +26,10 @@ function compact(value: number, precision = 2) {
   return fullNumber.format(value);
 }
 
-function validMetrics(value: unknown): value is Metrics {
-  return typeof value === "object" && value !== null && metricKeys.every((key) => {
-    const item = (value as Record<string, unknown>)[key];
-    return typeof item === "number" && Number.isFinite(item) && item >= 0;
-  });
-}
-
-function validAgents(value: unknown): value is Agent[] {
-  return Array.isArray(value) && value.every((item) => {
-    if (!validMetrics(item)) return false;
-    const agent = item as Metrics & { id?: unknown; models?: unknown };
-    return typeof agent.id === "string" && Object.hasOwn(agentNames, agent.id) &&
-      (agent.models === undefined || (Array.isArray(agent.models) && agent.models.every((model) => typeof model === "string" && model.length > 0)));
-  });
-}
-
 function trackedParts(metrics: Metrics) {
   const parts = tokenParts.map((part) => ({ ...part, value: metrics[part.key] }));
   const remainder = Math.max(0, metrics.totalTokens - parts.reduce((sum, part) => sum + part.value, 0));
   return remainder > 0 ? [...parts, { key: "otherTracked", label: "Other tracked", className: "other", value: remainder }] : parts;
-}
-
-function readSnapshot(value: unknown): UsageSnapshot {
-  const data = value as UsageSnapshot | null;
-  if (!data || data.schemaVersion !== 1 || !Number.isFinite(Date.parse(data.generatedAt)) ||
-    data.timezone !== "America/Los_Angeles" || !data.source || data.source.tool !== "ccusage" ||
-    !data.coverage || !datePattern.test(data.coverage.from) || !datePattern.test(data.coverage.through) ||
-    !validMetrics(data.totals) || !validAgents(data.agents) || !Array.isArray(data.daily) ||
-    !data.daily.every((day) => validMetrics(day) && datePattern.test(day.date) && validAgents(day.agents)) ||
-    !data.pricingGap || !Number.isFinite(data.pricingGap.totalTokens) || data.pricingGap.totalTokens < 0 ||
-    !Number.isFinite(data.pricingGap.modelCount) || data.pricingGap.modelCount < 0) {
-    throw new Error("Invalid usage snapshot");
-  }
-  return data;
 }
 
 function PageFrame({ children }: { children: ReactNode }) {
@@ -90,42 +54,7 @@ function PageFrame({ children }: { children: ReactNode }) {
 }
 
 export default function TokenMaxxing() {
-  const [snapshot, setSnapshot] = useState<UsageSnapshot | null>(null);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const activeRequest = useRef<AbortController | null>(null);
-  const snapshotRef = useRef<UsageSnapshot | null>(null);
-  const mounted = useRef(true);
-
-  const refresh = useCallback(async () => {
-    activeRequest.current?.abort();
-    const controller = new AbortController();
-    activeRequest.current = controller;
-    if (!snapshotRef.current) setLoading(true);
-    try {
-      const response = await fetch(`/data/token-usage.json?t=${Math.floor(Date.now() / 60_000)}`, { cache: "no-store", signal: controller.signal });
-      if (!response.ok) throw new Error("Snapshot unavailable");
-      const data = readSnapshot(await response.json());
-      if (mounted.current && !controller.signal.aborted) {
-        snapshotRef.current = data;
-        setSnapshot(data);
-        setError(false);
-      }
-    } catch {
-      if (mounted.current && !controller.signal.aborted) setError(true);
-    } finally {
-      if (mounted.current && !controller.signal.aborted) setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    mounted.current = true;
-    void refresh();
-    const timer = window.setInterval(() => { if (document.visibilityState === "visible") void refresh(); }, 60_000);
-    const onVisible = () => { if (document.visibilityState === "visible") void refresh(); };
-    document.addEventListener("visibilitychange", onVisible);
-    return () => { mounted.current = false; activeRequest.current?.abort(); window.clearInterval(timer); document.removeEventListener("visibilitychange", onVisible); };
-  }, [refresh]);
+  const { snapshot, error, loading, refresh } = useUsageSnapshot();
 
   if (!snapshot) return <PageFrame><main id="tm-main" className="tm-empty" aria-busy={loading}><span className="tm-kicker">NIMAL / TOKENMAXXING</span><h1>The compute<br /><i>behind the builds.</i></h1>{loading ? <p role="status">Opening the usage ledger<span className="tm-loading-dots" aria-hidden="true">…</span></p> : <><p role="alert">The usage ledger is temporarily unavailable.</p><button className="tm-retry" onClick={() => void refresh()}>Try again <Arrow diagonal={false} /></button></>}</main></PageFrame>;
 
