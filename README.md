@@ -1,74 +1,138 @@
-# Nimal — selected work
+<a href="https://nimal-site-three.vercel.app/">
+  <img src="public/images/social-card.png" alt="Nimal Periasamy. Curiosity. Into code. Applied AI and research engineering, with a floating chrome network and lime accents." width="1200" />
+</a>
 
-Personal website for Nimal Periasamy. Selected public projects, ranked by a deliberately subjective aura order, with Instagram Friendship Graph featured first.
+<p align="center">
+  <strong><a href="https://nimal-site-three.vercel.app/">ENTER THE SITE ↗</a></strong>
+  &nbsp; / &nbsp;
+  <a href="https://www.linkedin.com/in/nimal-periasamy/">LinkedIn ↗</a>
+  &nbsp; / &nbsp;
+  <a href="https://github.com/nimalp123">GitHub ↗</a>
+  &nbsp; / &nbsp;
+  <a href="https://rayaboy.com">Rayaboy ↗</a>
+</p>
 
-## Branches
+<p align="center"><strong>Hard problems. Fast builds. Verifiable progress.</strong><br />Applied AI, research systems, and things people use.</p>
 
-- `main`: production.
-- `staging`: working preview branch.
+---
 
-The initial website was reviewed locally before publication.
+`01 / SELECTED WORK`
 
-Only public repository metadata and approved, high-level Rayaboy copy belong here. Never commit private project code, personal graph data, credentials, or internal learnings.
+## Mapped. Still curious.
 
-## Local development
+### Instagram Friendship Graph
 
-Requires Node 24+.
+**A completed mapping experiment. A starting point for bigger questions.**
 
-The live Rayaboy counter needs `RAYABOY_INSFORGE_URL` and `RAYABOY_INSFORGE_API_KEY` in a local, ignored `.env.local` file. Both stay on the server. Without them, the site shows the counter as unavailable.
+I mapped my Instagram network into an explorable Obsidian vault. Mutual follows, shared connections, and paths across three degrees.
 
-```sh
-npm ci
-npm run dev
-```
+[![The published anonymous Instagram network: 5,347 accounts, 5,992 observed mutual-follow links, three degrees of connection.](public/images/actual-graph.png)](https://github.com/nimalp123/instagram-friendship-graph)
 
-Open http://localhost:5173/ in Brave. The development server listens on loopback only.
+| **5,347** | **5,992** | **3°** |
+| :--- | :--- | :--- |
+| Anonymous accounts | Observed mutual-follow links | Degrees of connection |
 
-```sh
-npm run lint
-npm test
-npm run build
-node scripts/browser-smoke.mjs
-```
+<sub>September 2026 snapshot. Second and third degree totals are observed lower bounds. Names stay private.</sub>
 
-The browser smoke check uses an isolated Brave session on macOS, then falls back to Chrome or installed Playwright Chromium. Override with `BROWSER_EXECUTABLE` and `PREVIEW_URL` if needed. Screenshots go into ignored `artifacts/`.
+**The graph is built. The questions keep coming.**
 
-## Updating public repositories
+- Who could I become friends with?
+- Which mutuals connect us?
+- Who might I click with?
+- What patterns am I missing?
 
-Run `npm run sync:repos` before a release to fetch the account's public repositories without a token. It follows pagination, discards private repositories and unapproved fields, and excludes this website, which is linked in the footer. Django server, OpenClaw, Streamlit example, Calpeptides, and Health helper are excluded by the curation policy in `scripts/repo-utils.mjs` and stay excluded after future syncs. An API failure preserves the existing snapshot. The website renders the saved snapshot with a visible date, so GitHub rate limits cannot take down the portfolio.
+**[Explore the experiment ↗](https://github.com/nimalp123/instagram-friendship-graph)** · [Try the interactive network ↗](https://nimal-site-three.vercel.app/#work)
 
-Aura order and editorial descriptions are in `src/App.tsx`. Instagram Friendship Graph stays first. The current selection contains four repositories. Fork filters appear only when the selection contains forks. Empty repositories are described honestly.
+---
 
-## Content and artwork
+`02 / RAYABOY — APPLIED AI + PRODUCT`
 
-- The interactive graph is a fictional demo. Its names and connections are synthetic.
-- Instagram Friendship Graph is presented as a completed public mapping experiment and a starting point for future data analysis. Friendship suggestions, shared connections, and other patterns are questions Nimal wants to explore, not implemented recommendation features.
-- `public/images/actual-graph.png` is the anonymous image already published in the flagship repository. Its counts are the September 2026 observed totals, with the lower-bound limitation displayed.
-- The Rayaboy showcase presents applied AI, research engineering, and the application product as short capabilities, 18 scoped metric cards, and a closed-loop iteration diagram. Its own catalog and live registration figures have a separate outcome strip. An audit of all 68 local scraper branches (including the 29 current GitHub branches), PR55, and newer document research branches informed the content. The public metric scope guide is in [RESEARCH-SNAPSHOTS.md](RESEARCH-SNAPSHOTS.md). No private code, proprietary execution tactics, private links, student records, or raw internal documents are included.
-- `public/images/rayaboy-site.webp` is a real screenshot of the public Rayaboy homepage captured on September 29, 2026 in an isolated Brave session. The public homepage displayed 40+ catalog scholarships and $336k in listed scholarship funding on that date. The image and explicit action link to `https://rayaboy.com` in a new tab. The catalog figures are not revenue, applications completed, or money awarded.
-- `public/images/chrome-network.webp` was generated with the built-in image generation tool and optimized as WebP. The complete prompt and art direction are in `DESIGN.md`.
-- `public/images/social-card.png` is a rendered screenshot of the site's hero.
+## Build fast. Prove it.
 
-The live user counter reads only `COUNT(*)` from Production Main's `auth.users` through a server-side InsForge admin REST request. Profiles are created later, so counting them would miss registrations. The endpoint returns only the aggregate and retrieval timestamp, caches for 60 seconds, and accepts GET/HEAD. The browser refreshes once per minute while visible. It reports registered accounts, including admins, unverified registrations, and retained test accounts; it does not claim active users. No database schema, permissions, or production app code was changed.
+**Research engineering → real product. Built with the Rayaboy team.**
 
-## Deployment
+| The product | The AI systems | The research infrastructure |
+| :--- | :--- | :--- |
+| SuperProfile | Browser research | Controlled experiments |
+| Document → profile | Document intelligence | Isolated workers |
+| Writing hub | Evidence verification | Record + replay |
+| Review + export | Human feedback | Restartable runs |
 
-Live URL: https://nimal-site-three.vercel.app. Vercel project **nimal-site**: framework **Vite**, Node **24.x**, build command `npm run build`, output `dist`, production branch `main`, preview branch `staging`.
+### My work / the receipts
 
-`api/rayaboy-stats.js` provides the counter endpoint. Both server-only variables from `.env.example` are configured for Vercel production and preview; the API key is sensitive. Keep it out of variables starting with `VITE_` and out of Git. `.vercelignore` also excludes local credentials, private data, and test artifacts from CLI uploads.
+[![Recorded research results: 3.3× observed batch throughput on six real pages; 78% fewer invalid AI proposals and 83% fewer output tokens in scoped synthetic comparisons; 20/20 repeated document validation trials; 8,419 passing unit checks; 137 review-driven regression cases.](public/images/readme-research.svg)](RESEARCH-SNAPSHOTS.md)
 
-The public source repository is https://github.com/nimalp123/nimal-site. GitHub Actions checks lint, tests, and the production build on both branches; the workflow can also be dispatched manually.
+| Result | What it measured |
+| :--- | :--- |
+| **3.3×** observed batch throughput | 93 → 28 minutes, same six real development pages; same terminal outcomes |
+| **78%** fewer invalid AI proposals | 45 → 10, same experimental arm and 12-case synthetic benchmark |
+| **83%** fewer output tokens | 963k → 163k, controlled 12-case baseline/tuned-arm comparison |
+| **22%** shorter evaluation runtime | 64 → 50 minutes in that baseline/tuned-arm comparison |
+| **6 → 11 / 12** exact matches | Initial/final runs, same arm and synthetic fixtures |
+| **12 / 12** passed verification | Up from 10/12 on the same synthetic benchmark |
+| **20 / 20** repeated document trials | 470/470 required fields matched on an already-seen synthetic set |
+| **539 / 539** selected course cells exact | 77/77 rows, each of two trials on one real development template |
+| **8,419** passing unit checks | Scraper development checkpoint; 344 skipped |
+| **137** review-driven regression cases | Recorded document-pipeline correction following independent review |
 
-Vercel is connected to this repository through a personal-account GitHub app installation with **Only select repositories** enabled and exactly `nimalp123/nimal-site` selected. The private organization’s installation and repository permissions were not changed.
+<details>
+<summary><strong>More from the lab ↗</strong></summary>
 
-Pushes to `main` automatically create production deployments; pushes to `staging` create preview deployments. Review a staging preview before promoting an approved version to `main`. For a manual deployment, use the Vercel CLI from the appropriate branch:
+| Checkpoint | Recorded result |
+| :--- | :--- |
+| Document research | **231** tracked model calls across PR55 development, comparison, and validation |
+| Offline source checks | **3,289** passed: 1,834 backend/core + 1,455 app |
+| Controlled response fixtures | **299**, exercised by 151 focused tests, including rejection cases |
+| Frozen replay probes | **167**; **79/79** legacy outputs unchanged |
+| Discovery research | **86** entries with readable real-web captures |
+| Saved source readings | **133**: 117 HTML + 16 PDF texts |
+| Research corpus | **19,977** source units cataloged for evaluation |
+| Artifact validation | **95/97** recordings admitted; two failures retained |
+| Browser isolation | **0** leaked processes across three repeated crash/cancel/deadline test cycles |
 
-```sh
-git switch staging
-vercel deploy
-# After reviewing and promoting the approved version to main:
-git switch main
-vercel deploy --prod
-```
+</details>
 
-Canonical and absolute social-image URLs currently use the assigned Vercel domain. When a custom domain is chosen, connect it to this project and update those URLs in `index.html`.
+<sub>Recorded September 2026 development experiments and engineering checkpoints. Each result keeps its test scope; the figures describe separate runs and overlapping suites. [Read the measurement notes ↗](RESEARCH-SNAPSHOTS.md)</sub>
+
+### Fast cycles. Hard checks.
+
+**Hypothesis → candidate → independent frontier-model review → verifiable test → repeat.**
+
+`FIXED INPUTS` · `VERSIONED ARTIFACTS` · `HELD-OUT EVALUATIONS` · `FAILURES → REGRESSIONS`
+
+### Rayaboy / the outcome
+
+**One profile. A world of opportunity.**
+
+[![Rayaboy’s public homepage and SuperProfile preview. Click to open rayaboy.com.](public/images/rayaboy-site.webp)](https://rayaboy.com)
+
+**[CLICK THE PREVIEW OR OPEN RAYABOY.COM ↗](https://rayaboy.com)**
+
+| **100** | **40+** | **$336k** |
+| :--- | :--- | :--- |
+| Registered accounts | Scholarships in the catalog | Listed scholarship funding |
+
+<sub>September 29, 2026 snapshots. Accounts include admin, unverified, and retained test registrations. Funding is listed scholarship value. [See the live registration counter ↗](https://nimal-site-three.vercel.app/#rayaboy)</sub>
+
+---
+
+`03 / THE PUBLIC ARCHIVE`
+
+## A few builds. More questions.
+
+| Aura order | Project | The experiment |
+| :--- | :--- | :--- |
+| **01** | [Instagram Friendship Graph ↗](https://github.com/nimalp123/instagram-friendship-graph) | A completed graph. More analysis to explore. |
+| **02** | [Trading algorithms ↗](https://github.com/nimalp123/tradingAlgos) | Trading programs and stock-data analysis. |
+| **03** | [FoodConnect ↗](https://github.com/nimalp123/FoodConnect) | An early Python build. |
+| **04** | [Mediquery ↗](https://github.com/nimalp123/mediquery) | An early Python experiment. |
+
+<sub>Ordered by aura. Completely subjective. Completely intentional.</sub>
+
+---
+
+## Got a good idea?
+
+**[See the work ↗](https://nimal-site-three.vercel.app/)** · **[Find me on LinkedIn ↗](https://www.linkedin.com/in/nimal-periasamy/)** · **[@nimalp123 ↗](https://github.com/nimalp123)**
+
+<sub>✳ NIMAL. — BUILD. MEASURE. ITERATE. SHIP.</sub>

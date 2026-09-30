@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="810" viewBox="0 0 1600 810" role="img" aria-labelledby="title description">
+  <title id="title">Engineering speed. Research discipline.</title>
+  <desc id="description">Six scoped September 2026 research and development results from Nimal's work for Rayaboy. Full comparisons and test scopes are in the README and measurement notes.</desc>
+  <rect width="1600" height="810" fill="#080a09"/>
+  <g fill="#9ba198" font-family="'IBM Plex Mono', monospace" font-size="19" letter-spacing="2">
+    <text x="48" y="56">NIMAL / MY WORK / THE RECEIPTS</text>
+    <text x="1552" y="56" text-anchor="end">SEPT 2026</text>
+  </g>
+  <text x="48" y="137" fill="#edf0e8" font-family="Syne, Arial, sans-serif" font-weight="800" font-size="65" letter-spacing="-2">Engineering speed.</text>
+  <text x="739" y="137" fill="#c5f660" font-family="Syne, Arial, sans-serif" font-weight="800" font-size="65" letter-spacing="-2">Research discipline.</text>
+  <g fill="#111410" stroke="#2a2e27" stroke-width="2">
+    <rect x="48" y="194" width="488" height="251"/>
+    <rect x="556" y="194" width="488" height="251"/>
+    <rect x="1064" y="194" width="488" height="251"/>
+    <rect x="48" y="465" width="488" height="251"/>
+    <rect x="556" y="465" width="488" height="251"/>
+    <rect x="1064" y="465" width="488" height="251"/>
+  </g>
+  <g fill="#c5f660" font-family="Syne, Arial, sans-serif" font-size="89" font-weight="800" letter-spacing="-3">
+    <text x="80" y="312">3.3×</text>
+    <text x="588" y="312">78%</text>
+    <text x="1096" y="312">83%</text>
+    <text x="80" y="583">20/20</text>
+    <text x="588" y="583">8,419</text>
+    <text x="1096" y="583">137</text>
+  </g>
+  <g fill="#edf0e8" font-family="Manrope, Arial, sans-serif" font-size="28" font-weight="600">
+    <text x="80" y="363">observed batch throughput</text>
+    <text x="588" y="363">fewer invalid AI proposals</text>
+    <text x="1096" y="363">fewer output tokens</text>
+    <text x="80" y="634">repeated validation trials</text>
+    <text x="588" y="634">unit checks passed</text>
+    <text x="1096" y="634">review-driven regressions</text>
+  </g>
+  <g fill="#9ba198" font-family="'IBM Plex Mono', monospace" font-size="18">
+    <text x="80" y="402">93 → 28 min · same 6 real pages</text>
+    <text x="588" y="402">45 → 10 · same 12-case arm</text>
+    <text x="1096" y="402">963k → 163k · 12-case comparison</text>
+    <text x="80" y="673">470/470 fields · seen synthetic set</text>
+    <text x="588" y="673">344 skipped · unit-suite checkpoint</text>
+    <text x="1096" y="673">Independent review · recorded R5</text>
+  </g>
+  <path d="M48 751H1552" stroke="#2a2e27" stroke-width="2"/>
+  <g fill="#9ba198" font-family="'IBM Plex Mono', monospace" font-size="17" letter-spacing="1">
+    <text x="48" y="785">RECORDED DEVELOPMENT RESULTS · MEASUREMENT SCOPES BELOW</text>
+    <text x="1552" y="785" fill="#c5f660" text-anchor="end">BUILD. MEASURE. ITERATE. SHIP.</text>
+  </g>
+</svg>
