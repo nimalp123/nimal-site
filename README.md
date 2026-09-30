@@ -7,7 +7,7 @@ Personal website for Nimal Periasamy. Selected public projects, ranked by a deli
 - `main`: production.
 - `staging`: working preview branch.
 
-The initial website stays local until Nimal reviews the localhost preview.
+The initial website was reviewed locally before publication.
 
 Only public repository metadata and approved, high-level Rayaboy copy belong here. Never commit private project code, personal graph data, credentials, or internal learnings.
 
@@ -51,12 +51,12 @@ Aura order and editorial descriptions are in `src/App.tsx`. Instagram Friendship
 
 The live user counter reads only `COUNT(*)` from Production Main's `auth.users` through a server-side InsForge admin REST request. Profiles are created later, so counting them would miss registrations. The endpoint returns only the aggregate and retrieval timestamp, caches for 60 seconds, and accepts GET/HEAD. The browser refreshes once per minute while visible. It reports registered accounts, including admins, unverified registrations, and retained test accounts; it does not claim active users. No database schema, permissions, or production app code was changed.
 
-## Deployment after preview approval
+## Deployment
 
-Vercel settings are prepared: framework **Vite**, build command `npm run build`, output `dist`, production branch `main`, preview branch `staging`. No Vercel connection or domain change has been made.
+Live URL: https://nimal-site-three.vercel.app. Vercel project **nimal-site**: framework **Vite**, Node **24.x**, build command `npm run build`, output `dist`, production branch `main`, preview branch `staging`.
 
-`api/rayaboy-stats.js` provides the production counter endpoint. Add the two server-only variables from `.env.example` to Vercel when connecting the site. Keep the API key out of variables starting with `VITE_` and out of Git.
+`api/rayaboy-stats.js` provides the counter endpoint. Both server-only variables from `.env.example` are configured for Vercel production and preview; the API key is sensitive. Keep it out of variables starting with `VITE_` and out of Git. `.vercelignore` also excludes local credentials, private data, and test artifacts from CLI uploads.
 
-After Nimal reviews the local preview, push the approved website on `staging` and promote to `main`. The remote is `https://github.com/nimalp123/nimal-site`. Both branches are currently local; the public remote remains empty until that approval.
+The public source repository is https://github.com/nimalp123/nimal-site. Push `staging` for previews; promote approved changes to `main` for production. GitHub Actions checks lint, tests, and the production build on both branches.
 
-When the domain is chosen, set canonical URL and absolute social-image URLs in `index.html`. Connect the Vercel project and domain only at that stage.
+Canonical and absolute social-image URLs currently use the assigned Vercel domain. When a custom domain is chosen, connect it to this project and update those URLs in `index.html`.
