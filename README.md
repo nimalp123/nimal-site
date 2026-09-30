@@ -15,6 +15,8 @@ Only public repository metadata and approved, high-level Rayaboy copy belong her
 
 Requires Node 24+.
 
+The live Rayaboy counter needs `RAYABOY_INSFORGE_URL` and `RAYABOY_INSFORGE_API_KEY` in a local, ignored `.env.local` file. Both stay on the server. Without them, the site shows the counter as unavailable.
+
 ```sh
 npm ci
 npm run dev
@@ -41,14 +43,18 @@ Aura order and editorial descriptions are in `src/App.tsx`. Instagram Friendship
 
 - The interactive graph is a fictional demo. Its names and connections are synthetic.
 - `public/images/actual-graph.png` is the anonymous image already published in the flagship repository. Its counts are the September 2026 observed totals, with the lower-bound limitation displayed.
-- The expanded Rayaboy case study covers eight areas of Nimal’s work across the product, staging builds, and research tooling. The 2,134 passing checks, 12 synthetic flows, and 56 staging assertions are recorded engineering checkpoints, not production performance or certification claims. No provider routing, proprietary execution tactics, private links, or raw private documents are included.
+- The concise Rayaboy showcase highlights Nimal’s product work, browser research, and reliability engineering, with measured results placed beside the relevant contribution. Its recorded research comparison uses the same 12-case synthetic benchmark: 963k → 163k output tokens (83% fewer), 64 → 50 minutes (22% shorter), and 8 → 11 exact matches. These describe an experimental pipeline against its baseline, not production performance. The 2,134 passing automated checks are a recorded local checkpoint. Rayaboy’s own public catalog figures are highlighted separately beside its homepage snapshot. No provider routing, proprietary execution tactics, private links, or raw private documents are included.
 - `public/images/rayaboy-site.webp` is a real screenshot of the public Rayaboy homepage captured on September 29, 2026 in an isolated Brave session. The public homepage displayed 40+ catalog scholarships and $336k in listed scholarship funding on that date. The image and explicit action link to `https://rayaboy.com` in a new tab. The catalog figures are not revenue, applications completed, or money awarded.
 - `public/images/chrome-network.webp` was generated with the built-in image generation tool and optimized as WebP. The complete prompt and art direction are in `DESIGN.md`.
 - `public/images/social-card.png` is a rendered screenshot of the site's hero.
 
+The live user counter reads only `COUNT(*)` from Production Main's `auth.users` through a server-side InsForge admin REST request. Profiles are created later, so counting them would miss registrations. The endpoint returns only the aggregate and retrieval timestamp, caches for 60 seconds, and accepts GET/HEAD. The browser refreshes once per minute while visible. It reports registered accounts, including admins, unverified registrations, and retained test accounts; it does not claim active users. No database schema, permissions, or production app code was changed.
+
 ## Deployment after preview approval
 
 Vercel settings are prepared: framework **Vite**, build command `npm run build`, output `dist`, production branch `main`, preview branch `staging`. No Vercel connection or domain change has been made.
+
+`api/rayaboy-stats.js` provides the production counter endpoint. Add the two server-only variables from `.env.example` to Vercel when connecting the site. Keep the API key out of variables starting with `VITE_` and out of Git.
 
 After Nimal reviews the local preview, push the approved website on `staging` and promote to `main`. The remote is `https://github.com/nimalp123/nimal-site`. Both branches are currently local; the public remote remains empty until that approval.
 

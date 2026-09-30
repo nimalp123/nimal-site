@@ -94,7 +94,42 @@ try {
       page.locator(`.repo-row[href="https://github.com/nimalp123/${name}"]`),
     ).toHaveCount(0);
   }
-  await expect(page.locator(".rb-build")).toHaveCount(8);
+  await expect(page.locator(".rb-build")).toHaveCount(3);
+  await expect(
+    page
+      .locator(".header-socials")
+      .getByRole("link", { name: "Nimal on LinkedIn" }),
+  ).toHaveAttribute("href", "https://www.linkedin.com/in/nimal-periasamy/");
+  await expect(
+    page.locator(".contact-links").getByRole("link", { name: "LinkedIn" }),
+  ).toHaveAttribute("href", "https://www.linkedin.com/in/nimal-periasamy/");
+  await expect(page.locator(".rb-metrics")).toContainText(
+    "fewer output tokens",
+  );
+  await expect(page.locator(".rb-result-note")).toContainText(
+    "synthetic benchmark",
+  );
+  await expect(
+    page.locator(".rb-build").nth(1).locator(".rb-metrics"),
+  ).toBeVisible();
+  await expect(page.locator(".rb-platform-metrics")).toContainText("40+");
+  await expect(page.locator(".rb-platform-metrics")).toContainText("$336k");
+  const counterResponse = await page.request.get(
+    new URL("/api/rayaboy-stats", page.url()).href,
+  );
+  assert.equal(counterResponse.status(), 200);
+  const counter = await counterResponse.json();
+  assert.deepEqual(Object.keys(counter).sort(), [
+    "registeredUsers",
+    "updatedAt",
+  ]);
+  assert.ok(Number.isSafeInteger(counter.registeredUsers));
+  await expect(page.locator(".rb-live-users strong")).toHaveText(
+    counter.registeredUsers.toLocaleString("en-US"),
+  );
+  await expect(page.locator(".rb-live-status")).toContainText(
+    "LIVE FROM RAYABOY",
+  );
   await expect(
     page.getByRole("link", {
       name: "Open the live Rayaboy website in a new tab",
@@ -148,7 +183,7 @@ try {
       2,
     ),
   );
-  for (const width of [320, 390, 768, 1024, 1440]) {
+  for (const width of [320, 390, 601, 700, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     const dimensions = await page.evaluate(() => ({
       scroll: document.documentElement.scrollWidth,
@@ -159,6 +194,26 @@ try {
       dimensions.viewport,
       `Horizontal overflow at ${width}px`,
     );
+    const header = await page.locator(".site-header").evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      return {
+        left: bounds.left,
+        right: bounds.right,
+        groups: [...element.children].map((child) => {
+          const rect = child.getBoundingClientRect();
+          return { left: rect.left, right: rect.right };
+        }),
+      };
+    });
+    assert.ok(
+      header.groups.at(-1).right <= header.right + 1,
+      `Header stays within its margin at ${width}px`,
+    );
+    for (let i = 1; i < header.groups.length; i++)
+      assert.ok(
+        header.groups[i - 1].right + 8 <= header.groups[i].left,
+        `Header groups have room at ${width}px`,
+      );
     console.log(`Responsive layout: ${width}px OK`);
   }
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);

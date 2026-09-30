@@ -177,18 +177,24 @@ nav a {
 nav a:hover {
   color: var(--lime);
 }
-.header-github {
+.header-socials {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+.header-social-link {
   display: flex;
   align-items: center;
   gap: 9px;
   font-size: 12px;
+  white-space: nowrap;
 }
-.header-github > svg:last-child {
+.header-social-link > svg:last-child {
   width: 14px;
   height: 14px;
   margin-left: 9px;
 }
-.header-github:hover {
+.header-social-link:hover {
   color: var(--lime);
 }
 .hero {
@@ -912,14 +918,19 @@ nav a:hover {
   margin-top: 26px;
   margin-bottom: 14px;
 }
-.outro > .text-link {
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.outro .text-link {
   font-size: 11px;
 }
-.outro > .text-link > svg:first-child {
+.outro .text-link > svg:first-child {
   width: 14px;
   height: 14px;
 }
-.outro > .text-link > svg:last-child {
+.outro .text-link > svg:last-child {
   width: 12px;
   height: 12px;
   margin-left: 10px;
@@ -1153,7 +1164,7 @@ footer > a.mono > span {
     gap: 20px;
     font-size: 11px;
   }
-  .header-github {
+  .header-social-link {
     font-size: 11px;
   }
   .hero {
@@ -1371,15 +1382,6 @@ footer > a.mono > span {
   }
   nav > a:last-child {
     display: none;
-  }
-  .header-github > span {
-    display: none;
-  }
-  .header-github > svg:last-child {
-    display: none;
-  }
-  .header-github {
-    padding: 8px;
   }
   .hero {
     display: flex;
@@ -1759,7 +1761,7 @@ footer > a.mono > span {
     margin-top: 23px;
     margin-bottom: 14px;
   }
-  .outro > .text-link {
+  .outro .text-link {
     font-size: 10px;
   }
   footer {
@@ -1803,6 +1805,9 @@ footer > a.mono > span {
   }
 }
 @media (max-width: 360px) {
+  .site-header nav > a:first-child {
+    display: none;
+  }
   .page-shell {
     padding: 0 16px;
   }
@@ -1855,5 +1860,20 @@ footer > a.mono > span {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .header-socials {
+    gap: 0;
+  }
+  .header-social-link > span {
+    display: none;
+  }
+  .header-social-link > svg:last-child {
+    display: none;
+  }
+  .header-social-link {
+    padding: 8px;
   }
 }

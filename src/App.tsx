@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Network from "./Network";
 import Rayaboy from "./Rayaboy";
-import { Arrow, GitHub, Spark } from "./icons";
+import { Arrow, GitHub, LinkedIn, Spark } from "./icons";
 import snapshot from "./data/repos.json";
 
 const github = "https://github.com/nimalp123";
+const linkedin = "https://www.linkedin.com/in/nimal-periasamy/";
 const featuredRepo = `${github}/instagram-friendship-graph`;
 const auraOrder = [
   "instagram-friendship-graph",
@@ -44,15 +45,18 @@ function ExternalLink({
   href,
   children,
   className = "",
+  ariaLabel,
 }: {
   href: string;
   children: React.ReactNode;
   className?: string;
+  ariaLabel?: string;
 }) {
   return (
     <a
       href={href}
       className={className}
+      aria-label={ariaLabel}
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -189,11 +193,26 @@ export default function App() {
             <a href="#rayaboy">Rayaboy</a>
             <a href="#repos">Repo index</a>
           </nav>
-          <ExternalLink href={github} className="header-github">
-            <GitHub />
-            <span>GitHub</span>
-            <Arrow />
-          </ExternalLink>
+          <div className="header-socials">
+            <ExternalLink
+              href={github}
+              className="header-social-link"
+              ariaLabel="Nimal on GitHub"
+            >
+              <GitHub />
+              <span>GitHub</span>
+              <Arrow />
+            </ExternalLink>
+            <ExternalLink
+              href={linkedin}
+              className="header-social-link"
+              ariaLabel="Nimal on LinkedIn"
+            >
+              <LinkedIn />
+              <span>LinkedIn</span>
+              <Arrow />
+            </ExternalLink>
+          </div>
         </header>
         <main id="main">
           <section className="hero" aria-labelledby="hero-title">
@@ -481,15 +500,20 @@ export default function App() {
                 <br />
                 <span className="serif-word">idea?</span>
               </h2>
-              <ExternalLink href={github} className="outro-link">
-                <span className="sr-only">Find Nimal on GitHub</span>
+              <ExternalLink href={linkedin} className="outro-link">
+                <span className="sr-only">Connect with Nimal on LinkedIn</span>
                 <Arrow />
               </ExternalLink>
             </div>
-            <p>Find me where the code lives.</p>
-            <ExternalLink href={github} className="text-link">
-              <GitHub /> @nimalp123 <Arrow />
-            </ExternalLink>
+            <p>Find me online.</p>
+            <div className="contact-links">
+              <ExternalLink href={github} className="text-link">
+                <GitHub /> @nimalp123 <Arrow />
+              </ExternalLink>
+              <ExternalLink href={linkedin} className="text-link">
+                <LinkedIn /> LinkedIn <Arrow />
+              </ExternalLink>
+            </div>
           </section>
         </main>
         <footer>
