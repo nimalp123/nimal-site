@@ -104,11 +104,13 @@ try {
     page.locator(".contact-links").getByRole("link", { name: "LinkedIn" }),
   ).toHaveAttribute("href", "https://www.linkedin.com/in/nimal-periasamy/");
   await expect(page.locator(".rb-metrics")).toContainText(
-    "fewer output tokens",
+    "fewer invalid AI proposals",
   );
   await expect(page.locator(".rb-result-note")).toContainText(
     "synthetic benchmark",
   );
+  await expect(page.locator(".rb-metrics")).toContainText("93 → 28 min");
+  await expect(page.locator(".rb-lab-proof")).toContainText("8,419");
   await expect(
     page.locator(".rb-build").nth(1).locator(".rb-metrics"),
   ).toBeVisible();

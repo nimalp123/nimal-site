@@ -370,25 +370,55 @@
   margin-bottom: 12px;
   letter-spacing: 0.06em;
 }
-.rb-build p.rb-build-proof {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 5px 8px;
-  color: #d0dbc6;
-  font-size: 11px;
-  margin-top: 13px;
+.rb-lab-proof {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 19px;
 }
-.rb-build-proof strong {
+.rb-lab-proof > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rb-lab-proof > div + div {
+  border-left: 1px solid #35442b;
+  padding-left: 18px;
+}
+.rb-lab-proof strong {
   color: var(--lime);
   font-family: var(--display);
-  font-size: 22px;
-  letter-spacing: -0.03em;
+  font-size: 30px;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  line-height: 1;
 }
-.rb-build-proof .mono {
-  flex-basis: 100%;
+.rb-lab-proof span {
+  font-size: 10px;
+  color: #d0dbc6;
+  line-height: 1.7;
+  max-width: 150px;
+}
+.rb-build p.rb-lab-note {
   font-size: 7px;
   color: #9fad92;
+  margin-top: 16px;
+  letter-spacing: 0.025em;
+}
+.rb-progression {
+  font-size: 7px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  line-height: 1.8;
+  color: #a3b096;
+  margin: 18px 0 9px;
+  letter-spacing: 0.04em;
+}
+.rb-progression > span {
+  color: var(--lime);
+  font-size: 13px;
 }
 .rb-platform-results {
   border-top: 1px solid #475636;

@@ -10,14 +10,14 @@ const builds = [
       "Built the SuperProfile, document-to-profile intelligence, and a writing hub with autosave, comparison, and exports.",
   },
   {
-    title: "Research past the obvious.",
+    title: "Built the research engine.",
     description:
-      "Engineered browser research across portals, PDFs, quizzes, and conditional flows. Scattered requirements become source-backed data.",
+      "Browser research across real portals, PDFs, and branching requirements. Then the experiments to make it faster and more precise.",
   },
   {
-    title: "Built to survive the mess.",
+    title: "Then I built the lab.",
     description:
-      "Isolated workers. Resumable batches. A synthetic test lab. The machinery to make hard research repeatable.",
+      "Isolated workers, restartable batches, and recording/replay tooling. A research lab around real web captures to make failures reproducible.",
   },
 ];
 
@@ -64,42 +64,61 @@ export default function Rayaboy() {
                       >
                         <div>
                           <strong>
-                            83<span>%</span>
+                            3.3<span>×</span>
                           </strong>
-                          <span>fewer output tokens</span>
-                          <small>963k → 163k</small>
+                          <span>batch throughput</span>
+                          <small>6 real pages · 93 → 28 min</small>
                         </div>
                         <div>
                           <strong>
-                            22<span>%</span>
+                            78<span>%</span>
                           </strong>
-                          <span>shorter runtime</span>
-                          <small>64 min → 50 min</small>
+                          <span>fewer invalid AI proposals</span>
+                          <small>45 → 10 · same benchmark</small>
                         </div>
                         <div>
                           <strong>
-                            8<span className="rb-metric-arrow">→</span>11
+                            6<span className="rb-metric-arrow">→</span>11
                           </strong>
                           <span>exact matches out of 12</span>
-                          <small>Higher accuracy. Same benchmark.</small>
+                          <small>Recorded before → final iteration</small>
                         </div>
                       </div>
                       <p className="rb-result-note">
-                        Same 12-case synthetic benchmark · experimental pipeline
-                        vs. baseline · September 2026.
+                        Throughput: six-page real-web trial, same outcomes.
+                        Quality: same 12-case synthetic benchmark. September
+                        2026.
                       </p>
                     </div>
                   )}
                   {index === 2 && (
-                    <p className="rb-build-proof">
-                      <strong>2,134</strong> passing automated checks
-                      <span className="mono">RECORDED LOCAL CHECKPOINT</span>
+                    <div
+                      className="rb-lab-proof"
+                      aria-label="Recorded engineering and research checkpoints"
+                    >
+                      <div>
+                        <strong>8,419</strong>
+                        <span>unit checks passed</span>
+                      </div>
+                      <div>
+                        <strong>86</strong>
+                        <span>entries in the discovery research lab</span>
+                      </div>
+                    </div>
+                  )}
+                  {index === 2 && (
+                    <p className="rb-lab-note mono">
+                      RECORDED DEVELOPMENT + RESEARCH CHECKPOINTS · SEPT 2026
                     </p>
                   )}
                 </div>
               </article>
             ))}
           </div>
+          <p className="rb-progression mono">
+            PROTOTYPES <span aria-hidden="true">→</span> REAL WEB{" "}
+            <span aria-hidden="true">→</span> RESEARCH LAB
+          </p>
           <a
             href={site}
             className="button button-lime rb-primary-link"
