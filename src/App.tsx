@@ -20,8 +20,8 @@ const editorial: Record<
   "instagram-friendship-graph": {
     title: "Instagram Friendship Graph",
     description:
-      "Mutual follows, mapped. Find the connections hiding between your circles.",
-    label: "THE USEFUL ONE",
+      "A completed network-mapping experiment. A starting point for more questions and analysis.",
+    label: "COMPLETED EXPERIMENT",
   },
   tradingAlgos: {
     title: "Trading algorithms",
@@ -274,17 +274,17 @@ export default function App() {
               <div>
                 <p className="eyebrow">01 / SELECTED WORK</p>
                 <h2 id="work-title">
-                  The one with <span className="serif-word">actual</span> aura.
+                  Mapped. Still <span className="serif-word">curious.</span>
                 </h2>
               </div>
               <span className="section-note mono">
-                ONE GOOD PROJECT &gt; TEN FORGETTABLE ONES
+                THE GRAPH IS BUILT. THE QUESTIONS KEEP COMING.
               </span>
             </div>
             <article className="featured-project">
               <div className="feature-copy">
                 <div className="feature-status">
-                  <span className="tag tag-lime">THE FLAGSHIP</span>
+                  <span className="tag tag-lime">COMPLETED EXPERIMENT</span>
                   <span className="mono">OPEN SOURCE ↗</span>
                 </div>
                 <h3>
@@ -295,13 +295,12 @@ export default function App() {
                   <span className="lime">Graph.</span>
                 </h3>
                 <p>
-                  Your social world is bigger than a follower list. I built a
-                  way to see it.
+                  I mapped my Instagram network. The graph is built; now I want
+                  to explore what the data can tell me.
                 </p>
                 <p className="feature-detail">
-                  Turns reciprocal Instagram follows into an explorable Obsidian
-                  vault. Find hidden mutuals and paths between your first,
-                  second, and third degree circles.
+                  Reciprocal follows, mutual connections, and paths across three
+                  degrees—collected into an explorable Obsidian vault.
                 </p>
                 <div className="feature-tags">
                   <span>Python</span>
@@ -366,6 +365,19 @@ export default function App() {
                       : "COPY ↗"}
                 </span>
               </button>
+            </div>
+            <div className="graph-next" aria-labelledby="graph-next-title">
+              <div>
+                <span className="eyebrow">QUESTIONS I WANT TO EXPLORE</span>
+                <h3 id="graph-next-title">Where could this lead?</h3>
+                <p>More analysis as I learn, try ideas, and find new questions.</p>
+              </div>
+              <ul>
+                <li>Who could I become friends with?</li>
+                <li>Which mutuals connect us?</li>
+                <li>Who might I click with?</li>
+                <li>What patterns am I missing?</li>
+              </ul>
             </div>
           </section>
 

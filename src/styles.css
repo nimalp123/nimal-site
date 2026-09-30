@@ -446,6 +446,65 @@ nav a:hover {
   padding: 12px 17px;
   font-size: 11px;
 }
+.graph-next {
+  display: grid;
+  grid-template-columns: 0.77fr 1.4fr;
+  gap: 36px;
+  margin-top: 28px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+.graph-next .eyebrow {
+  font-size: 8px;
+  color: #adbc9e;
+}
+.graph-next h3 {
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  margin: 10px 0;
+}
+.graph-next p {
+  font-size: 12px;
+  color: #aab69e;
+  line-height: 1.7;
+  max-width: 330px;
+}
+.graph-next ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: center;
+  gap: 14px 28px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.graph-next li {
+  font-size: 12px;
+  color: #d0dbc6;
+  line-height: 1.6;
+  display: flex;
+  gap: 10px;
+}
+.graph-next li::before {
+  content: "↗";
+  color: var(--lime);
+  flex-shrink: 0;
+}
+@media (max-width: 700px) {
+  .graph-next {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .graph-next ul {
+    gap: 14px 20px;
+  }
+}
+@media (max-width: 380px) {
+  .graph-next ul {
+    grid-template-columns: 1fr;
+  }
+}
 .text-link {
   display: inline-flex;
   align-items: center;
