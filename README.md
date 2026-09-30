@@ -59,7 +59,9 @@ Live URL: https://nimal-site-three.vercel.app. Vercel project **nimal-site**: fr
 
 The public source repository is https://github.com/nimalp123/nimal-site. GitHub Actions checks lint, tests, and the production build on both branches; the workflow can also be dispatched manually.
 
-Production is deployed from `main`; previews are deployed from `staging`. The Vercel GitHub app connection still needs authorization for this public repository. Until that connection is complete, deploy with the Vercel CLI from the appropriate branch:
+Vercel is connected to this repository through a personal-account GitHub app installation with **Only select repositories** enabled and exactly `nimalp123/nimal-site` selected. The private organization’s installation and repository permissions were not changed.
+
+Pushes to `main` automatically create production deployments; pushes to `staging` create preview deployments. Review a staging preview before promoting an approved version to `main`. For a manual deployment, use the Vercel CLI from the appropriate branch:
 
 ```sh
 git switch staging
