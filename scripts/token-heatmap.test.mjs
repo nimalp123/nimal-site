@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { calendarFor, displayedDate, displayedWeek, heatmapLevel, keyboardTarget, latestRecordedDate, todayInZone, weeklyKeyboardTarget, weeklyUsage } from "../src/token-heatmap-utils.mjs";
+import { aggregateUsage, calendarFor, heatmapLevel, keyboardTarget, latestRecordedDate, previousDayUsage, shiftDate, todayInZone, usageDelta, weeklyKeyboardTarget, weeklyUsage } from "../src/token-heatmap-utils.mjs";
 
 test("fixed API value bands keep a quiet day visibly below real burst days", () => {
   assert.equal(heatmapLevel(0, "cost"), 0);
@@ -54,17 +54,7 @@ test("Pacific midnight controls unrecorded dates independently of UTC midnight",
   assert.equal(calendar.cells.find((cell) => cell.date === "2026-10-01").available, false);
 });
 
-test("hover/focus preview is temporary and restores latest or explicitly pinned day", () => {
-  const availableDates = new Set(["2026-09-28", "2026-09-29", "2026-09-30"]);
-  const base = { availableDates, latest: "2026-09-30", pinned: null, preview: null };
-  assert.equal(displayedDate(base), "2026-09-30");
-  assert.equal(displayedDate({ ...base, preview: "2026-09-28" }), "2026-09-28");
-  assert.equal(displayedDate({ ...base, pinned: "2026-09-29", preview: "2026-09-28" }), "2026-09-28");
-  assert.equal(displayedDate({ ...base, pinned: "2026-09-29" }), "2026-09-29");
-  assert.equal(displayedDate({ ...base, pinned: "2024-01-01", preview: "2024-01-01" }), "2026-09-30");
-});
-
-test("unpinned selection follows the newest recorded day in the selected year", () => {
+test("latest recorded date is selected independently for each year", () => {
   const days = [{ date: "2025-12-31" }, { date: "2026-09-29" }, { date: "2026-09-28" }];
   assert.equal(latestRecordedDate(days, 2026), "2026-09-29");
   assert.equal(latestRecordedDate([...days, { date: "2026-09-30" }], 2026), "2026-09-30");
@@ -150,20 +140,107 @@ test("zero-use covered weeks remain distinct from unavailable weeks", () => {
   assert.equal(unavailable.coveredFrom, null);
 });
 
-test("weekly hover previews restore the selected day's week or explicit weekly pin", () => {
+test("weekly keyboard navigation moves through covered columns and stops at coverage boundaries", () => {
   const snapshot = { timezone: "America/Los_Angeles", coverage: { from: "2026-09-01", through: "2026-09-30" }, daily: [] };
   const weeks = weeklyUsage(2026, calendarFor(2026, snapshot, new Date("2026-10-01T12:00:00Z")));
   const latest = weeks.find((week) => week.start === "2026-09-27");
   const earlier = weeks.find((week) => week.start === "2026-09-20");
-  const outside = weeks[0];
-  const base = { weeks, selectedDate: "2026-09-30", pinned: null, preview: null };
-  assert.equal(displayedWeek(base).index, latest.index);
-  assert.equal(displayedWeek({ ...base, preview: earlier.index }).index, earlier.index);
-  assert.equal(displayedWeek({ ...base, pinned: earlier.index }).index, earlier.index);
-  assert.equal(displayedWeek({ ...base, pinned: earlier.index, preview: latest.index }).index, latest.index);
-  assert.equal(displayedWeek({ ...base, pinned: outside.index }).index, latest.index);
-  assert.equal(displayedWeek({ ...base, preview: outside.index }).available, false);
+  const earliest = weeks.find((week) => week.available);
   assert.equal(weeklyKeyboardTarget(weeks, latest.index, "ArrowLeft"), earlier.index);
   assert.equal(weeklyKeyboardTarget(weeks, latest.index, "ArrowRight"), null);
+  assert.equal(weeklyKeyboardTarget(weeks, earlier.index, "ArrowRight"), latest.index);
+  assert.equal(weeklyKeyboardTarget(weeks, earliest.index, "ArrowLeft"), null);
+  assert.equal(weeklyKeyboardTarget(weeks, latest.index, "Home"), earliest.index);
   assert.equal(weeklyKeyboardTarget(weeks, earlier.index, "End"), latest.index);
+  assert.equal(weeklyKeyboardTarget(weeks, earlier.index, "Tab"), null);
+});
+
+test("usage aggregates sum all token components and cost without mutating daily entries", () => {
+  const days = [
+    {
+      date: "2026-09-28", inputTokens: 10, outputTokens: 20, cacheCreationTokens: 30,
+      cacheReadTokens: 40, totalTokens: 100, totalCost: 1.25,
+      agents: [{ id: "claude", inputTokens: 10, outputTokens: 20, cacheCreationTokens: 30, cacheReadTokens: 40, totalTokens: 100, totalCost: 1.25, models: ["opus", "sonnet"] }],
+    },
+    {
+      date: "2026-09-29", inputTokens: 1, outputTokens: 2, cacheCreationTokens: 3,
+      cacheReadTokens: 4, totalTokens: 10, totalCost: 2.5,
+      agents: [{ id: "claude", inputTokens: 1, outputTokens: 2, cacheCreationTokens: 3, cacheReadTokens: 4, totalTokens: 10, totalCost: 2.5, models: ["sonnet", "haiku"] }],
+    },
+  ];
+  const original = structuredClone(days);
+  const aggregate = aggregateUsage(days);
+  const metrics = { inputTokens: 11, outputTokens: 22, cacheCreationTokens: 33, cacheReadTokens: 44, totalTokens: 110, totalCost: 3.75 };
+  assert.deepEqual(aggregate, {
+    ...metrics, agents: [{ id: "claude", ...metrics, models: ["haiku", "opus", "sonnet"] }],
+  });
+  assert.deepEqual(days, original);
+  aggregate.agents[0].models.push("changed");
+  assert.deepEqual(days, original);
+});
+
+test("usage aggregates keep agent model unions separate and sort deterministically", () => {
+  const days = [{
+    date: "2026-09-29", totalTokens: 1000, totalCost: 12,
+    agents: [
+      { id: "zeta", totalTokens: 10, totalCost: 4, models: ["z-model"] },
+      { id: "beta", totalTokens: 20, totalCost: 4, models: ["b-model"] },
+      { id: "alpha", totalTokens: 20, totalCost: 4 },
+      { id: "gamma", totalTokens: 9999, totalCost: 3, models: ["g-model"] },
+    ],
+  }];
+  const aggregate = aggregateUsage(days);
+  assert.deepEqual(aggregate.agents.map((agent) => agent.id), ["alpha", "beta", "zeta", "gamma"]);
+  assert.equal(aggregate.totalTokens, 1000);
+  assert.equal(aggregate.totalCost, 12);
+  assert.equal(aggregate.inputTokens, 0);
+  assert.equal(aggregate.agents[0].models, undefined);
+  assert.deepEqual(aggregate.agents[1].models, ["b-model"]);
+  assert.deepEqual(aggregateUsage([{ ...days[0], agents: [...days[0].agents].reverse() }]), aggregate);
+  assert.deepEqual(aggregateUsage([]), {
+    inputTokens: 0, outputTokens: 0, cacheCreationTokens: 0, cacheReadTokens: 0,
+    totalTokens: 0, totalCost: 0, agents: [],
+  });
+});
+
+test("date shifts follow UTC calendar days across leap days, years, and DST", () => {
+  assert.equal(shiftDate("2026-01-01", -1), "2025-12-31");
+  assert.equal(shiftDate("2026-12-31", 1), "2027-01-01");
+  assert.equal(shiftDate("2024-03-01", -1), "2024-02-29");
+  assert.equal(shiftDate("2025-03-01", -1), "2025-02-28");
+  assert.equal(shiftDate("2026-03-08", 1), "2026-03-09");
+  assert.equal(shiftDate("2026-11-01", -7), "2026-10-25");
+  assert.throws(() => shiftDate("2026-02-30", 1), RangeError);
+  assert.throws(() => shiftDate("2026-09-29", 0.5), RangeError);
+});
+
+test("usage deltas show signed changes with an unavailable percentage for zero baselines", () => {
+  assert.deepEqual(usageDelta(150, 100), { difference: 50, percent: 50 });
+  assert.deepEqual(usageDelta(50, 100), { difference: -50, percent: -50 });
+  assert.deepEqual(usageDelta(100, 100), { difference: 0, percent: 0 });
+  assert.deepEqual(usageDelta(25, 0), { difference: 25, percent: null });
+  assert.deepEqual(usageDelta(0, 0), { difference: 0, percent: null });
+  assert.deepEqual(usageDelta(0, 100), { difference: -100, percent: -100 });
+});
+
+test("previous-day comparison uses the calendar day and distinguishes covered gaps from missing coverage", () => {
+  const snapshot = {
+    coverage: { from: "2025-12-31", through: "2026-01-03" },
+    daily: [
+      { date: "2025-12-31", totalTokens: 200, totalCost: 5, agents: [{ id: "codex", totalTokens: 200, totalCost: 5, models: ["gpt"] }] },
+      { date: "2026-01-02", totalTokens: 300, totalCost: 10, agents: [] },
+    ],
+  };
+  const crossYear = previousDayUsage(snapshot, "2026-01-01");
+  assert.equal(crossYear.date, "2025-12-31");
+  assert.equal(crossYear.available, true);
+  assert.equal(crossYear.metrics.totalCost, 5);
+  assert.deepEqual(crossYear.metrics.agents[0].models, ["gpt"]);
+  const gap = previousDayUsage(snapshot, "2026-01-02");
+  assert.equal(gap.date, "2026-01-01");
+  assert.equal(gap.available, true);
+  assert.deepEqual(gap.metrics, aggregateUsage([]));
+  assert.deepEqual(previousDayUsage(snapshot, "2025-12-31"), { date: "2025-12-30", available: false, metrics: null });
+  assert.deepEqual(previousDayUsage(snapshot, "2026-01-05"), { date: "2026-01-04", available: false, metrics: null });
+  assert.equal(previousDayUsage(snapshot, "2026-01-04").available, true);
 });

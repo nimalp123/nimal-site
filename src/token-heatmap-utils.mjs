@@ -67,11 +67,6 @@ export function latestRecordedDate(days, year) {
   return days.filter((day) => day.date.startsWith(`${year}-`)).reduce((latest, day) => day.date > latest ? day.date : latest, "") || null;
 }
 
-// Preview is transient; pins are explicit. An unpinned view follows a new feed day.
-export function displayedDate({ availableDates, latest, pinned, preview }) {
-  return [preview, pinned, latest].find((date) => date && availableDates.has(date)) ?? null;
-}
-
 export function keyboardTarget(cells, date, key) {
   if (key === "Home") return cells.find((cell) => cell.available)?.date ?? null;
   if (key === "End") return cells.findLast((cell) => cell.available)?.date ?? null;
@@ -107,14 +102,6 @@ export function weeklyUsage(year, calendar) {
   });
 }
 
-export function displayedWeek({ weeks, selectedDate, pinned, preview }) {
-  const previewWeek = preview !== null ? weeks.find((week) => week.index === preview) : null;
-  if (previewWeek) return previewWeek;
-  const pinnedWeek = pinned !== null ? weeks.find((week) => week.index === pinned && week.available) : null;
-  if (pinnedWeek) return pinnedWeek;
-  return weeks.find((week) => week.cells.some((cell) => cell.date === selectedDate && cell.available)) ?? null;
-}
-
 export function weeklyKeyboardTarget(weeks, index, key) {
   const available = weeks.filter((week) => week.available);
   if (key === "Home") return available[0]?.index ?? null;
@@ -123,4 +110,80 @@ export function weeklyKeyboardTarget(weeks, index, key) {
   if (!offset) return null;
   const position = available.findIndex((week) => week.index === index);
   return available[position + offset]?.index ?? null;
+}
+
+const usageMetricNames = [
+  "inputTokens", "outputTokens", "cacheCreationTokens", "cacheReadTokens", "totalTokens", "totalCost",
+];
+
+function emptyUsage() {
+  return Object.fromEntries(usageMetricNames.map((name) => [name, 0]));
+}
+
+function addUsage(target, source) {
+  for (const name of usageMetricNames) {
+    target[name] += Number.isFinite(source[name]) ? source[name] : 0;
+  }
+}
+
+// Daily totals stay independent of their agent breakdown. Legacy snapshots may
+// omit token components or model names; missing components contribute zero.
+export function aggregateUsage(days) {
+  const totals = emptyUsage();
+  const agents = new Map();
+  for (const day of days) {
+    addUsage(totals, day);
+    for (const agent of day.agents ?? []) {
+      let aggregate = agents.get(agent.id);
+      if (!aggregate) {
+        aggregate = { id: agent.id, ...emptyUsage(), modelNames: new Set() };
+        agents.set(agent.id, aggregate);
+      }
+      addUsage(aggregate, agent);
+      for (const model of agent.models ?? []) aggregate.modelNames.add(model);
+    }
+  }
+  return {
+    ...totals,
+    agents: [...agents.values()].map(({ modelNames, ...agent }) => ({
+      ...agent,
+      ...(modelNames.size ? { models: [...modelNames].sort() } : {}),
+    })).sort((left, right) => right.totalCost - left.totalCost
+      || right.totalTokens - left.totalTokens
+      || (left.id < right.id ? -1 : left.id > right.id ? 1 : 0)),
+  };
+}
+
+// Calendar arithmetic uses UTC so DST and the browser's timezone cannot shift a
+// daily comparison. Reject normalized invalid dates such as February 30.
+export function shiftDate(date, offset) {
+  const time = new Date(`${date}T00:00:00.000Z`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(time.getTime())
+    || time.toISOString().slice(0, 10) !== date || !Number.isInteger(offset)) {
+    throw new RangeError("Expected a calendar date and integer day offset");
+  }
+  time.setUTCDate(time.getUTCDate() + offset);
+  if (!Number.isFinite(time.getTime()) || !/^\d{4}-\d{2}-\d{2}T/.test(time.toISOString())) {
+    throw new RangeError("Shifted date is outside the supported calendar range");
+  }
+  return time.toISOString().slice(0, 10);
+}
+
+// A zero baseline has no percentage comparison, including zero versus zero.
+// The absolute difference remains usable and never becomes an infinite percent.
+export function usageDelta(value, baseline) {
+  const difference = value - baseline;
+  return { difference, percent: baseline === 0 ? null : difference / baseline * 100 };
+}
+
+// Compare to the previous calendar day, not the previous recorded/active day.
+// A covered gap is a real zero; outside coverage remains unavailable.
+export function previousDayUsage(snapshot, date) {
+  const previousDate = shiftDate(date, -1);
+  const available = previousDate >= snapshot.coverage.from && previousDate <= snapshot.coverage.through;
+  return {
+    date: previousDate,
+    available,
+    metrics: available ? aggregateUsage(snapshot.daily.filter((day) => day.date === previousDate)) : null,
+  };
 }
