@@ -57,12 +57,12 @@ I mapped my Instagram network into an explorable Obsidian vault. Mutual follows,
 | :--- | :--- | :--- |
 | SuperProfile | Browser research | Controlled experiments |
 | Document → profile | Document intelligence | Isolated workers |
-| Writing hub | Evidence verification | Record + replay |
+| Writing hub | Evidence verification | Model-free capture |
 | Review + export | Human feedback | Restartable runs |
 
 ### My work / the receipts
 
-[![Recorded research results: 3.3× observed batch throughput on six real pages; 78% fewer invalid AI proposals and 83% fewer output tokens in scoped synthetic comparisons; 20/20 repeated document validation trials; 8,419 passing unit checks; 137 review-driven regression cases.](public/images/readme-research.svg)](RESEARCH-SNAPSHOTS.md)
+[![Recorded research results: 3.3× observed batch throughput on six real pages; 78% fewer invalid AI proposals and 83% fewer output tokens in scoped synthetic comparisons; 20/20 repeated document validation trials; 9,600 passing unit checks; 137 review-driven regression cases.](public/images/readme-research.svg)](RESEARCH-SNAPSHOTS.md)
 
 | Result | What it measured |
 | :--- | :--- |
@@ -74,7 +74,7 @@ I mapped my Instagram network into an explorable Obsidian vault. Mutual follows,
 | **12 / 12** passed verification | Up from 10/12 on the same synthetic benchmark |
 | **20 / 20** repeated document trials | 470/470 required fields matched on an already-seen synthetic set |
 | **539 / 539** selected course cells exact | 77/77 rows, each of two trials on one real development template |
-| **8,419** passing unit checks | Scraper development checkpoint; 344 skipped |
+| **9,600** passing unit checks | September 30 scraper development checkpoint; 347 skipped |
 | **137** review-driven regression cases | Recorded document-pipeline correction following independent review |
 
 <details>
@@ -86,10 +86,12 @@ I mapped my Instagram network into an explorable Obsidian vault. Mutual follows,
 | Offline source checks | **3,289** passed: 1,834 backend/core + 1,455 app |
 | Controlled response fixtures | **299**, exercised by 151 focused tests, including rejection cases |
 | Frozen replay probes | **167**; **79/79** legacy outputs unchanged |
+| Labeled-condition retention | **98.8%**: 251/254 reference-recorded labels present in model-free captures; same 97 development cases |
+| Start-page agreement | **98.7%**: 78/79 start comparisons matched between model-free and reference recordings |
 | Discovery research | **86** entries with readable real-web captures |
 | Saved source readings | **133**: 117 HTML + 16 PDF texts |
 | Research corpus | **19,977** source units cataloged for evaluation |
-| Artifact validation | **95/97** recordings admitted; two failures retained |
+| Artifact validation | **95/97** recordings admitted in the original campaign; two failures retained |
 | Browser isolation | **0** leaked processes across three repeated crash/cancel/deadline test cycles |
 
 </details>

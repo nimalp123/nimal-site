@@ -17,11 +17,27 @@
 .tm-page .th-scroll { overflow-x: auto; padding: 4px 5px 9px; margin: -4px -5px -9px; scrollbar-color: #4a513f var(--tm-bg); scrollbar-width: thin; overscroll-behavior-x: contain; }
 .tm-page .th-heatmap { position: relative; min-width: 760px; padding: 27px 0 0 40px; }
 .tm-page .th-months { display: grid; position: absolute; top: 0; left: 40px; right: 0; grid-template-columns: repeat(var(--th-weeks), minmax(0, 1fr)); gap: 5px; font: 10px/1.2 "IBM Plex Mono", monospace; color: var(--tm-muted); }
-.tm-page .th-weekdays { position: absolute; left: 0; bottom: 0; top: 27px; display: grid; grid-template-rows: repeat(7, minmax(0, 1fr)); gap: 5px; align-items: center; font: 9px/1 "IBM Plex Mono", monospace; color: var(--tm-muted); }
+.tm-page .th-calendar { position: relative; }
+.tm-page .th-weekdays { position: absolute; left: -40px; bottom: 0; top: 0; display: grid; grid-template-rows: repeat(7, minmax(0, 1fr)); gap: 5px; align-items: center; font: 9px/1 "IBM Plex Mono", monospace; color: var(--tm-muted); }
 .tm-page .th-weekdays span:nth-child(1) { grid-row: 2; }
 .tm-page .th-weekdays span:nth-child(2) { grid-row: 4; }
 .tm-page .th-weekdays span:nth-child(3) { grid-row: 6; }
-.tm-page .th-cells { display: grid; grid-template-columns: repeat(var(--th-weeks), minmax(0, 1fr)); grid-template-rows: repeat(7, minmax(0, 1fr)); gap: 5px; }
+.tm-page .th-cells { display: grid; grid-template-columns: repeat(var(--th-weeks), minmax(0, 1fr)); gap: 5px; }
+.tm-page .th-week-column { display: grid; grid-template-rows: repeat(7, minmax(0, 1fr)); gap: 5px; min-width: 0; border-radius: 1px; }
+.tm-page .th-week-column.th-week-highlight { background: rgba(197, 246, 96, .13); box-shadow: 0 0 0 3px rgba(197, 246, 96, .2); }
+.tm-page .th-weekly-bars { position: relative; display: grid; grid-template-columns: repeat(var(--th-weeks), minmax(0, 1fr)); gap: 5px; height: 48px; margin-top: 16px; }
+.tm-page .th-weekly-axis { position: absolute; bottom: 0; left: -40px; font: 8px/1.6 "IBM Plex Mono", monospace; color: var(--tm-muted); }
+.tm-page .th-week-bar { display: flex; align-items: end; width: 100%; min-width: 0; height: 100%; padding: 0; background: #10150e; border-bottom: 1px solid var(--tm-line); border-radius: 0; }
+.tm-page .th-week-bar > span { display: block; width: 100%; background: #94bb48; }
+.tm-page .th-week-bar-highlight { background: rgba(197, 246, 96, .12); box-shadow: 0 0 0 2px rgba(197, 246, 96, .28); }
+.tm-page .th-week-bar-highlight > span { background: var(--tm-lime); }
+.tm-page .th-week-unavailable { background: transparent; border-color: #1a2017; }
+.tm-page .th-week-bar:focus-visible { outline: 2px solid var(--tm-text); outline-offset: 2px; }
+.tm-page .th-week-receipt { display: grid; grid-template-columns: 1.4fr 1fr 1.1fr; gap: 24px; min-height: 105px; padding: 22px 0 20px; border-bottom: 1px solid var(--tm-line); align-items: start; }
+.tm-page .th-week-range > strong { display: block; margin: 7px 0 5px; font: 600 18px/1.35 "Syne", sans-serif; letter-spacing: -.035em; }
+.tm-page .th-week-range > small { color: var(--tm-muted); font: 9px/1.7 "IBM Plex Mono", monospace; }
+.tm-page .th-week-value > strong { display: block; margin-top: 6px; color: var(--tm-lime); font: 600 30px/1.2 "Syne", sans-serif; letter-spacing: -.045em; font-variant-numeric: tabular-nums; }
+.tm-page .th-week-tokens > strong { display: block; margin-top: 11px; font: 500 19px/1.25 "IBM Plex Mono", monospace; letter-spacing: -.045em; font-variant-numeric: tabular-nums; }
 .tm-page .th-cell { display: block; aspect-ratio: 1; width: 100%; min-width: 0; padding: 0; border: 1px solid rgba(237, 240, 232, .035); border-radius: 1px; transition: box-shadow .12s; }
 .tm-page .th-cell.th-pinned { box-shadow: 0 0 0 2px var(--tm-text); z-index: 1; position: relative; }
 .tm-page .th-cell.th-preview { box-shadow: 0 0 0 2px var(--tm-lime); z-index: 2; position: relative; }
@@ -54,6 +70,21 @@
 .tm-page .th-parts > div { display: flex; align-items: center; justify-content: space-between; gap: 10px; font: 9px/1.6 "IBM Plex Mono", monospace; }
 .tm-page .th-parts span { color: var(--tm-muted); }
 .tm-page .th-parts strong { font-weight: 400; font-variant-numeric: tabular-nums; }
+.tm-page .th-day-agents { grid-column: 1 / -1; min-width: 0; padding-top: 20px; border-top: 1px solid var(--tm-line); }
+.tm-page .th-day-agent-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.tm-page .th-day-agent-heading h3 { font: 600 21px/1.3 "Syne", sans-serif; letter-spacing: -.04em; }
+.tm-page .th-day-agent-heading > span { color: var(--tm-muted); font: 9px/1.6 "IBM Plex Mono", monospace; }
+.tm-page .th-day-agent-rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; margin: 0; padding: 0; list-style: none; }
+.tm-page .th-day-agent-row { display: flex; align-items: start; justify-content: space-between; gap: 20px; min-width: 0; padding: 16px 0; border-top: 1px solid var(--tm-line); }
+.tm-page .th-day-agent-identity { min-width: 0; flex: 1; }
+.tm-page .th-day-agent-name { display: block; padding-top: 3px; font-size: 14px; }
+.tm-page .th-day-agent-models { display: flex; flex-wrap: wrap; gap: 5px; margin: 9px 0 0; padding: 0; list-style: none; }
+.tm-page .th-day-agent-models > li { min-width: 0; max-width: 100%; padding: 3px 6px; border: 1px solid var(--tm-line); color: var(--tm-muted); font: 9px/1.6 "IBM Plex Mono", monospace; overflow-wrap: anywhere; }
+.tm-page .th-day-agent-models-missing { display: block; margin-top: 9px; color: var(--tm-muted); font: 9px/1.6 "IBM Plex Mono", monospace; }
+.tm-page .th-day-agent-numbers { display: flex; flex-direction: column; align-items: end; flex-shrink: 0; gap: 5px; font-variant-numeric: tabular-nums; }
+.tm-page .th-day-agent-numbers > strong { color: var(--tm-lime); font: 600 22px/1.1 "Syne", sans-serif; letter-spacing: -.04em; }
+.tm-page .th-day-agent-numbers > span { color: var(--tm-muted); font: 10px/1.6 "IBM Plex Mono", monospace; white-space: nowrap; }
+.tm-page .th-day-agent-empty { color: var(--tm-muted); font-size: 11px; line-height: 1.7; }
 .tm-page .th-peaks { padding: 23px 0; border-bottom: 1px solid var(--tm-line); display: grid; grid-template-columns: minmax(145px, .65fr) 3fr; gap: 24px; align-items: center; }
 .tm-page .th-peak-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .tm-page .th-peak-list button { display: flex; align-items: start; text-align: left; gap: 12px; padding: 0 24px; border-left: 1px solid var(--tm-line); min-width: 0; }
@@ -92,6 +123,9 @@
   .tm-page .th-peak-receipt > strong { font-size: 14px; }
   .tm-page .th-peak-rank { font-size: 9px; }
   .tm-page .th-legend-label { width: 100%; }
+  .tm-page .th-week-receipt { grid-template-columns: 1fr 1.35fr; gap: 18px 22px; min-height: 164px; }
+  .tm-page .th-week-range { grid-column: 1 / -1; }
+  .tm-page .th-week-tokens > strong { font-size: 18px; }
 }
 @media (max-width: 600px) {
   .tm-page .th-activity { padding-top: 38px; }
@@ -113,11 +147,18 @@
   .tm-page .th-day-tokens > strong { font-size: 23px; margin: 6px 0 5px; }
   .tm-page .th-parts { grid-template-columns: 1fr 1fr; gap: 15px 22px; }
   .tm-page .th-parts > div { font-size: 9px; }
+  .tm-page .th-day-agent-rows { grid-template-columns: 1fr; }
+  .tm-page .th-day-agent-row { gap: 12px; }
+  .tm-page .th-day-agent-numbers > span { font-size: 9px; }
   .tm-page .th-peak-list { grid-template-columns: 1fr; gap: 20px; }
   .tm-page .th-peak-list button { padding: 0; border-left: 0; gap: 14px; }
   .tm-page .th-peak-receipt { gap: 4px; }
   .tm-page .th-peak-receipt > strong { font-size: 18px; }
   .tm-page .th-peak-list svg { margin-top: 17px; }
+  .tm-page .th-week-receipt { grid-template-columns: 1fr; min-height: 243px; gap: 18px; padding-top: 20px; }
+  .tm-page .th-week-range > strong { font-size: 20px; }
+  .tm-page .th-week-tokens > strong { font-size: 20px; margin-top: 7px; }
+  .tm-page .th-week-value > strong { font-size: 32px; margin-top: 4px; }
 }
 @media (hover: none) { .tm-page .th-mouse-hint { display: none; } }
 @media (prefers-reduced-motion: reduce) { .tm-page .th-cell { transition: none; } }

@@ -21,7 +21,7 @@
     <text x="588" y="312">78%</text>
     <text x="1096" y="312">83%</text>
     <text x="80" y="583">20/20</text>
-    <text x="588" y="583">8,419</text>
+    <text x="588" y="583">9,600</text>
     <text x="1096" y="583">137</text>
   </g>
   <g fill="#edf0e8" font-family="Manrope, Arial, sans-serif" font-size="28" font-weight="600">
@@ -37,7 +37,7 @@
     <text x="588" y="402">45 → 10 · same 12-case arm</text>
     <text x="1096" y="402">963k → 163k · 12-case comparison</text>
     <text x="80" y="673">470/470 fields · seen synthetic set</text>
-    <text x="588" y="673">344 skipped · unit-suite checkpoint</text>
+    <text x="588" y="673">347 skipped · unit-suite checkpoint</text>
     <text x="1096" y="673">Independent review · recorded R5</text>
   </g>
   <path d="M48 751H1552" stroke="#2a2e27" stroke-width="2"/>

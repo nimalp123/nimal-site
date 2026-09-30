@@ -64,13 +64,42 @@ function agentId(value) {
   return agents.has(value) ? value : "other";
 }
 
-function sortedAgents(map) {
-  return [...map.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([id, counts]) => ({ id, ...counts }));
+function modelNames(value) {
+  if (value === undefined) return undefined;
+  if (!Array.isArray(value)) invalid();
+  for (const name of value) {
+    // ccusage emits model identifiers, including provider/model namespaces.
+    // Reject malformed labels rather than publishing paths, URLs, or free text.
+    if (typeof name !== "string" || !/^[A-Za-z0-9][A-Za-z0-9._+/@-]{0,199}$/.test(name) ||
+        name.split("/").some((part) => part === ".." || part === "." || part === "")) invalid();
+  }
+  return [...new Set(value)].sort();
 }
 
-function mergeAgent(map, id, counts) {
+function recordedModels(value) {
+  const lists = [modelNames(value.models), modelNames(value.modelsUsed)];
+  if (value.modelBreakdowns !== undefined) {
+    if (!Array.isArray(value.modelBreakdowns)) invalid();
+    lists.push(modelNames(value.modelBreakdowns.map((entry) => {
+      if (!entry || typeof entry !== "object" || Array.isArray(entry)) invalid();
+      return entry.modelName;
+    })));
+  }
+  const available = lists.filter((list) => list !== undefined);
+  return available.length ? [...new Set(available.flat())].sort() : undefined;
+}
+
+function sortedAgents(map) {
+  return [...map.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([id, counts]) => ({
+    id, ...counts, ...(counts.models === undefined ? {} : { models: [...counts.models] }),
+  }));
+}
+
+function mergeAgent(map, id, counts, models = counts.models) {
   if (!map.has(id)) map.set(id, zero());
-  add(map.get(id), counts);
+  const target = map.get(id);
+  add(target, counts);
+  if (models !== undefined) target.models = [...new Set([...(target.models ?? []), ...models])].sort();
 }
 
 function unpricedTokens(row, unpriced) {
@@ -91,7 +120,7 @@ function unpricedTokens(row, unpriced) {
   return result;
 }
 
-/** Build public data from an allowlist. No paths, projects, sessions, or model names survive. */
+/** Build public data from an allowlist: usage, agent IDs, and authorized model identifiers. */
 export function buildPublicUsage(input, {
   generatedAt = new Date().toISOString(),
   version = USAGE_VERSION,
@@ -116,11 +145,11 @@ export function buildPublicUsage(input, {
       for (const entry of row.agents) {
         const values = metrics(entry);
         add(sum, values);
-        mergeAgent(grouped, agentId(entry.agent ?? entry.id), values);
+        mergeAgent(grouped, agentId(entry.agent ?? entry.id), values, recordedModels(entry));
       }
       equalMetrics(counts, sum);
     } else {
-      mergeAgent(grouped, agentId(row.agent ?? "claude"), counts);
+      mergeAgent(grouped, agentId(row.agent ?? "claude"), counts, recordedModels(row));
     }
     const rawAgent = typeof row.agent === "string" ? row.agent : "claude";
     const aggregate = hasAgents || rawAgent === "all";
@@ -162,7 +191,20 @@ export function validatePublicUsage(input) {
   if (!input || input.schemaVersion !== 1 || input.timezone !== USAGE_TIMEZONE ||
       input.source?.tool !== "ccusage" || !Array.isArray(input.agents)) invalid();
   const output = buildPublicUsage({
-    daily: input.daily,
+    // Public snapshots only authorize `models`; raw collector fields or extra
+    // metadata added to a snapshot must not become another source of labels.
+    daily: Array.isArray(input.daily) ? input.daily.map((row) => {
+      if (!row || typeof row !== "object" || !Array.isArray(row.agents)) invalid();
+      return {
+        date: row.date,
+        ...metrics(row),
+        agents: row.agents.map((entry) => {
+          if (!entry || typeof entry !== "object" || !agents.has(entry.id)) invalid();
+          const models = modelNames(entry.models);
+          return { id: entry.id, ...metrics(entry), ...(models === undefined ? {} : { models }) };
+        }),
+      };
+    }) : undefined,
     totals: input.totals,
   }, { generatedAt: input.generatedAt, version: input.source.version });
   equalMetrics(output.totals, metrics(input.totals));
@@ -170,12 +212,15 @@ export function validatePublicUsage(input) {
   const providedAgents = new Map();
   for (const entry of input.agents) {
     if (!entry || !agents.has(entry.id) || providedAgents.has(entry.id)) invalid();
-    providedAgents.set(entry.id, metrics(entry));
+    const models = modelNames(entry.models);
+    providedAgents.set(entry.id, { ...metrics(entry), ...(models === undefined ? {} : { models }) });
   }
   if (providedAgents.size !== output.agents.length) invalid();
   for (const entry of output.agents) {
     if (!providedAgents.has(entry.id)) invalid();
-    equalMetrics(entry, providedAgents.get(entry.id));
+    const provided = providedAgents.get(entry.id);
+    equalMetrics(entry, provided);
+    if (provided.models !== undefined && JSON.stringify(provided.models) !== JSON.stringify(entry.models ?? [])) invalid();
   }
   const modelCount = number(input.pricingGap?.modelCount);
   const totalTokens = number(input.pricingGap?.totalTokens);

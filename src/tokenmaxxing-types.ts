@@ -7,7 +7,7 @@ export type UsageMetrics = {
   totalCost: number;
 };
 
-export type UsageAgent = UsageMetrics & { id: string };
+export type UsageAgent = UsageMetrics & { id: string; models?: string[] };
 export type UsageDay = UsageMetrics & { date: string; agents: UsageAgent[] };
 export type UsageSnapshot = {
   schemaVersion: 1;

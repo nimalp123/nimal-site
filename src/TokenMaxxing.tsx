@@ -42,8 +42,9 @@ function validMetrics(value: unknown): value is Metrics {
 function validAgents(value: unknown): value is Agent[] {
   return Array.isArray(value) && value.every((item) => {
     if (!validMetrics(item)) return false;
-    const id = (item as Metrics & { id?: unknown }).id;
-    return typeof id === "string" && Object.hasOwn(agentNames, id);
+    const agent = item as Metrics & { id?: unknown; models?: unknown };
+    return typeof agent.id === "string" && Object.hasOwn(agentNames, agent.id) &&
+      (agent.models === undefined || (Array.isArray(agent.models) && agent.models.every((model) => typeof model === "string" && model.length > 0)));
   });
 }
 

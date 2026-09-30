@@ -27,7 +27,7 @@ const builds = [
     items: [
       "Controlled experiments",
       "Isolated workers",
-      "Record + replay",
+      "Model-free capture",
       "Restartable runs",
     ],
   },
@@ -113,10 +113,22 @@ const documents = [
 
 const lab = [
   {
-    value: "8,419",
+    value: "9,600",
     label: "unit checks passed",
     detail: "Scraper unit-suite checkpoint",
-    scope: "344 skipped · unit suite",
+    scope: "347 skipped · Sept 30 checkpoint",
+  },
+  {
+    value: "98.8%",
+    label: "labeled-condition retention",
+    detail: "251/254 reference-recorded labels",
+    scope: "Model-free vs. reference · 97 dev cases",
+  },
+  {
+    value: "98.7%",
+    label: "start-page agreement",
+    detail: "78/79 start comparisons matched",
+    scope: "Model-free vs. reference · 97 dev cases",
   },
   {
     value: "86",
@@ -140,7 +152,7 @@ const lab = [
     value: "95/97",
     label: "recordings admitted",
     detail: "Strict artifact validation",
-    scope: "2 finalize failures retained",
+    scope: "Original campaign · 2 failures retained",
   },
   {
     value: "0",

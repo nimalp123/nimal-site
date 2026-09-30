@@ -17,3 +17,26 @@ export function displayedDate(options: {
   preview: string | null;
 }): string | null;
 export function keyboardTarget(cells: CalendarCell[], date: string, key: string): string | null;
+export type UsageWeek = {
+  index: number;
+  start: string;
+  end: string;
+  coveredFrom: string | null;
+  coveredThrough: string | null;
+  coveredDays: number;
+  observedDays: number;
+  activeDays: number;
+  available: boolean;
+  partial: boolean;
+  totalTokens: number;
+  totalCost: number;
+  cells: CalendarCell[];
+};
+export function weeklyUsage(year: number, calendar: { cells: CalendarCell[]; weeks: number }): UsageWeek[];
+export function displayedWeek(options: {
+  weeks: UsageWeek[];
+  selectedDate: string | null;
+  pinned: number | null;
+  preview: number | null;
+}): UsageWeek | null;
+export function weeklyKeyboardTarget(weeks: UsageWeek[], index: number, key: string): number | null;

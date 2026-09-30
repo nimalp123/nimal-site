@@ -81,3 +81,46 @@ export function keyboardTarget(cells, date, key) {
   const next = cells[index + shifts[key]];
   return next?.available ? next.date : null;
 }
+
+export function weeklyUsage(year, calendar) {
+  const first = new Date(Date.UTC(year, 0, 1));
+  const firstSunday = first.getTime() - first.getUTCDay() * 86_400_000;
+  return Array.from({ length: calendar.weeks }, (_, index) => {
+    const cells = calendar.cells.filter((cell) => cell.week === index);
+    const covered = cells.filter((cell) => cell.available);
+    const observed = covered.filter((cell) => cell.day);
+    return {
+      index,
+      start: new Date(firstSunday + index * 7 * 86_400_000).toISOString().slice(0, 10),
+      end: new Date(firstSunday + (index * 7 + 6) * 86_400_000).toISOString().slice(0, 10),
+      coveredFrom: covered[0]?.date ?? null,
+      coveredThrough: covered.at(-1)?.date ?? null,
+      coveredDays: covered.length,
+      observedDays: observed.length,
+      activeDays: observed.filter((cell) => cell.day.totalTokens > 0 || cell.day.totalCost > 0).length,
+      available: covered.length > 0,
+      partial: covered.length > 0 && covered.length < 7,
+      totalTokens: observed.reduce((sum, cell) => sum + cell.day.totalTokens, 0),
+      totalCost: observed.reduce((sum, cell) => sum + cell.day.totalCost, 0),
+      cells,
+    };
+  });
+}
+
+export function displayedWeek({ weeks, selectedDate, pinned, preview }) {
+  const previewWeek = preview !== null ? weeks.find((week) => week.index === preview) : null;
+  if (previewWeek) return previewWeek;
+  const pinnedWeek = pinned !== null ? weeks.find((week) => week.index === pinned && week.available) : null;
+  if (pinnedWeek) return pinnedWeek;
+  return weeks.find((week) => week.cells.some((cell) => cell.date === selectedDate && cell.available)) ?? null;
+}
+
+export function weeklyKeyboardTarget(weeks, index, key) {
+  const available = weeks.filter((week) => week.available);
+  if (key === "Home") return available[0]?.index ?? null;
+  if (key === "End") return available.at(-1)?.index ?? null;
+  const offset = key === "ArrowLeft" ? -1 : key === "ArrowRight" ? 1 : 0;
+  if (!offset) return null;
+  const position = available.findIndex((week) => week.index === index);
+  return available[position + offset]?.index ?? null;
+}

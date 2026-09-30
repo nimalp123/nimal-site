@@ -7,6 +7,7 @@ function snapshot() {
   return buildPublicUsage({ daily: [{
     date: "2026-09-29", agent: "codex", inputTokens: 10, outputTokens: 5,
     cacheCreationTokens: 3, cacheReadTokens: 20, totalTokens: 40, totalCost: 0.25,
+    modelsUsed: ["gpt-6.1-sol"],
   }] }, { generatedAt: "2026-09-30T12:00:00.000Z" });
 }
 function response() {
@@ -35,6 +36,7 @@ test("usage API fixes its upstream, strips unknown data, coalesces reads, and re
   ]);
   assert.equal(calls, 1);
   assert.deepEqual(first.body, snapshot());
+  assert.deepEqual(first.body.daily[0].agents[0].models, ["gpt-6.1-sol"]);
   assert.equal(first.headers["X-Usage-Source"], "live");
   assert.equal(first.headers["Cache-Control"], "public, max-age=0, s-maxage=60, stale-while-revalidate=60");
   const notModified = response();

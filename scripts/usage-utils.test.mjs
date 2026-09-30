@@ -11,7 +11,7 @@ const counts = {
   cacheReadTokens: 20, totalTokens: 40, totalCost: 0.25,
 };
 const breakdown = {
-  modelName: "private-model-label", inputTokens: 10, outputTokens: 5,
+  modelName: "gpt-6-sol", inputTokens: 10, outputTokens: 5,
   cacheCreationTokens: 3, cacheReadTokens: 20, cost: 0,
 };
 function raw() {
@@ -19,22 +19,24 @@ function raw() {
     daily: [{
       period: "2026-09-29", agent: "all", ...counts,
       metadata: { project: "/private/client-code", prompt: "private prompt", session: "private-id" },
-      modelsUsed: ["private-model-label"], modelBreakdowns: [breakdown],
+      modelsUsed: ["gpt-6-sol"], modelBreakdowns: [breakdown],
       agents: [{ agent: "codex", ...counts, modelBreakdowns: [breakdown] }],
     }],
-    totals: { ...counts, unpricedModels: ["private-model-label"] },
+    totals: { ...counts, unpricedModels: ["gpt-6-sol"] },
   };
 }
 function snapshot() { return buildPublicUsage(raw(), { generatedAt: time }); }
 
-test("an allowlisted aggregate removes private metadata and model labels without double-counting", () => {
+test("an allowlisted aggregate retains authorized model identifiers and removes private metadata without double-counting", () => {
   const result = snapshot();
   assert.deepEqual(result.totals, counts);
   assert.deepEqual(result.pricingGap, { modelCount: 1, totalTokens: 38 });
   assert.deepEqual(result.coverage, { from: "2026-09-29", through: "2026-09-29" });
   assert.equal(result.agents[0].id, "codex");
+  assert.deepEqual(result.agents[0].models, ["gpt-6-sol"]);
+  assert.deepEqual(result.daily[0].agents[0].models, ["gpt-6-sol"]);
   assert.equal(result.source.tool, "ccusage");
-  for (const secret of ["private-model-label", "/private/client-code", "private prompt", "private-id", "modelsUsed", "modelBreakdowns", "metadata"]) {
+  for (const secret of ["/private/client-code", "private prompt", "private-id", "modelsUsed", "modelBreakdowns", "metadata"]) {
     assert.equal(JSON.stringify(result).includes(secret), false);
   }
   // ccusage totalTokens can include tokens not itemized in its four component columns.
@@ -56,6 +58,83 @@ test("legacy daily rows and distinct per-agent rows are grouped and totals are r
   assert.deepEqual(result.pricingGap, { modelCount: 0, totalTokens: 0 });
   const legacy = buildPublicUsage({ daily: [{ date: "2026-09-29", ...counts }] }, { generatedAt: time });
   assert.equal(legacy.agents[0].id, "claude");
+  assert.equal(Object.hasOwn(legacy.agents[0], "models"), false);
+  assert.equal(Object.hasOwn(legacy.daily[0].agents[0], "models"), false);
+  assert.deepEqual(validatePublicUsage(legacy), legacy);
+});
+
+test("models are sorted, deduplicated, attributed to their specific agents, and merged across days without mutating input", () => {
+  const combined = Object.fromEntries(Object.entries(counts).map(([key, value]) => [key, value * 2]));
+  const input = { daily: [
+    {
+      period: "2026-09-29", agent: "all", ...combined,
+      modelsUsed: ["aggregate-only-must-not-be-attributed"],
+      agents: [
+        { agent: "claude", ...counts, modelsUsed: ["claude-sonnet-5", "claude-opus-5", "claude-opus-5"],
+          modelBreakdowns: [{ ...breakdown, modelName: "claude-opus-5" }] },
+        { agent: "codex", ...counts, modelBreakdowns: [breakdown] },
+      ],
+    },
+    { period: "2026-09-30", agent: "claude", ...counts,
+      modelsUsed: ["claude-opus-5", "claude-opus-5-5"] },
+  ] };
+  const before = structuredClone(input);
+  const result = buildPublicUsage(input, { generatedAt: time });
+  assert.deepEqual(input, before);
+  assert.deepEqual(result.daily[0].agents.find((agent) => agent.id === "claude").models,
+    ["claude-opus-5", "claude-sonnet-5"]);
+  assert.deepEqual(result.daily[0].agents.find((agent) => agent.id === "codex").models, ["gpt-6-sol"]);
+  assert.deepEqual(result.agents.find((agent) => agent.id === "claude").models,
+    ["claude-opus-5", "claude-opus-5-5", "claude-sonnet-5"]);
+  assert.deepEqual(result.agents.find((agent) => agent.id === "codex").models, ["gpt-6-sol"]);
+  assert.equal(JSON.stringify(result).includes("aggregate-only"), false);
+  assert.deepEqual(validatePublicUsage(result), result);
+});
+
+test("recorded model identifiers keep their exact spelling and provider namespaces", () => {
+  const names = ["mlx-community/Ornith-1.0-35B-bf16", "MiniMax-M3", "model_placeholder_m50", "default_model"];
+  const input = raw();
+  input.daily[0].agents[0].modelsUsed = names;
+  input.daily[0].agents[0].modelBreakdowns = [];
+  const result = buildPublicUsage(input, { generatedAt: time });
+  assert.deepEqual(result.daily[0].agents[0].models, [...names].sort());
+  assert.deepEqual(validatePublicUsage(result), result);
+  const empty = raw();
+  empty.daily[0].agents[0].modelsUsed = [];
+  empty.daily[0].agents[0].modelBreakdowns = [];
+  assert.deepEqual(buildPublicUsage(empty, { generatedAt: time }).agents[0].models, []);
+});
+
+test("unknown tool aliases are merged without mixing models into known agents", () => {
+  const input = { daily: [
+    { date: "2026-09-29", agent: "local-tool-a", ...counts, modelsUsed: ["model-a"] },
+    { date: "2026-09-29", agent: "local-tool-b", ...counts, modelsUsed: ["model-b", "model-a"] },
+    { date: "2026-09-29", agent: "codex", ...counts, modelsUsed: ["gpt-6-sol"] },
+  ] };
+  const result = buildPublicUsage(input, { generatedAt: time });
+  assert.deepEqual(result.daily[0].agents.find((agent) => agent.id === "other").models, ["model-a", "model-b"]);
+  assert.deepEqual(result.daily[0].agents.find((agent) => agent.id === "codex").models, ["gpt-6-sol"]);
+});
+
+test("malformed per-agent model lists and model identifiers are rejected", () => {
+  for (const models of [null, "gpt-6-sol", {}, [null], [3], [""], [" model"], ["model name"],
+    ["model\nprivate prompt"], ["/Users/nimal/private"], ["../private"], ["provider/../private"],
+    ["https://private.example"], ["a\\private"], ["a".repeat(201)]]) {
+    const input = raw();
+    input.daily[0].agents[0].modelsUsed = models;
+    assert.throws(() => buildPublicUsage(input), /Invalid usage data/);
+  }
+  for (const value of [null, {}, [null], [{ modelName: null }]]) {
+    const input = raw();
+    input.daily[0].agents[0].modelBreakdowns = value;
+    assert.throws(() => buildPublicUsage(input), /Invalid usage data/);
+  }
+  const publicSnapshot = snapshot();
+  publicSnapshot.daily[0].agents[0].models = ["/private"];
+  assert.throws(() => validatePublicUsage(publicSnapshot), /Invalid usage data/);
+  const badSummary = snapshot();
+  badSummary.agents[0].models = ["different-model"];
+  assert.throws(() => validatePublicUsage(badSummary), /Invalid usage data/);
 });
 
 test("malformed dates, numeric values, duplicate aggregate rows, and mismatched totals are rejected", () => {
@@ -81,6 +160,11 @@ test("public snapshot validation strips added fields but refuses altered summary
   input.privatePath = "/private";
   input.source.token = "secret";
   input.daily[0].session = "secret";
+  input.daily[0].modelsUsed = ["aggregate-added-model"];
+  input.daily[0].agents[0].modelsUsed = ["raw-added-model"];
+  input.daily[0].agents[0].modelBreakdowns = [{ modelName: "breakdown-added-model", prompt: "secret" }];
+  input.daily[0].agents[0].metadata = { paths: ["/private/client"] };
+  input.agents[0].project = "/private/client";
   assert.deepEqual(validatePublicUsage(input), snapshot());
   input.coverage.through = "2026-09-30";
   assert.throws(() => validatePublicUsage(input), /Invalid usage data/);
@@ -90,6 +174,10 @@ test("public snapshot validation strips added fields but refuses altered summary
   assert.throws(() => validatePublicUsage(gap), /Invalid usage data/);
   const nextTime = snapshot(); nextTime.generatedAt = "2026-09-30T13:00:00.000Z";
   assert.equal(sameUsage(snapshot(), nextTime), true);
+  const changedModels = snapshot();
+  changedModels.daily[0].agents[0].models.push("gpt-6.1-sol");
+  changedModels.agents[0].models.push("gpt-6.1-sol");
+  assert.equal(sameUsage(snapshot(), changedModels), false);
 });
 
 function publicRepo() {

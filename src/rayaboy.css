@@ -524,6 +524,12 @@
   margin-right: 7px;
 }
 
+@media (min-width: 1251px) {
+  .rb-lab-proof .rb-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .rb-lab-proof .rb-metric:nth-child(5) { border-left: 0; }
+  .rb-lab-proof .rb-metric:nth-child(n + 5) { border-top: 1px solid #34442c; }
+}
+
 @media (max-width: 1250px) {
   .rb-overview {
     gap: 40px;

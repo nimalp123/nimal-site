@@ -31,12 +31,16 @@ PR55 and its follow-up branches contain experimental and unreleased work. The ne
 
 | Metric                        | Scope                                                                                             |
 | ----------------------------- | ------------------------------------------------------------------------------------------------- |
-| 8,419 unit checks passed      | Recorded scraper development checkpoint; 344 skipped. Other gated suites are separate.            |
+| 9,600 unit checks passed      | September 30 scraper development checkpoint; 347 skipped, zero failures. Other gated suites are separate. |
+| 98.8% labeled-condition retention | Source evidence for 251/254 labeled reference-recorded conditions was present in model-free captures of the same 97 development cases. Recording fidelity, not semantic or extraction accuracy. |
+| 98.7% start-page agreement | 78/79 start comparisons matched in source classification and presence between model-free and reference recordings of those cases. Recording fidelity, not held-out or corpus-wide accuracy. |
 | 86 discovery research entries | Entries with readable real-web captures, not verified scholarships.                               |
 | 133 saved readings            | 117 HTML captures and 16 PDF texts in the research lab.                                           |
 | 19,977 source units           | Material cataloged for research and evaluation, not verified facts.                               |
-| 95/97 recordings admitted     | 95 passed strict artifact validation; two finalization failures remain in the record.             |
+| 95/97 recordings admitted     | Original 97-case campaign: 95 passed strict artifact validation; two finalization failures remain in the record. Targeted repair checks are not a new completed campaign. |
 | Zero leaked browser processes | Three repeated controlled isolation cycles exercising crash, cancellation, and deadline behavior. |
+
+The September 30 recording comparison excludes two entries whose recordings were lost on both sides. Sixteen entries had no start classification on either side and are outside the start-agreement denominator. The three missing labeled conditions and the one start disagreement came from one timed-out page. Evidence present on another page of the same entry counts as retained. These ratios measure preservation of labeled evidence available in the reference recordings, not coverage of every true condition on the sites. Model-free capture is built; the scraper's complete end-to-end replay driver remains unbuilt at this checkpoint.
 
 ## Iteration workflow
 

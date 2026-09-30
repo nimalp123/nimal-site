@@ -25,9 +25,11 @@ Brand spelling is **Rayaboy**. Link the showcase to `https://rayaboy.com`. Keep 
 
 `/tokenmaxxing` is a separate compute ledger. Match the portfolio's uppercase wordmark, page width, gutters, and locally hosted fonts. Introduce it with restrained type and a floating chrome compute sculpture. Emphasize API-equivalent dollar value, with exact comma-separated token totals beneath it. Keep the main portfolio's copy unchanged; its only entry point is a small footer link.
 
-The heatmap uses fixed magnitude bands, with a nearly white top band for the largest bursts. Default to the most recent recorded day; hovering or keyboard focus previews another day's receipt, and clicking or tapping pins it. Keep each peak date directly above its value. Tool rows rank by estimated API value and show full token counts as secondary text.
+The heatmap uses fixed magnitude bands, with a nearly white top band for the largest bursts. Default to the most recent recorded day; hovering or keyboard focus previews another day's receipt, and clicking or tapping pins it. Include each day's agent breakdown with its recorded models, API-equivalent value, and exact token count. Keep each peak date directly above its value. Tool rows rank by estimated API value and show full token counts as secondary text.
 
-Present ccusage totals as processed tokens including cache traffic, and costs as estimated API-equivalent usage value. Preserve the actual recorded date range, timezone, unknown-pricing count, and last-sync timestamp. Never claim these numbers are an invoice, benchmark ranking, or proof of research quality. Publish only daily numeric aggregates and approved agent identifiers, with no project names, session data, prompts, paths, or individual model identifiers.
+Align weekly usage bars with the calendar columns. Hovering a column previews its Sunday–Saturday aggregate while preserving the daily receipt. Weekly figures use full token counts and prominent API-equivalent value, with partial coverage marked explicitly. Support keyboard previews and touch selection.
+
+Present ccusage totals as processed tokens including cache traffic, and costs as estimated API-equivalent usage value. Preserve the actual recorded date range, timezone, unknown-pricing count, and last-sync timestamp. Never claim these numbers are an invoice, benchmark ranking, or proof of research quality. Publish only daily numeric aggregates, approved agent identifiers, and their recorded model names, with no project names, session data, prompts, or paths.
 
 ### Compute artwork
 

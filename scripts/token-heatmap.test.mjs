@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { calendarFor, displayedDate, heatmapLevel, keyboardTarget, latestRecordedDate, todayInZone } from "../src/token-heatmap-utils.mjs";
+import { calendarFor, displayedDate, displayedWeek, heatmapLevel, keyboardTarget, latestRecordedDate, todayInZone, weeklyKeyboardTarget, weeklyUsage } from "../src/token-heatmap-utils.mjs";
 
 test("fixed API value bands keep a quiet day visibly below real burst days", () => {
   assert.equal(heatmapLevel(0, "cost"), 0);
@@ -84,4 +84,86 @@ test("roving keyboard navigation follows week columns without entering unavailab
   assert.equal(keyboardTarget(cells, "2026-09-30", "ArrowDown"), null);
   assert.equal(keyboardTarget(cells, "2026-09-01", "ArrowLeft"), null);
   assert.equal(keyboardTarget(cells, "2026-09-15", "Tab"), null);
+});
+
+test("weekly columns sum observed Sunday–Saturday entries and exclude unavailable dates", () => {
+  const snapshot = {
+    timezone: "America/Los_Angeles",
+    coverage: { from: "2026-09-23", through: "2026-09-30" },
+    daily: [
+      { date: "2026-09-22", totalTokens: 999, totalCost: 999 },
+      { date: "2026-09-23", totalTokens: 100, totalCost: 1.25 },
+      { date: "2026-09-26", totalTokens: 200, totalCost: 2.5 },
+      { date: "2026-09-27", totalTokens: 1000, totalCost: 10.25 },
+      { date: "2026-09-30", totalTokens: 2000, totalCost: 20.5 },
+      { date: "2026-10-01", totalTokens: 999, totalCost: 999 },
+    ],
+  };
+  const calendar = calendarFor(2026, snapshot, new Date("2026-10-02T12:00:00Z"));
+  const weeks = weeklyUsage(2026, calendar);
+  const first = weeks.find((week) => week.start === "2026-09-20");
+  assert.equal(first.end, "2026-09-26");
+  assert.equal(first.totalTokens, 300);
+  assert.equal(first.totalCost, 3.75);
+  assert.equal(first.coveredDays, 4);
+  assert.equal(first.observedDays, 2);
+  assert.equal(first.partial, true);
+  assert.equal(first.coveredFrom, "2026-09-23");
+  const second = weeks.find((week) => week.start === "2026-09-27");
+  assert.equal(second.totalTokens, 3000);
+  assert.equal(second.totalCost, 30.75);
+  assert.equal(second.activeDays, 2);
+  assert.equal(second.coveredThrough, "2026-09-30");
+  assert.equal(weeks.reduce((sum, week) => sum + week.totalTokens, 0), 3300);
+});
+
+test("year boundaries remain partial and do not double-count cross-year entries", () => {
+  const snapshot = {
+    timezone: "America/Los_Angeles", coverage: { from: "2025-12-28", through: "2026-12-31" },
+    daily: [{ date: "2025-12-31", totalTokens: 50, totalCost: 5 }, { date: "2026-01-01", totalTokens: 70, totalCost: 7 }, { date: "2026-12-31", totalTokens: 90, totalCost: 9 }],
+  };
+  const weeks = weeklyUsage(2026, calendarFor(2026, snapshot, new Date("2027-01-01T12:00:00Z")));
+  assert.equal(weeks[0].start, "2025-12-28");
+  assert.equal(weeks[0].end, "2026-01-03");
+  assert.equal(weeks[0].partial, true);
+  assert.equal(weeks[0].coveredDays, 3);
+  assert.equal(weeks[0].totalTokens, 70);
+  assert.equal(weeks.at(-1).start, "2026-12-27");
+  assert.equal(weeks.at(-1).end, "2027-01-02");
+  assert.equal(weeks.at(-1).partial, true);
+  assert.equal(weeks.at(-1).coveredDays, 5);
+  assert.equal(weeks.at(-1).totalTokens, 90);
+  assert.equal(weeks.reduce((sum, week) => sum + week.totalTokens, 0), 160);
+});
+
+test("zero-use covered weeks remain distinct from unavailable weeks", () => {
+  const snapshot = { timezone: "America/Los_Angeles", coverage: { from: "2026-09-20", through: "2026-09-26" }, daily: [] };
+  const weeks = weeklyUsage(2026, calendarFor(2026, snapshot, new Date("2026-10-01T12:00:00Z")));
+  const covered = weeks.find((week) => week.start === "2026-09-20");
+  const unavailable = weeks.find((week) => week.start === "2026-09-27");
+  assert.equal(covered.available, true);
+  assert.equal(covered.partial, false);
+  assert.equal(covered.observedDays, 0);
+  assert.equal(covered.totalTokens, 0);
+  assert.equal(unavailable.available, false);
+  assert.equal(unavailable.coveredDays, 0);
+  assert.equal(unavailable.coveredFrom, null);
+});
+
+test("weekly hover previews restore the selected day's week or explicit weekly pin", () => {
+  const snapshot = { timezone: "America/Los_Angeles", coverage: { from: "2026-09-01", through: "2026-09-30" }, daily: [] };
+  const weeks = weeklyUsage(2026, calendarFor(2026, snapshot, new Date("2026-10-01T12:00:00Z")));
+  const latest = weeks.find((week) => week.start === "2026-09-27");
+  const earlier = weeks.find((week) => week.start === "2026-09-20");
+  const outside = weeks[0];
+  const base = { weeks, selectedDate: "2026-09-30", pinned: null, preview: null };
+  assert.equal(displayedWeek(base).index, latest.index);
+  assert.equal(displayedWeek({ ...base, preview: earlier.index }).index, earlier.index);
+  assert.equal(displayedWeek({ ...base, pinned: earlier.index }).index, earlier.index);
+  assert.equal(displayedWeek({ ...base, pinned: earlier.index, preview: latest.index }).index, latest.index);
+  assert.equal(displayedWeek({ ...base, pinned: outside.index }).index, latest.index);
+  assert.equal(displayedWeek({ ...base, preview: outside.index }).available, false);
+  assert.equal(weeklyKeyboardTarget(weeks, latest.index, "ArrowLeft"), earlier.index);
+  assert.equal(weeklyKeyboardTarget(weeks, latest.index, "ArrowRight"), null);
+  assert.equal(weeklyKeyboardTarget(weeks, earlier.index, "End"), latest.index);
 });
