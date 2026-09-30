@@ -540,6 +540,9 @@ export default function App() {
           <ExternalLink href={`${github}/nimal-site`} className="mono">
             BUILT WITH INTENT. <span>↗</span>
           </ExternalLink>
+          <a href="/tokenmaxxing" className="mono footer-tokenmaxxing">
+            TOKENMAXXING <span>↗</span>
+          </a>
           <a href="#" className="back-to-top" aria-label="Back to top">
             ↑
           </a>

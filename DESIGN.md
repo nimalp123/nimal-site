@@ -20,3 +20,9 @@ Exact generation prompt:
 ## Rayaboy
 
 Brand spelling is **Rayaboy**. Link the showcase to `https://rayaboy.com`. Keep it a compact highlight reel with both Nimal’s contributions and Rayaboy’s own platform figures. Attach qualified experiment results to the research work and a recorded local check count to the reliability work. Place the public catalog and listed scholarship funding next to the real, clickable homepage snapshot. Use a prominent lime action with an external-link arrow and explicit new-tab copy. Keep source code, internal methods, learnings, provider choices, credentials, private links, and student data out of the site.
+
+## Tokenmaxxing
+
+`/tokenmaxxing` is a separate compute ledger. Use the existing dark and lime palette and locally hosted fonts, oversized token totals, an interactive daily heatmap, compact tool-level breakdowns, and precise measurement labels. Keep the main portfolio's copy unchanged; its only entry point is a small footer link.
+
+Present ccusage totals as processed tokens including cache traffic, and costs as estimated API-equivalent usage value. Preserve the actual recorded date range, timezone, unknown-pricing count, and last-sync timestamp. Never claim these numbers are an invoice, benchmark ranking, or proof of research quality. Publish only daily numeric aggregates and approved agent identifiers, with no project names, session data, prompts, paths, or individual model identifiers.

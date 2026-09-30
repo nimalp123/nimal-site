@@ -72,3 +72,15 @@ vercel deploy --prod
 ```
 
 `nimalp123.com` is connected and redirects to the verified primary host `www.nimalp123.com`. Portfolio links use the custom domain; canonical and absolute social-image URLs use `https://www.nimalp123.com`.
+
+## Tokenmaxxing usage ledger
+
+The separate `/tokenmaxxing` HTML entry shares fonts and design tokens with the portfolio. A small footer link is its only mention on the main page. Its daily heatmap and tool-level totals use `America/Los_Angeles` date grouping.
+
+`npm run sync:usage` runs pinned `ccusage@20.0.26` against this MacBook's local CLI logs and creates the initial public snapshot. Only allowlisted dates, numeric usage totals, and approved agent identifiers survive sanitization. Model identifiers, projects, session details, prompts, filesystem paths, credentials, and raw exports are excluded. Cost figures are API-equivalent usage estimates and unknown-pricing gaps remain visible.
+
+`npm run publish:usage` publishes only `data/token-usage.json` in the existing public `nimalp123/nimalp123` profile repository using the GitHub CLI's existing authentication. It verifies the repository is public and skips unchanged usage. The profile README stays independent. This data file doesn't trigger a website deployment or the profile's shared-asset workflow.
+
+The public `/data/token-usage.json` route reads that sanitized public file through `/api/token-usage`, with a short cache and the initial snapshot as a fallback. No local log access or GitHub secret is present on Vercel.
+
+`npm run install:usage-updater` installs the per-user `com.nimalp123.tokenmaxxing` launch agent to publish hourly while this Mac is awake. Its logs and reviewable plist copy stay in ignored `artifacts/`. Prepare the plist without installing via `node scripts/install-usage-updater.mjs --prepare`; remove only this updater via `node scripts/install-usage-updater.mjs --uninstall`.

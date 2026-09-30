@@ -12,6 +12,9 @@
     "lint": "oxlint",
     "preview": "vite preview --host 127.0.0.1",
     "sync:repos": "node scripts/sync-repos.mjs",
+    "sync:usage": "node scripts/sync-usage.mjs --output public/data/token-usage.json",
+    "publish:usage": "node scripts/sync-usage.mjs --publish",
+    "install:usage-updater": "node scripts/install-usage-updater.mjs",
     "test": "node --test scripts/*.test.mjs"
   },
   "dependencies": {

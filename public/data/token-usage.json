@@ -1,0 +1,2400 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-30T08:29:36.772Z",
+  "timezone": "America/Los_Angeles",
+  "source": {
+    "tool": "ccusage",
+    "version": "20.0.26",
+    "scope": "Local CLI usage on Nimal’s MacBook"
+  },
+  "coverage": {
+    "from": "2026-03-18",
+    "through": "2026-09-30"
+  },
+  "pricingGap": {
+    "modelCount": 5,
+    "totalTokens": 331306029
+  },
+  "totals": {
+    "inputTokens": 301272098,
+    "outputTokens": 40450063,
+    "cacheCreationTokens": 269660530,
+    "cacheReadTokens": 25044105992,
+    "totalTokens": 25659847741,
+    "totalCost": 12404.85007098901
+  },
+  "agents": [
+    {
+      "id": "antigravity",
+      "inputTokens": 455466,
+      "outputTokens": 63798,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 5593267,
+      "totalTokens": 6151242,
+      "totalCost": 2.41519755
+    },
+    {
+      "id": "claude",
+      "inputTokens": 254644,
+      "outputTokens": 13131578,
+      "cacheCreationTokens": 269238832,
+      "cacheReadTokens": 16311151144,
+      "totalTokens": 16593776198,
+      "totalCost": 5419.9351846500085
+    },
+    {
+      "id": "codex",
+      "inputTokens": 122504623,
+      "outputTokens": 15364279,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 3533087488,
+      "totalTokens": 3670956390,
+      "totalCost": 3830.61643004
+    },
+    {
+      "id": "grok",
+      "inputTokens": 49123,
+      "outputTokens": 4484,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 191616,
+      "totalTokens": 245223,
+      "totalCost": 0.1826348
+    },
+    {
+      "id": "hermes",
+      "inputTokens": 14776405,
+      "outputTokens": 480742,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 181242496,
+      "totalTokens": 196660492,
+      "totalCost": 447.7745066
+    },
+    {
+      "id": "kimi",
+      "inputTokens": 1411989,
+      "outputTokens": 627791,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 57396992,
+      "totalTokens": 59436772,
+      "totalCost": 41.97081122
+    },
+    {
+      "id": "opencode",
+      "inputTokens": 161819848,
+      "outputTokens": 10777391,
+      "cacheCreationTokens": 421698,
+      "cacheReadTokens": 4955442989,
+      "totalTokens": 5132621424,
+      "totalCost": 2661.955306128999
+    }
+  ],
+  "daily": [
+    {
+      "date": "2026-03-18",
+      "inputTokens": 362944,
+      "outputTokens": 94211,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 7296768,
+      "totalTokens": 7753923,
+      "totalCost": 4.144717,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 362944,
+          "outputTokens": 94211,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7296768,
+          "totalTokens": 7753923,
+          "totalCost": 4.144717
+        }
+      ]
+    },
+    {
+      "date": "2026-04-02",
+      "inputTokens": 51826,
+      "outputTokens": 4067,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 176256,
+      "totalTokens": 232149,
+      "totalCost": 0.234634,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 51826,
+          "outputTokens": 4067,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 176256,
+          "totalTokens": 232149,
+          "totalCost": 0.234634
+        }
+      ]
+    },
+    {
+      "date": "2026-05-02",
+      "inputTokens": 293004,
+      "outputTokens": 40804,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 2121088,
+      "totalTokens": 2454896,
+      "totalCost": 3.7496840000000002,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 293004,
+          "outputTokens": 40804,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2121088,
+          "totalTokens": 2454896,
+          "totalCost": 3.7496840000000002
+        }
+      ]
+    },
+    {
+      "date": "2026-05-03",
+      "inputTokens": 163961,
+      "outputTokens": 21978,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 1011200,
+      "totalTokens": 1197139,
+      "totalCost": 1.984745,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 163961,
+          "outputTokens": 21978,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 1011200,
+          "totalTokens": 1197139,
+          "totalCost": 1.984745
+        }
+      ]
+    },
+    {
+      "date": "2026-05-04",
+      "inputTokens": 58204,
+      "outputTokens": 2791,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 168576,
+      "totalTokens": 229571,
+      "totalCost": 0.45903799999999995,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 58204,
+          "outputTokens": 2791,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 168576,
+          "totalTokens": 229571,
+          "totalCost": 0.45903799999999995
+        }
+      ]
+    },
+    {
+      "date": "2026-05-11",
+      "inputTokens": 5668,
+      "outputTokens": 50,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 9216,
+      "totalTokens": 14934,
+      "totalCost": 0.007059159999999999,
+      "agents": [
+        {
+          "id": "kimi",
+          "inputTokens": 5668,
+          "outputTokens": 50,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 9216,
+          "totalTokens": 14934,
+          "totalCost": 0.007059159999999999
+        }
+      ]
+    },
+    {
+      "date": "2026-06-09",
+      "inputTokens": 2243486,
+      "outputTokens": 44406,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 23236096,
+      "totalTokens": 25537441,
+      "totalCost": 73.71374399999999,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 2243486,
+          "outputTokens": 44406,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 23236096,
+          "totalTokens": 25537441,
+          "totalCost": 73.71374399999999
+        }
+      ]
+    },
+    {
+      "date": "2026-06-10",
+      "inputTokens": 2461622,
+      "outputTokens": 58347,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 36831744,
+      "totalTokens": 39369046,
+      "totalCost": 98.983146,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 2461622,
+          "outputTokens": 58347,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 36831744,
+          "totalTokens": 39369046,
+          "totalCost": 98.983146
+        }
+      ]
+    },
+    {
+      "date": "2026-06-11",
+      "inputTokens": 105615,
+      "outputTokens": 2234,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 318974,
+      "totalTokens": 430511,
+      "totalCost": 0.19237666679999998,
+      "agents": [
+        {
+          "id": "antigravity",
+          "inputTokens": 68651,
+          "outputTokens": 1661,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 227407,
+          "totalTokens": 301201,
+          "totalCost": 0.18328904999999998
+        },
+        {
+          "id": "opencode",
+          "inputTokens": 36964,
+          "outputTokens": 573,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 91567,
+          "totalTokens": 129310,
+          "totalCost": 0.0090876168
+        }
+      ]
+    },
+    {
+      "date": "2026-06-12",
+      "inputTokens": 75141,
+      "outputTokens": 77299,
+      "cacheCreationTokens": 22598,
+      "cacheReadTokens": 50418,
+      "totalTokens": 226998,
+      "totalCost": 0.4937091672,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 12759,
+          "outputTokens": 11333,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 4352,
+          "totalTokens": 28444,
+          "totalCost": 0.18175185
+        },
+        {
+          "id": "kimi",
+          "inputTokens": 21074,
+          "outputTokens": 20770,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 43008,
+          "totalTokens": 84852,
+          "totalCost": 0.10998158
+        },
+        {
+          "id": "opencode",
+          "inputTokens": 41308,
+          "outputTokens": 45196,
+          "cacheCreationTokens": 22598,
+          "cacheReadTokens": 3058,
+          "totalTokens": 113702,
+          "totalCost": 0.2019757372
+        }
+      ]
+    },
+    {
+      "date": "2026-06-13",
+      "inputTokens": 328771,
+      "outputTokens": 72669,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 2427008,
+      "totalTokens": 2828448,
+      "totalCost": 5.0374289999999995,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 328771,
+          "outputTokens": 72669,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2427008,
+          "totalTokens": 2828448,
+          "totalCost": 5.0374289999999995
+        }
+      ]
+    },
+    {
+      "date": "2026-06-14",
+      "inputTokens": 18984,
+      "outputTokens": 39,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 18432,
+      "totalTokens": 37455,
+      "totalCost": 0.31591800000000003,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 18984,
+          "outputTokens": 39,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 18432,
+          "totalTokens": 37455,
+          "totalCost": 0.31591800000000003
+        }
+      ]
+    },
+    {
+      "date": "2026-06-15",
+      "inputTokens": 1088672,
+      "outputTokens": 41306,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 19515904,
+      "totalTokens": 20657388,
+      "totalCost": 50.357016,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 1088672,
+          "outputTokens": 41306,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 19515904,
+          "totalTokens": 20657388,
+          "totalCost": 50.357016
+        }
+      ]
+    },
+    {
+      "date": "2026-06-16",
+      "inputTokens": 2365873,
+      "outputTokens": 464419,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 61913956,
+      "totalTokens": 64812746,
+      "totalCost": 60.958487123599994,
+      "agents": [
+        {
+          "id": "antigravity",
+          "inputTokens": 386815,
+          "outputTokens": 62137,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 5365860,
+          "totalTokens": 5850041,
+          "totalCost": 2.2319085
+        },
+        {
+          "id": "codex",
+          "inputTokens": 487201,
+          "outputTokens": 161926,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 15112448,
+          "totalTokens": 15761575,
+          "totalCost": 5.76424415
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 1018648,
+          "outputTokens": 26840,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 20891648,
+          "totalTokens": 21945810,
+          "totalCost": 49.813452
+        },
+        {
+          "id": "kimi",
+          "inputTokens": 167898,
+          "outputTokens": 64879,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7053568,
+          "totalTokens": 7286345,
+          "totalCost": 1.5475899800000006
+        },
+        {
+          "id": "opencode",
+          "inputTokens": 305311,
+          "outputTokens": 148637,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 13490432,
+          "totalTokens": 13968975,
+          "totalCost": 1.6012924935999993
+        }
+      ]
+    },
+    {
+      "date": "2026-06-18",
+      "inputTokens": 1134524,
+      "outputTokens": 16024,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 11416064,
+      "totalTokens": 12571692,
+      "totalCost": 36.041316,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 1134524,
+          "outputTokens": 16024,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 11416064,
+          "totalTokens": 12571692,
+          "totalCost": 36.041316
+        }
+      ]
+    },
+    {
+      "date": "2026-06-19",
+      "inputTokens": 417976,
+      "outputTokens": 123866,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 9745269,
+      "totalTokens": 10287255,
+      "totalCost": 3.6375987,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 417976,
+          "outputTokens": 123866,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 9745269,
+          "totalTokens": 10287255,
+          "totalCost": 3.6375987
+        }
+      ]
+    },
+    {
+      "date": "2026-06-23",
+      "inputTokens": 1160712,
+      "outputTokens": 137755,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 21463680,
+      "totalTokens": 22762147,
+      "totalCost": 20.66805,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 1160712,
+          "outputTokens": 137755,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 21463680,
+          "totalTokens": 22762147,
+          "totalCost": 20.66805
+        }
+      ]
+    },
+    {
+      "date": "2026-06-29",
+      "inputTokens": 182431,
+      "outputTokens": 145745,
+      "cacheCreationTokens": 334563,
+      "cacheReadTokens": 5320604,
+      "totalTokens": 5983343,
+      "totalCost": 5.2268569000000005,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 122626,
+          "outputTokens": 40258,
+          "cacheCreationTokens": 334563,
+          "cacheReadTokens": 2331968,
+          "totalTokens": 2829415,
+          "totalCost": 5.2185265
+        },
+        {
+          "id": "opencode",
+          "inputTokens": 59805,
+          "outputTokens": 105487,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2988636,
+          "totalTokens": 3153928,
+          "totalCost": 0.008330399999999998
+        }
+      ]
+    },
+    {
+      "date": "2026-07-01",
+      "inputTokens": 887204,
+      "outputTokens": 54794,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 8285696,
+      "totalTokens": 9235653,
+      "totalCost": 31.384374,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 887204,
+          "outputTokens": 54794,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 8285696,
+          "totalTokens": 9235653,
+          "totalCost": 31.384374
+        }
+      ]
+    },
+    {
+      "date": "2026-07-02",
+      "inputTokens": 8195,
+      "outputTokens": 959,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 26624,
+      "totalTokens": 35951,
+      "totalCost": 0.264741,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 8195,
+          "outputTokens": 959,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 26624,
+          "totalTokens": 35951,
+          "totalCost": 0.264741
+        }
+      ]
+    },
+    {
+      "date": "2026-07-03",
+      "inputTokens": 11254,
+      "outputTokens": 1159,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 27648,
+      "totalTokens": 40283,
+      "totalCost": 0.334572,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 11254,
+          "outputTokens": 1159,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 27648,
+          "totalTokens": 40283,
+          "totalCost": 0.334572
+        }
+      ]
+    },
+    {
+      "date": "2026-07-04",
+      "inputTokens": 9182,
+      "outputTokens": 597,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 10240,
+      "totalTokens": 20139,
+      "totalCost": 0.21762000000000004,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 9182,
+          "outputTokens": 597,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 10240,
+          "totalTokens": 20139,
+          "totalCost": 0.21762000000000004
+        }
+      ]
+    },
+    {
+      "date": "2026-07-05",
+      "inputTokens": 120540,
+      "outputTokens": 803,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 6144,
+      "totalTokens": 127543,
+      "totalCost": 0.09920100000000001,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 3569,
+          "outputTokens": 349,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6144,
+          "totalTokens": 10118,
+          "totalCost": 0.09920100000000001
+        },
+        {
+          "id": "opencode",
+          "inputTokens": 116971,
+          "outputTokens": 454,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "totalTokens": 117425,
+          "totalCost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-07-06",
+      "inputTokens": 59238,
+      "outputTokens": 745,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 63120,
+      "totalTokens": 123305,
+      "totalCost": 0.1358295864,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 5610,
+          "outputTokens": 339,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 4096,
+          "totalTokens": 10122,
+          "totalCost": 0.12773400000000001
+        },
+        {
+          "id": "opencode",
+          "inputTokens": 53628,
+          "outputTokens": 406,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 59024,
+          "totalTokens": 113183,
+          "totalCost": 0.0080955864
+        }
+      ]
+    },
+    {
+      "date": "2026-07-07",
+      "inputTokens": 3573,
+      "outputTokens": 334,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 6144,
+      "totalTokens": 10105,
+      "totalCost": 0.09773100000000001,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 3573,
+          "outputTokens": 334,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6144,
+          "totalTokens": 10105,
+          "totalCost": 0.09773100000000001
+        }
+      ]
+    },
+    {
+      "date": "2026-07-08",
+      "inputTokens": 6172,
+      "outputTokens": 476,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 9216,
+      "totalTokens": 15950,
+      "totalCost": 0.156984,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 6172,
+          "outputTokens": 476,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 9216,
+          "totalTokens": 15950,
+          "totalCost": 0.156984
+        }
+      ]
+    },
+    {
+      "date": "2026-07-09",
+      "inputTokens": 4104,
+      "outputTokens": 456,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 11264,
+      "totalTokens": 15901,
+      "totalCost": 0.126426,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 4104,
+          "outputTokens": 456,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 11264,
+          "totalTokens": 15901,
+          "totalCost": 0.126426
+        }
+      ]
+    },
+    {
+      "date": "2026-07-10",
+      "inputTokens": 3551,
+      "outputTokens": 373,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 6144,
+      "totalTokens": 10138,
+      "totalCost": 0.102351,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 3551,
+          "outputTokens": 373,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6144,
+          "totalTokens": 10138,
+          "totalCost": 0.102351
+        }
+      ]
+    },
+    {
+      "date": "2026-07-11",
+      "inputTokens": 3574,
+      "outputTokens": 357,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 6144,
+      "totalTokens": 10135,
+      "totalCost": 0.100356,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 3574,
+          "outputTokens": 357,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6144,
+          "totalTokens": 10135,
+          "totalCost": 0.100356
+        }
+      ]
+    },
+    {
+      "date": "2026-07-12",
+      "inputTokens": 3592,
+      "outputTokens": 418,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 6144,
+      "totalTokens": 10243,
+      "totalCost": 0.10872600000000002,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 3592,
+          "outputTokens": 418,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6144,
+          "totalTokens": 10243,
+          "totalCost": 0.10872600000000002
+        }
+      ]
+    },
+    {
+      "date": "2026-07-13",
+      "inputTokens": 9271411,
+      "outputTokens": 980180,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 330768128,
+      "totalTokens": 341019766,
+      "totalCost": 188.97509892,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 9267834,
+          "outputTokens": 979876,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 330761984,
+          "totalTokens": 341009694,
+          "totalCost": 188.88063792
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 3577,
+          "outputTokens": 304,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6144,
+          "totalTokens": 10072,
+          "totalCost": 0.094461
+        }
+      ]
+    },
+    {
+      "date": "2026-07-14",
+      "inputTokens": 5621386,
+      "outputTokens": 774791,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 201689088,
+      "totalTokens": 208085313,
+      "totalCost": 118.70995939999999,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 5619877,
+          "outputTokens": 774462,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 201680896,
+          "totalTokens": 208075235,
+          "totalCost": 118.64110639999998
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 1509,
+          "outputTokens": 329,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 8192,
+          "totalTokens": 10078,
+          "totalCost": 0.068853
+        }
+      ]
+    },
+    {
+      "date": "2026-07-15",
+      "inputTokens": 3776587,
+      "outputTokens": 461547,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 140450560,
+      "totalTokens": 144688779,
+      "totalCost": 80.6449512,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 3769399,
+          "outputTokens": 461094,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 140442368,
+          "totalTokens": 144672861,
+          "totalCost": 80.4764232
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 7188,
+          "outputTokens": 453,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 8192,
+          "totalTokens": 15918,
+          "totalCost": 0.16852799999999998
+        }
+      ]
+    },
+    {
+      "date": "2026-07-16",
+      "inputTokens": 3571,
+      "outputTokens": 347,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 6144,
+      "totalTokens": 10125,
+      "totalCost": 0.099681,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 3571,
+          "outputTokens": 347,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6144,
+          "totalTokens": 10125,
+          "totalCost": 0.099681
+        }
+      ]
+    },
+    {
+      "date": "2026-07-17",
+      "inputTokens": 5613,
+      "outputTokens": 295,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 4096,
+      "totalTokens": 10058,
+      "totalCost": 0.12174900000000001,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 5613,
+          "outputTokens": 295,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 4096,
+          "totalTokens": 10058,
+          "totalCost": 0.12174900000000001
+        }
+      ]
+    },
+    {
+      "date": "2026-07-18",
+      "inputTokens": 2533,
+      "outputTokens": 308,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 7168,
+      "totalTokens": 10059,
+      "totalCost": 0.080967,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 2533,
+          "outputTokens": 308,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7168,
+          "totalTokens": 10059,
+          "totalCost": 0.080967
+        }
+      ]
+    },
+    {
+      "date": "2026-07-19",
+      "inputTokens": 2540,
+      "outputTokens": 340,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 7168,
+      "totalTokens": 10126,
+      "totalCost": 0.08647200000000001,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 2540,
+          "outputTokens": 340,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7168,
+          "totalTokens": 10126,
+          "totalCost": 0.08647200000000001
+        }
+      ]
+    },
+    {
+      "date": "2026-07-20",
+      "inputTokens": 2557,
+      "outputTokens": 353,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 7168,
+      "totalTokens": 10146,
+      "totalCost": 0.086997,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 2557,
+          "outputTokens": 353,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7168,
+          "totalTokens": 10146,
+          "totalCost": 0.086997
+        }
+      ]
+    },
+    {
+      "date": "2026-07-21",
+      "inputTokens": 2001906,
+      "outputTokens": 319837,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 69260544,
+      "totalTokens": 71582361,
+      "totalCost": 42.1788824,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 1999370,
+          "outputTokens": 319439,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 69253376,
+          "totalTokens": 71572185,
+          "totalCost": 42.0876104
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 2536,
+          "outputTokens": 398,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7168,
+          "totalTokens": 10176,
+          "totalCost": 0.091272
+        }
+      ]
+    },
+    {
+      "date": "2026-07-22",
+      "inputTokens": 811576,
+      "outputTokens": 205004,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 42280192,
+      "totalTokens": 43296832,
+      "totalCost": 24.4917766,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 727897,
+          "outputTokens": 168274,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 41668864,
+          "totalTokens": 42565035,
+          "totalCost": 22.9446136
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 2552,
+          "outputTokens": 435,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7168,
+          "totalTokens": 10215,
+          "totalCost": 0.09358200000000001
+        },
+        {
+          "id": "kimi",
+          "inputTokens": 81127,
+          "outputTokens": 36295,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 604160,
+          "totalTokens": 721582,
+          "totalCost": 1.453581
+        }
+      ]
+    },
+    {
+      "date": "2026-07-23",
+      "inputTokens": 386031,
+      "outputTokens": 148536,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 9565440,
+      "totalTokens": 10100063,
+      "totalCost": 9.447065400000005,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 2548,
+          "outputTokens": 357,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7168,
+          "totalTokens": 10129,
+          "totalCost": 0.08614200000000001
+        },
+        {
+          "id": "kimi",
+          "inputTokens": 383483,
+          "outputTokens": 148179,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 9558272,
+          "totalTokens": 10089934,
+          "totalCost": 9.360923400000004
+        }
+      ]
+    },
+    {
+      "date": "2026-07-24",
+      "inputTokens": 502173,
+      "outputTokens": 208193,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 24433664,
+      "totalTokens": 25144136,
+      "totalCost": 18.009313199999998,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 2519,
+          "outputTokens": 393,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7168,
+          "totalTokens": 10186,
+          "totalCost": 0.093447
+        },
+        {
+          "id": "kimi",
+          "inputTokens": 499654,
+          "outputTokens": 207800,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 24426496,
+          "totalTokens": 25133950,
+          "totalCost": 17.915866199999996
+        }
+      ]
+    },
+    {
+      "date": "2026-07-25",
+      "inputTokens": 2534,
+      "outputTokens": 425,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 7168,
+      "totalTokens": 10206,
+      "totalCost": 0.094122,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 2534,
+          "outputTokens": 425,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7168,
+          "totalTokens": 10206,
+          "totalCost": 0.094122
+        }
+      ]
+    },
+    {
+      "date": "2026-07-26",
+      "inputTokens": 2538,
+      "outputTokens": 405,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 7168,
+      "totalTokens": 10175,
+      "totalCost": 0.091032,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 2538,
+          "outputTokens": 405,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7168,
+          "totalTokens": 10175,
+          "totalCost": 0.091032
+        }
+      ]
+    },
+    {
+      "date": "2026-07-27",
+      "inputTokens": 2534,
+      "outputTokens": 381,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 7168,
+      "totalTokens": 10155,
+      "totalCost": 0.089532,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 2534,
+          "outputTokens": 381,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7168,
+          "totalTokens": 10155,
+          "totalCost": 0.089532
+        }
+      ]
+    },
+    {
+      "date": "2026-07-28",
+      "inputTokens": 1430,
+      "outputTokens": 369,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 8192,
+      "totalTokens": 10098,
+      "totalCost": 0.07657800000000001,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 1430,
+          "outputTokens": 369,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 8192,
+          "totalTokens": 10098,
+          "totalCost": 0.07657800000000001
+        }
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "inputTokens": 254948,
+      "outputTokens": 150115,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 15691776,
+      "totalTokens": 16096922,
+      "totalCost": 11.6921139,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 6414,
+          "outputTokens": 326,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 8704,
+          "totalTokens": 15527,
+          "totalCost": 0.146076
+        },
+        {
+          "id": "kimi",
+          "inputTokens": 248534,
+          "outputTokens": 149789,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 15683072,
+          "totalTokens": 16081395,
+          "totalCost": 11.5460379
+        }
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "inputTokens": 858909,
+      "outputTokens": 44589,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 14197376,
+      "totalTokens": 15112590,
+      "totalCost": 38.00195480000001,
+      "agents": [
+        {
+          "id": "grok",
+          "inputTokens": 49123,
+          "outputTokens": 4484,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 191616,
+          "totalTokens": 245223,
+          "totalCost": 0.1826348
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 809786,
+          "outputTokens": 40105,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 14005760,
+          "totalTokens": 14867367,
+          "totalCost": 37.819320000000005
+        }
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "inputTokens": 1391245,
+      "outputTokens": 51827,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 21238784,
+      "totalTokens": 22697131,
+      "totalCost": 58.766031000000005,
+      "agents": [
+        {
+          "id": "hermes",
+          "inputTokens": 1391245,
+          "outputTokens": 51827,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 21238784,
+          "totalTokens": 22697131,
+          "totalCost": 58.766031000000005
+        }
+      ]
+    },
+    {
+      "date": "2026-08-04",
+      "inputTokens": 1071547,
+      "outputTokens": 96144,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 27584256,
+      "totalTokens": 28770864,
+      "totalCost": 5.222019100000001,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 418656,
+          "outputTokens": 49793,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 24919040,
+          "totalTokens": 25387489,
+          "totalCost": 1.06915472
+        },
+        {
+          "id": "opencode",
+          "inputTokens": 652891,
+          "outputTokens": 46351,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2665216,
+          "totalTokens": 3383375,
+          "totalCost": 4.1528643800000005
+        }
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "inputTokens": 11339792,
+      "outputTokens": 1145431,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 282120967,
+      "totalTokens": 295044726,
+      "totalCost": 140.93737057999996,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 11339792,
+          "outputTokens": 1145431,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 282120967,
+          "totalTokens": 295044726,
+          "totalCost": 140.93737057999996
+        }
+      ]
+    },
+    {
+      "date": "2026-08-06",
+      "inputTokens": 11907807,
+      "outputTokens": 821659,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 212389376,
+      "totalTokens": 225388842,
+      "totalCost": 113.1643934200001,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 11907807,
+          "outputTokens": 821659,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 212389376,
+          "totalTokens": 225388842,
+          "totalCost": 113.1643934200001
+        }
+      ]
+    },
+    {
+      "date": "2026-08-07",
+      "inputTokens": 46228,
+      "outputTokens": 5407,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 426496,
+      "totalTokens": 478131,
+      "totalCost": 0.02426392,
+      "agents": [
+        {
+          "id": "codex",
+          "inputTokens": 46228,
+          "outputTokens": 5407,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 426496,
+          "totalTokens": 478131,
+          "totalCost": 0.02426392
+        }
+      ]
+    },
+    {
+      "date": "2026-08-08",
+      "inputTokens": 5471249,
+      "outputTokens": 301718,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 85118208,
+      "totalTokens": 91040879,
+      "totalCost": 50.36101195999997,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 5471249,
+          "outputTokens": 301718,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 85118208,
+          "totalTokens": 91040879,
+          "totalCost": 50.36101195999997
+        }
+      ]
+    },
+    {
+      "date": "2026-08-09",
+      "inputTokens": 6670228,
+      "outputTokens": 352003,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 133216512,
+      "totalTokens": 140403772,
+      "totalCost": 82.3331825,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 6670228,
+          "outputTokens": 352003,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 133216512,
+          "totalTokens": 140403772,
+          "totalCost": 82.3331825
+        }
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "inputTokens": 9183054,
+      "outputTokens": 728683,
+      "cacheCreationTokens": 399100,
+      "cacheReadTokens": 349839320,
+      "totalTokens": 360359207,
+      "totalCost": 142.10623281999995,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 9183054,
+          "outputTokens": 728683,
+          "cacheCreationTokens": 399100,
+          "cacheReadTokens": 349839320,
+          "totalTokens": 360359207,
+          "totalCost": 142.10623281999995
+        }
+      ]
+    },
+    {
+      "date": "2026-08-11",
+      "inputTokens": 3375104,
+      "outputTokens": 261780,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 205028352,
+      "totalTokens": 208696850,
+      "totalCost": 110.61510151999991,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 3375104,
+          "outputTokens": 261780,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 205028352,
+          "totalTokens": 208696850,
+          "totalCost": 110.61510151999991
+        }
+      ]
+    },
+    {
+      "date": "2026-08-12",
+      "inputTokens": 1142492,
+      "outputTokens": 82947,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 101408512,
+      "totalTokens": 102641417,
+      "totalCost": 51.87708589999998,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 1142492,
+          "outputTokens": 82947,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 101408512,
+          "totalTokens": 102641417,
+          "totalCost": 51.87708589999998
+        }
+      ]
+    },
+    {
+      "date": "2026-08-13",
+      "inputTokens": 905641,
+      "outputTokens": 78266,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 135265792,
+      "totalTokens": 136249699,
+      "totalCost": 66.70597590000003,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 905641,
+          "outputTokens": 78266,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 135265792,
+          "totalTokens": 136249699,
+          "totalCost": 66.70597590000003
+        }
+      ]
+    },
+    {
+      "date": "2026-08-14",
+      "inputTokens": 6414249,
+      "outputTokens": 245662,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 159476480,
+      "totalTokens": 166223694,
+      "totalCost": 105.23826843999996,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 6414249,
+          "outputTokens": 245662,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 159476480,
+          "totalTokens": 166223694,
+          "totalCost": 105.23826843999996
+        }
+      ]
+    },
+    {
+      "date": "2026-08-15",
+      "inputTokens": 5315532,
+      "outputTokens": 148899,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 134676736,
+      "totalTokens": 140198045,
+      "totalCost": 91.76966296000005,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 5315532,
+          "outputTokens": 148899,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 134676736,
+          "totalTokens": 140198045,
+          "totalCost": 91.76966296000005
+        }
+      ]
+    },
+    {
+      "date": "2026-08-16",
+      "inputTokens": 8817205,
+      "outputTokens": 1122788,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 246037760,
+      "totalTokens": 256276860,
+      "totalCost": 74.84184095999986,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 8817205,
+          "outputTokens": 1122788,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 246037760,
+          "totalTokens": 256276860,
+          "totalCost": 74.84184095999986
+        }
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "inputTokens": 9092416,
+      "outputTokens": 659893,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 263570688,
+      "totalTokens": 273553281,
+      "totalCost": 103.46372259999998,
+      "agents": [
+        {
+          "id": "kimi",
+          "inputTokens": 4551,
+          "outputTokens": 29,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 19200,
+          "totalTokens": 23780,
+          "totalCost": 0.029772
+        },
+        {
+          "id": "opencode",
+          "inputTokens": 9087865,
+          "outputTokens": 659864,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 263551488,
+          "totalTokens": 273529501,
+          "totalCost": 103.43395059999999
+        }
+      ]
+    },
+    {
+      "date": "2026-08-18",
+      "inputTokens": 21783281,
+      "outputTokens": 1387313,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 687641335,
+      "totalTokens": 711427590,
+      "totalCost": 406.5164975200003,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 21783281,
+          "outputTokens": 1387313,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 687641335,
+          "totalTokens": 711427590,
+          "totalCost": 406.5164975200003
+        }
+      ]
+    },
+    {
+      "date": "2026-08-19",
+      "inputTokens": 539548,
+      "outputTokens": 112461,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 49685248,
+      "totalTokens": 50353696,
+      "totalCost": 27.054087199999998,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 539548,
+          "outputTokens": 112461,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 49685248,
+          "totalTokens": 50353696,
+          "totalCost": 27.054087199999998
+        }
+      ]
+    },
+    {
+      "date": "2026-08-23",
+      "inputTokens": 657151,
+      "outputTokens": 86597,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 58194176,
+      "totalTokens": 58956116,
+      "totalCost": 30.988975199999995,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 657151,
+          "outputTokens": 86597,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 58194176,
+          "totalTokens": 58956116,
+          "totalCost": 30.988975199999995
+        }
+      ]
+    },
+    {
+      "date": "2026-08-24",
+      "inputTokens": 5582941,
+      "outputTokens": 329871,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 187081984,
+      "totalTokens": 193133464,
+      "totalCost": 89.61517939999987,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 5582941,
+          "outputTokens": 329871,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 187081984,
+          "totalTokens": 193133464,
+          "totalCost": 89.61517939999987
+        }
+      ]
+    },
+    {
+      "date": "2026-08-25",
+      "inputTokens": 5075905,
+      "outputTokens": 388449,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 112974080,
+      "totalTokens": 118538502,
+      "totalCost": 69.63594111999994,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 5075905,
+          "outputTokens": 388449,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 112974080,
+          "totalTokens": 118538502,
+          "totalCost": 69.63594111999994
+        }
+      ]
+    },
+    {
+      "date": "2026-08-26",
+      "inputTokens": 1367145,
+      "outputTokens": 63903,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 17687879,
+      "totalTokens": 19160454,
+      "totalCost": 12.284060755,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 1367145,
+          "outputTokens": 63903,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 17687879,
+          "totalTokens": 19160454,
+          "totalCost": 12.284060755
+        }
+      ]
+    },
+    {
+      "date": "2026-08-27",
+      "inputTokens": 10870092,
+      "outputTokens": 595848,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 332180736,
+      "totalTokens": 344050904,
+      "totalCost": 189.76898283999995,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 10870092,
+          "outputTokens": 595848,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 332180736,
+          "totalTokens": 344050904,
+          "totalCost": 189.76898283999995
+        }
+      ]
+    },
+    {
+      "date": "2026-08-29",
+      "inputTokens": 1248525,
+      "outputTokens": 60943,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 44172032,
+      "totalTokens": 45498726,
+      "totalCost": 26.030381500000004,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 1248525,
+          "outputTokens": 60943,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 44172032,
+          "totalTokens": 45498726,
+          "totalCost": 26.030381500000004
+        }
+      ]
+    },
+    {
+      "date": "2026-08-30",
+      "inputTokens": 8375610,
+      "outputTokens": 392867,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 364152064,
+      "totalTokens": 373128449,
+      "totalCost": 210.23380746000004,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 8375610,
+          "outputTokens": 392867,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 364152064,
+          "totalTokens": 373128449,
+          "totalCost": 210.23380746000004
+        }
+      ]
+    },
+    {
+      "date": "2026-09-01",
+      "inputTokens": 5323660,
+      "outputTokens": 426942,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 118386446,
+      "totalTokens": 124404793,
+      "totalCost": 52.70671405999993,
+      "agents": [
+        {
+          "id": "opencode",
+          "inputTokens": 5323660,
+          "outputTokens": 426942,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 118386446,
+          "totalTokens": 124404793,
+          "totalCost": 52.70671405999993
+        }
+      ]
+    },
+    {
+      "date": "2026-09-02",
+      "inputTokens": 2620897,
+      "outputTokens": 453158,
+      "cacheCreationTokens": 655794,
+      "cacheReadTokens": 170856624,
+      "totalTokens": 174741534,
+      "totalCost": 104.9250498199999,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 508,
+          "outputTokens": 294941,
+          "cacheCreationTokens": 655794,
+          "cacheReadTokens": 45514160,
+          "totalTokens": 46465403,
+          "totalCost": 36.132515
+        },
+        {
+          "id": "opencode",
+          "inputTokens": 2620389,
+          "outputTokens": 158217,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 125342464,
+          "totalTokens": 128276131,
+          "totalCost": 68.7925348199999
+        }
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "inputTokens": 14922635,
+      "outputTokens": 346851,
+      "cacheCreationTokens": 518792,
+      "cacheReadTokens": 474756039,
+      "totalTokens": 490725740,
+      "totalCost": 310.0499484800001,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 20,
+          "outputTokens": 4417,
+          "cacheCreationTokens": 518792,
+          "cacheReadTokens": 2165703,
+          "totalTokens": 2688932,
+          "totalCost": 6.381296500000001
+        },
+        {
+          "id": "opencode",
+          "inputTokens": 14922615,
+          "outputTokens": 342434,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 472590336,
+          "totalTokens": 488036808,
+          "totalCost": 303.6686519800001
+        }
+      ]
+    },
+    {
+      "date": "2026-09-04",
+      "inputTokens": 2154906,
+      "outputTokens": 1394488,
+      "cacheCreationTokens": 3775146,
+      "cacheReadTokens": 436877253,
+      "totalTokens": 444206645,
+      "totalCost": 278.9409793,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 16992,
+          "outputTokens": 1383612,
+          "cacheCreationTokens": 3775146,
+          "cacheReadTokens": 388695749,
+          "totalTokens": 393871499,
+          "totalCost": 247.28480949999997
+        },
+        {
+          "id": "opencode",
+          "inputTokens": 2137914,
+          "outputTokens": 10876,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 48181504,
+          "totalTokens": 50335146,
+          "totalCost": 31.656169799999986
+        }
+      ]
+    },
+    {
+      "date": "2026-09-05",
+      "inputTokens": 610,
+      "outputTokens": 208991,
+      "cacheCreationTokens": 1888346,
+      "cacheReadTokens": 124838142,
+      "totalTokens": 126936089,
+      "totalCost": 101.53931474999999,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 610,
+          "outputTokens": 208991,
+          "cacheCreationTokens": 1888346,
+          "cacheReadTokens": 124838142,
+          "totalTokens": 126936089,
+          "totalCost": 101.53931474999999
+        }
+      ]
+    },
+    {
+      "date": "2026-09-06",
+      "inputTokens": 4268,
+      "outputTokens": 954571,
+      "cacheCreationTokens": 3558292,
+      "cacheReadTokens": 207961143,
+      "totalTokens": 212478274,
+      "totalCost": 173.4172495,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 4268,
+          "outputTokens": 954571,
+          "cacheCreationTokens": 3558292,
+          "cacheReadTokens": 207961143,
+          "totalTokens": 212478274,
+          "totalCost": 173.4172495
+        }
+      ]
+    },
+    {
+      "date": "2026-09-07",
+      "inputTokens": 734,
+      "outputTokens": 88829,
+      "cacheCreationTokens": 119816,
+      "cacheReadTokens": 18278678,
+      "totalTokens": 18488057,
+      "totalCost": 11.414779499999998,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 734,
+          "outputTokens": 88829,
+          "cacheCreationTokens": 119816,
+          "cacheReadTokens": 18278678,
+          "totalTokens": 18488057,
+          "totalCost": 11.414779499999998
+        }
+      ]
+    },
+    {
+      "date": "2026-09-08",
+      "inputTokens": 14,
+      "outputTokens": 1934,
+      "cacheCreationTokens": 24613,
+      "cacheReadTokens": 367988,
+      "totalTokens": 394549,
+      "totalCost": 0.1914176,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 14,
+          "outputTokens": 1934,
+          "cacheCreationTokens": 24613,
+          "cacheReadTokens": 367988,
+          "totalTokens": 394549,
+          "totalCost": 0.1914176
+        }
+      ]
+    },
+    {
+      "date": "2026-09-09",
+      "inputTokens": 2,
+      "outputTokens": 2,
+      "cacheCreationTokens": 25702,
+      "cacheReadTokens": 34972,
+      "totalTokens": 60678,
+      "totalCost": 0.10982639999999999,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 2,
+          "outputTokens": 2,
+          "cacheCreationTokens": 25702,
+          "cacheReadTokens": 34972,
+          "totalTokens": 60678,
+          "totalCost": 0.10982639999999999
+        }
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "inputTokens": 3001614,
+      "outputTokens": 509797,
+      "cacheCreationTokens": 1656584,
+      "cacheReadTokens": 51846808,
+      "totalTokens": 57016395,
+      "totalCost": 83.90186247999999,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 24,
+          "outputTokens": 340939,
+          "cacheCreationTokens": 1656584,
+          "cacheReadTokens": 39576,
+          "totalTokens": 2037123,
+          "totalCost": 10.0436892
+        },
+        {
+          "id": "codex",
+          "inputTokens": 2700725,
+          "outputTokens": 165882,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 50430848,
+          "totalTokens": 53297455,
+          "totalCost": 73.39682987999998
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 300865,
+          "outputTokens": 2976,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 1376384,
+          "totalTokens": 1681817,
+          "totalCost": 0.4613434
+        }
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "inputTokens": 1809986,
+      "outputTokens": 134341,
+      "cacheCreationTokens": 28583,
+      "cacheReadTokens": 21487300,
+      "totalTokens": 23503241,
+      "totalCost": 15.29371928,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 4,
+          "outputTokens": 9562,
+          "cacheCreationTokens": 28583,
+          "cacheReadTokens": 6596,
+          "totalTokens": 44745,
+          "totalCost": 0.2112792
+        },
+        {
+          "id": "codex",
+          "inputTokens": 518540,
+          "outputTokens": 41768,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6676096,
+          "totalTokens": 7236404,
+          "totalCost": 11.68032728
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 1291442,
+          "outputTokens": 83011,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 14804608,
+          "totalTokens": 16222092,
+          "totalCost": 3.4021128
+        }
+      ]
+    },
+    {
+      "date": "2026-09-17",
+      "inputTokens": 13472,
+      "outputTokens": 572,
+      "cacheCreationTokens": 642542,
+      "cacheReadTokens": 96730,
+      "totalTokens": 753388,
+      "totalCost": 12.611607000000001,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 6,
+          "outputTokens": 471,
+          "cacheCreationTokens": 642542,
+          "cacheReadTokens": 96730,
+          "totalTokens": 739749,
+          "totalCost": 12.597276
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 13466,
+          "outputTokens": 101,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "totalTokens": 13639,
+          "totalCost": 0.014330999999999998
+        }
+      ]
+    },
+    {
+      "date": "2026-09-18",
+      "inputTokens": 1487019,
+      "outputTokens": 160328,
+      "cacheCreationTokens": 2586144,
+      "cacheReadTokens": 28696632,
+      "totalTokens": 32941807,
+      "totalCost": 66.8694684,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 596,
+          "outputTokens": 82733,
+          "cacheCreationTokens": 2586144,
+          "cacheReadTokens": 10698552,
+          "totalTokens": 13368025,
+          "totalCost": 40.370550200000004
+        },
+        {
+          "id": "codex",
+          "inputTokens": 855634,
+          "outputTokens": 58590,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 15138432,
+          "totalTokens": 16052656,
+          "totalCost": 25.428719400000002
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 630789,
+          "outputTokens": 19005,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2859648,
+          "totalTokens": 3521126,
+          "totalCost": 1.0701988
+        }
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "inputTokens": 34,
+      "outputTokens": 177,
+      "cacheCreationTokens": 530057,
+      "cacheReadTokens": 529867,
+      "totalTokens": 1060135,
+      "totalCost": 10.742796750000002,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 34,
+          "outputTokens": 177,
+          "cacheCreationTokens": 530057,
+          "cacheReadTokens": 529867,
+          "totalTokens": 1060135,
+          "totalCost": 10.742796750000002
+        }
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "inputTokens": 688098,
+      "outputTokens": 1212018,
+      "cacheCreationTokens": 4308605,
+      "cacheReadTokens": 178462572,
+      "totalTokens": 184671293,
+      "totalCost": 150.90863857999997,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 5172,
+          "outputTokens": 1146138,
+          "cacheCreationTokens": 4308605,
+          "cacheReadTokens": 162800108,
+          "totalTokens": 168260023,
+          "totalCost": 150.1757755
+        },
+        {
+          "id": "codex",
+          "inputTokens": 682926,
+          "outputTokens": 65880,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 15662464,
+          "totalTokens": 16411270,
+          "totalCost": 0.73286308
+        }
+      ]
+    },
+    {
+      "date": "2026-09-22",
+      "inputTokens": 16867234,
+      "outputTokens": 770042,
+      "cacheCreationTokens": 1478149,
+      "cacheReadTokens": 378651656,
+      "totalTokens": 397767081,
+      "totalCost": 81.07204144,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 3738,
+          "outputTokens": 166961,
+          "cacheCreationTokens": 1478149,
+          "cacheReadTokens": 105171592,
+          "totalTokens": 106820440,
+          "totalCost": 64.241308
+        },
+        {
+          "id": "codex",
+          "inputTokens": 16863496,
+          "outputTokens": 603081,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 273480064,
+          "totalTokens": 290946641,
+          "totalCost": 16.83073344
+        }
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "inputTokens": 5384886,
+      "outputTokens": 2046507,
+      "cacheCreationTokens": 19879514,
+      "cacheReadTokens": 986517447,
+      "totalTokens": 1013839550,
+      "totalCost": 471.2649737499995,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 9186,
+          "outputTokens": 1374732,
+          "cacheCreationTokens": 19879514,
+          "cacheReadTokens": 874308167,
+          "totalTokens": 895571599,
+          "totalCost": 312.37958694999946
+        },
+        {
+          "id": "codex",
+          "inputTokens": 4007097,
+          "outputTokens": 641849,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 105688704,
+          "totalTokens": 110337650,
+          "totalCost": 156.6591162
+        },
+        {
+          "id": "hermes",
+          "inputTokens": 1368603,
+          "outputTokens": 29926,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6520576,
+          "totalTokens": 7930301,
+          "totalCost": 2.2262706000000003
+        }
+      ]
+    },
+    {
+      "date": "2026-09-24",
+      "inputTokens": 1543985,
+      "outputTokens": 2161893,
+      "cacheCreationTokens": 34202548,
+      "cacheReadTokens": 2004148714,
+      "totalTokens": 2042057140,
+      "totalCost": 665.1741011600003,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 11982,
+          "outputTokens": 2045766,
+          "cacheCreationTokens": 34202548,
+          "cacheReadTokens": 1982100970,
+          "totalTokens": 2018361266,
+          "totalCost": 629.2582600000003
+        },
+        {
+          "id": "codex",
+          "inputTokens": 1532003,
+          "outputTokens": 116127,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 22047744,
+          "totalTokens": 23695874,
+          "totalCost": 35.91584115999999
+        }
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "inputTokens": 3116659,
+      "outputTokens": 1317754,
+      "cacheCreationTokens": 26429804,
+      "cacheReadTokens": 2007488446,
+      "totalTokens": 2038352663,
+      "totalCost": 651.634283679999,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 10336,
+          "outputTokens": 1055134,
+          "cacheCreationTokens": 26429804,
+          "cacheReadTokens": 1932510270,
+          "totalTokens": 1960005544,
+          "totalCost": 546.992673999999
+        },
+        {
+          "id": "codex",
+          "inputTokens": 3106323,
+          "outputTokens": 262620,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 74978176,
+          "totalTokens": 78347119,
+          "totalCost": 104.64160968000002
+        }
+      ]
+    },
+    {
+      "date": "2026-09-26",
+      "inputTokens": 1269231,
+      "outputTokens": 371443,
+      "cacheCreationTokens": 6201245,
+      "cacheReadTokens": 538384449,
+      "totalTokens": 546226368,
+      "totalCost": 188.53556279999998,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 2724,
+          "outputTokens": 342165,
+          "cacheCreationTokens": 6201245,
+          "cacheReadTokens": 530575169,
+          "totalTokens": 537121303,
+          "totalCost": 150.41392879999998
+        },
+        {
+          "id": "codex",
+          "inputTokens": 1266507,
+          "outputTokens": 29278,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7809280,
+          "totalTokens": 9105065,
+          "totalCost": 38.121634
+        }
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "inputTokens": 16842153,
+      "outputTokens": 3604487,
+      "cacheCreationTokens": 20428252,
+      "cacheReadTokens": 1538371215,
+      "totalTokens": 1579246107,
+      "totalCost": 1304.7149162000007,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 6042,
+          "outputTokens": 797761,
+          "cacheCreationTokens": 20428252,
+          "cacheReadTokens": 948079631,
+          "totalTokens": 969311686,
+          "totalCost": 331.4229062000007
+        },
+        {
+          "id": "codex",
+          "inputTokens": 16836111,
+          "outputTokens": 2806726,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 590291584,
+          "totalTokens": 609934421,
+          "totalCost": 973.29201
+        }
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "inputTokens": 22538398,
+      "outputTokens": 4960310,
+      "cacheCreationTokens": 72925246,
+      "cacheReadTokens": 4893897598,
+      "totalTokens": 4994321552,
+      "totalCost": 2474.5950118000014,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 31124,
+          "outputTokens": 1508396,
+          "cacheCreationTokens": 72925246,
+          "cacheReadTokens": 4039620734,
+          "totalTokens": 4114085500,
+          "totalCost": 1222.6497078000014
+        },
+        {
+          "id": "codex",
+          "inputTokens": 22507274,
+          "outputTokens": 3451914,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 854276864,
+          "totalTokens": 880236052,
+          "totalCost": 1251.945304
+        }
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "inputTokens": 25633252,
+      "outputTokens": 4875413,
+      "cacheCreationTokens": 65226871,
+      "cacheReadTokens": 5453486147,
+      "totalTokens": 5549221683,
+      "totalCost": 1962.6723304800075,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 26830,
+          "outputTokens": 1226061,
+          "cacheCreationTokens": 65226871,
+          "cacheReadTokens": 4816809923,
+          "totalTokens": 4883289685,
+          "totalCost": 1322.9778256000075
+        },
+        {
+          "id": "codex",
+          "inputTokens": 25606422,
+          "outputTokens": 3649352,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 636676224,
+          "totalTokens": 665931998,
+          "totalCost": 639.69450488
+        }
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "inputTokens": 1253994,
+      "outputTokens": 222360,
+      "cacheCreationTokens": 1813624,
+      "cacheReadTokens": 138611364,
+      "totalTokens": 141901342,
+      "totalCost": 39.69671908,
+      "agents": [
+        {
+          "id": "claude",
+          "inputTokens": 1072,
+          "outputTokens": 57027,
+          "cacheCreationTokens": 1813624,
+          "cacheReadTokens": 117614756,
+          "totalTokens": 119486479,
+          "totalCost": 33.7678852
+        },
+        {
+          "id": "codex",
+          "inputTokens": 1252922,
+          "outputTokens": 165333,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 20996608,
+          "totalTokens": 22414863,
+          "totalCost": 5.928833880000001
+        }
+      ]
+    }
+  ]
+}
