@@ -57,6 +57,16 @@ Live URL: https://nimal-site-three.vercel.app. Vercel project **nimal-site**: fr
 
 `api/rayaboy-stats.js` provides the counter endpoint. Both server-only variables from `.env.example` are configured for Vercel production and preview; the API key is sensitive. Keep it out of variables starting with `VITE_` and out of Git. `.vercelignore` also excludes local credentials, private data, and test artifacts from CLI uploads.
 
-The public source repository is https://github.com/nimalp123/nimal-site. Push `staging` for previews; promote approved changes to `main` for production. GitHub Actions checks lint, tests, and the production build on both branches.
+The public source repository is https://github.com/nimalp123/nimal-site. GitHub Actions checks lint, tests, and the production build on both branches; the workflow can also be dispatched manually.
+
+Production is deployed from `main`; previews are deployed from `staging`. The Vercel GitHub app connection still needs authorization for this public repository. Until that connection is complete, deploy with the Vercel CLI from the appropriate branch:
+
+```sh
+git switch staging
+vercel deploy
+# After reviewing and promoting the approved version to main:
+git switch main
+vercel deploy --prod
+```
 
 Canonical and absolute social-image URLs currently use the assigned Vercel domain. When a custom domain is chosen, connect it to this project and update those URLs in `index.html`.
