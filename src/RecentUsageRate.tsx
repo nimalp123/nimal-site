@@ -10,7 +10,7 @@ export default function RecentUsageRate({ snapshot, compact = false }: { snapsho
   const rate = snapshot ? recentDailyAverage(snapshot) : null;
   return (
     <div className={`usage-rate${compact ? " usage-rate-compact" : ""}`} role="region" aria-label="Average usage for the latest three full days">
-      <span className="usage-rate-label">3 FULL DAYS / DAILY AVERAGE</span>
+      <span className="usage-rate-label">Daily average of last 3 days</span>
       <div className="usage-rate-metrics">
         <div className="usage-rate-cost"><strong>{rate ? currency.format(rate.costPerDay) : "—"}</strong><span>/ day</span></div>
         <div className="usage-rate-tokens"><strong>{rate ? number.format(rate.tokensPerDay) : "—"}</strong><span>tokens / day</span></div>
