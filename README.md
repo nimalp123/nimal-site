@@ -49,7 +49,7 @@ I mapped my Instagram network into an explorable Obsidian vault. Mutual follows,
 
 ## Build fast. Prove it.
 
-**Research engineering → real product. Built with the Rayaboy team.**
+**Research engineering → real product.**
 
 | The product | The AI systems | The research infrastructure |
 | :--- | :--- | :--- |
