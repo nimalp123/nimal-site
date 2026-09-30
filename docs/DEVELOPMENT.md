@@ -53,7 +53,7 @@ The live user counter reads only `COUNT(*)` from Production Main's `auth.users` 
 
 ## Deployment
 
-Live URL: https://nimal-site-three.vercel.app. Vercel project **nimal-site**: framework **Vite**, Node **24.x**, build command `npm run build`, output `dist`, production branch `main`, preview branch `staging`.
+Live URL: https://nimalp123.com. Vercel project **nimal-site**: framework **Vite**, Node **24.x**, build command `npm run build`, output `dist`, production branch `main`, preview branch `staging`.
 
 `api/rayaboy-stats.js` provides the counter endpoint. Both server-only variables from `.env.example` are configured for Vercel production and preview; the API key is sensitive. Keep it out of variables starting with `VITE_` and out of Git. `.vercelignore` also excludes local credentials, private data, and test artifacts from CLI uploads.
 
@@ -71,4 +71,4 @@ git switch main
 vercel deploy --prod
 ```
 
-Canonical and absolute social-image URLs currently use the assigned Vercel domain. When a custom domain is chosen, connect it to this project and update those URLs in `index.html`.
+`nimalp123.com` is connected and redirects to the verified primary host `www.nimalp123.com`. Portfolio links use the custom domain; canonical and absolute social-image URLs use `https://www.nimalp123.com`.

@@ -1,9 +1,9 @@
-<a href="https://nimal-site-three.vercel.app/">
+<a href="https://nimalp123.com/">
   <img src="public/images/social-card.png" alt="Nimal Periasamy. Curiosity. Into code. Applied AI and research engineering, with a floating chrome network and lime accents." width="1200" />
 </a>
 
 <p align="center">
-  <strong><a href="https://nimal-site-three.vercel.app/">ENTER THE SITE ↗</a></strong>
+  <strong><a href="https://nimalp123.com/">ENTER THE SITE ↗</a></strong>
   &nbsp; / &nbsp;
   <a href="https://www.linkedin.com/in/nimal-periasamy/">LinkedIn ↗</a>
   &nbsp; / &nbsp;
@@ -41,7 +41,7 @@ I mapped my Instagram network into an explorable Obsidian vault. Mutual follows,
 - Who might I click with?
 - What patterns am I missing?
 
-**[Explore the experiment ↗](https://github.com/nimalp123/instagram-friendship-graph)** · [Try the interactive network ↗](https://nimal-site-three.vercel.app/#work)
+**[Explore the experiment ↗](https://github.com/nimalp123/instagram-friendship-graph)** · [Try the interactive network ↗](https://nimalp123.com/#work)
 
 ---
 
@@ -112,7 +112,7 @@ I mapped my Instagram network into an explorable Obsidian vault. Mutual follows,
 | :--- | :--- | :--- |
 | Registered accounts | Scholarships in the catalog | Listed scholarship funding |
 
-<sub>September 29, 2026 snapshots. Accounts include admin, unverified, and retained test registrations. Funding is listed scholarship value. [See the live registration counter ↗](https://nimal-site-three.vercel.app/#rayaboy)</sub>
+<sub>September 29, 2026 snapshots. Accounts include admin, unverified, and retained test registrations. Funding is listed scholarship value. [See the live registration counter ↗](https://nimalp123.com/#rayaboy)</sub>
 
 ---
 
@@ -133,6 +133,6 @@ I mapped my Instagram network into an explorable Obsidian vault. Mutual follows,
 
 ## Got a good idea?
 
-**[See the work ↗](https://nimal-site-three.vercel.app/)** · **[Find me on LinkedIn ↗](https://www.linkedin.com/in/nimal-periasamy/)** · **[@nimalp123 ↗](https://github.com/nimalp123)**
+**[See the work ↗](https://nimalp123.com/)** · **[Find me on LinkedIn ↗](https://www.linkedin.com/in/nimal-periasamy/)** · **[@nimalp123 ↗](https://github.com/nimalp123)**
 
 <sub>✳ NIMAL. — BUILD. MEASURE. ITERATE. SHIP.</sub>
