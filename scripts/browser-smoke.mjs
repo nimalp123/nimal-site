@@ -103,17 +103,19 @@ try {
   await expect(
     page.locator(".contact-links").getByRole("link", { name: "LinkedIn" }),
   ).toHaveAttribute("href", "https://www.linkedin.com/in/nimal-periasamy/");
-  await expect(page.locator(".rb-metrics")).toContainText(
-    "fewer invalid AI proposals",
+  const researchMetrics = page.locator(
+    '[aria-label="Recorded research experiment results"]',
   );
-  await expect(page.locator(".rb-result-note")).toContainText(
-    "synthetic benchmark",
-  );
-  await expect(page.locator(".rb-metrics")).toContainText("93 → 28 min");
+  await expect(researchMetrics).toContainText("fewer invalid AI proposals");
+  await expect(researchMetrics).toContainText("synthetic benchmark");
+  await expect(researchMetrics).toContainText("93 → 28 min");
   await expect(page.locator(".rb-lab-proof")).toContainText("8,419");
-  await expect(
-    page.locator(".rb-build").nth(1).locator(".rb-metrics"),
-  ).toBeVisible();
+  await expect(page.locator(".rb-document-research")).toBeVisible();
+  await expect(page.locator(".rb-metric")).toHaveCount(18);
+  await expect(page.locator(".rb-document-research")).toContainText("3,289");
+  await expect(page.locator(".rb-iteration")).toContainText(
+    "Independent frontier-model review",
+  );
   await expect(page.locator(".rb-platform-metrics")).toContainText("40+");
   await expect(page.locator(".rb-platform-metrics")).toContainText("$336k");
   const counterResponse = await page.request.get(
@@ -195,6 +197,18 @@ try {
       dimensions.scroll,
       dimensions.viewport,
       `Horizontal overflow at ${width}px`,
+    );
+    const oversizedMetrics = await page
+      .locator(".rb-metric strong")
+      .evaluateAll((elements) =>
+        elements
+          .filter((element) => element.scrollWidth > element.clientWidth + 1)
+          .map((element) => element.textContent),
+      );
+    assert.deepEqual(
+      oversizedMetrics,
+      [],
+      `Metric values fit their cards at ${width}px`,
     );
     const header = await page.locator(".site-header").evaluate((element) => {
       const bounds = element.getBoundingClientRect();

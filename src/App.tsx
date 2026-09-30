@@ -218,8 +218,8 @@ export default function App() {
           <section className="hero" aria-labelledby="hero-title">
             <div className="hero-copy">
               <p className="eyebrow">
-                <span className="status-dot" /> NIMAL PERIASAMY / BUILDER &
-                EXPLORER
+                <span className="status-dot" /> NIMAL PERIASAMY / APPLIED AI &
+                RESEARCH ENGINEERING
               </p>
               <h1 id="hero-title">
                 Curiosity<span className="lime">.</span>
@@ -229,14 +229,16 @@ export default function App() {
                 </span>
               </h1>
               <p className="hero-description">
-                I build things I want to exist.
+                Hard problems. Fast builds. Verifiable progress.
                 <br />
-                Sometimes useful. Always a little obsessive.
+                Applied AI, research systems, and things people use.
               </p>
               <a href="#work" className="button button-lime">
                 Explore the work <Arrow diagonal={false} />
               </a>
-              <span className="hero-aside mono">LESS TALK. MORE COMMITS.</span>
+              <span className="hero-aside mono">
+                BUILD. MEASURE. ITERATE. SHIP.
+              </span>
             </div>
             <div className="hero-art">
               <img
