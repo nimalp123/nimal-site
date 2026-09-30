@@ -47,7 +47,9 @@ I mapped my Instagram network into an explorable Obsidian vault. Mutual follows,
 
 `02 / RAYABOY — APPLIED AI + PRODUCT`
 
-## Build fast. Prove it.
+## Rayaboy
+
+**Build fast. Prove it.**
 
 **Research engineering → real product.**
 
