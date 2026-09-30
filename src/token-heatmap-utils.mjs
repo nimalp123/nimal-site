@@ -169,6 +169,23 @@ export function shiftDate(date, offset) {
   return time.toISOString().slice(0, 10);
 }
 
+// A snapshot taken during a day cannot certify that day's full usage, even if
+// it is viewed later. Use three consecutive covered days, including zero days.
+export function recentDailyAverage(snapshot, now = new Date()) {
+  const syncedDay = todayInZone(snapshot.timezone, new Date(snapshot.generatedAt));
+  const today = todayInZone(snapshot.timezone, now);
+  const through = [snapshot.coverage.through, shiftDate(syncedDay, -1), shiftDate(today, -1)].sort()[0];
+  const from = shiftDate(through, -2);
+  if (from < snapshot.coverage.from) return null;
+  const days = snapshot.daily.filter((day) => day.date >= from && day.date <= through);
+  return {
+    from,
+    through,
+    costPerDay: days.reduce((sum, day) => sum + day.totalCost, 0) / 3,
+    tokensPerDay: days.reduce((sum, day) => sum + day.totalTokens, 0) / 3,
+  };
+}
+
 // A zero baseline has no percentage comparison, including zero versus zero.
 // The absolute difference remains usable and never becomes an infinite percent.
 export function usageDelta(value, baseline) {

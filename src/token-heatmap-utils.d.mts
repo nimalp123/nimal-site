@@ -31,6 +31,12 @@ export function weeklyKeyboardTarget(weeks: UsageWeek[], index: number, key: str
 export type AggregatedUsage = UsageMetrics & { agents: UsageAgent[] };
 export function aggregateUsage(days: UsageDay[]): AggregatedUsage;
 export function shiftDate(date: string, offset: number): string;
+export function recentDailyAverage(snapshot: UsageSnapshot, now?: Date): {
+  from: string;
+  through: string;
+  costPerDay: number;
+  tokensPerDay: number;
+} | null;
 /** A zero baseline always returns a null percent, including zero versus zero. */
 export function usageDelta(value: number, baseline: number): { difference: number; percent: number | null };
 export function previousDayUsage(snapshot: UsageSnapshot, date: string): {

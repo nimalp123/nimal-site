@@ -1,6 +1,62 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { aggregateUsage, calendarFor, heatmapLevel, keyboardTarget, latestRecordedDate, previousDayUsage, shiftDate, todayInZone, usageDelta, weeklyKeyboardTarget, weeklyUsage } from "../src/token-heatmap-utils.mjs";
+import { aggregateUsage, calendarFor, heatmapLevel, keyboardTarget, latestRecordedDate, previousDayUsage, recentDailyAverage, shiftDate, todayInZone, usageDelta, weeklyKeyboardTarget, weeklyUsage } from "../src/token-heatmap-utils.mjs";
+
+test("recent daily average excludes the ongoing Pacific day and uses exactly three full days", () => {
+  const snapshot = {
+    generatedAt: "2026-09-30T10:00:00Z", timezone: "America/Los_Angeles",
+    coverage: { from: "2026-09-26", through: "2026-09-30" },
+    daily: [
+      { date: "2026-09-26", totalTokens: 9999, totalCost: 9999 },
+      { date: "2026-09-27", totalTokens: 100, totalCost: 10 },
+      { date: "2026-09-28", totalTokens: 200, totalCost: 20 },
+      { date: "2026-09-29", totalTokens: 300, totalCost: 30 },
+      { date: "2026-09-30", totalTokens: 9999, totalCost: 9999 },
+    ],
+  };
+  assert.deepEqual(recentDailyAverage(snapshot, new Date("2026-09-30T12:00:00Z")), {
+    from: "2026-09-27", through: "2026-09-29", costPerDay: 20, tokensPerDay: 200,
+  });
+});
+
+test("three-day average includes covered zero days rather than taking three active days", () => {
+  const snapshot = {
+    generatedAt: "2026-09-30T10:00:00Z", timezone: "America/Los_Angeles",
+    coverage: { from: "2026-09-26", through: "2026-09-29" },
+    daily: [
+      { date: "2026-09-26", totalTokens: 9999, totalCost: 9999 },
+      { date: "2026-09-27", totalTokens: 9, totalCost: 0.09 },
+      { date: "2026-09-29", totalTokens: 0, totalCost: 0 },
+    ],
+  };
+  assert.deepEqual(recentDailyAverage(snapshot, new Date("2026-09-30T12:00:00Z")), {
+    from: "2026-09-27", through: "2026-09-29", costPerDay: 0.03, tokensPerDay: 3,
+  });
+});
+
+test("a stale snapshot cannot count its last partial day as a full day", () => {
+  const snapshot = {
+    generatedAt: "2026-09-30T06:30:00Z", timezone: "America/Los_Angeles",
+    coverage: { from: "2026-09-26", through: "2026-09-29" },
+    daily: [{ date: "2026-09-28", totalTokens: 60, totalCost: 6 }, { date: "2026-09-29", totalTokens: 9999, totalCost: 9999 }],
+  };
+  assert.deepEqual(recentDailyAverage(snapshot, new Date("2026-10-01T12:00:00Z")), {
+    from: "2026-09-26", through: "2026-09-28", costPerDay: 2, tokensPerDay: 20,
+  });
+});
+
+test("recent averages respect coverage boundaries and calendar days across a year boundary", () => {
+  const snapshot = {
+    generatedAt: "2026-01-02T12:00:00Z", timezone: "America/Los_Angeles",
+    coverage: { from: "2025-12-30", through: "2026-01-02" },
+    daily: [{ date: "2026-01-01", totalTokens: 30, totalCost: 3 }],
+  };
+  const now = new Date("2026-01-02T12:00:00Z");
+  assert.deepEqual(recentDailyAverage(snapshot, now), {
+    from: "2025-12-30", through: "2026-01-01", costPerDay: 1, tokensPerDay: 10,
+  });
+  assert.equal(recentDailyAverage({ ...snapshot, coverage: { from: "2025-12-31", through: "2026-01-02" } }, now), null);
+});
 
 test("fixed API value bands keep a quiet day visibly below real burst days", () => {
   assert.equal(heatmapLevel(0, "cost"), 0);

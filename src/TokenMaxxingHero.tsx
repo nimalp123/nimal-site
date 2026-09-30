@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { UsageSnapshot } from "./tokenmaxxing-types";
+import RecentUsageRate from "./RecentUsageRate";
 import "./tokenmaxxing-hero.css";
 
 type HeroProps = {
@@ -47,6 +48,7 @@ export default function TokenMaxxingHero({ snapshot, refreshError = false, onRet
             <strong>{integer.format(snapshot.totals.totalTokens)}</strong>
             <p>Exact count · includes cache reads</p>
           </div>
+          <RecentUsageRate snapshot={snapshot} />
         </div>
 
         <figure className={`tm-compute-art${motionPaused ? " tm-compute-art-paused" : ""}`}>

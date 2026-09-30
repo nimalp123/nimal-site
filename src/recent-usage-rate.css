@@ -1,0 +1,23 @@
+.usage-rate { padding-top: 18px; margin-top: 22px; border-top: 1px solid var(--line); }
+.usage-rate-label { display: block; color: var(--muted); font: 8px/1.6 var(--mono); letter-spacing: .04em; }
+.usage-rate-metrics { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 9px; }
+.usage-rate-cost { display: flex; align-items: baseline; gap: 7px; }
+.usage-rate-cost > strong { color: var(--lime); font: 600 32px/1.15 var(--display); letter-spacing: -.045em; font-variant-numeric: tabular-nums; }
+.usage-rate-cost > span, .usage-rate-tokens > span { color: var(--muted); font: 9px/1.5 var(--mono); }
+.usage-rate-tokens > strong { display: block; font: 400 17px/1.35 var(--mono); letter-spacing: -.035em; font-variant-numeric: tabular-nums; }
+.usage-rate-tokens > span { display: block; margin-top: 2px; }
+.usage-rate-period { display: block; margin-top: 9px; color: var(--muted); font: 8px/1.7 var(--mono); }
+.usage-rate-compact { padding-top: 14px; margin-top: 15px; }
+.usage-rate-compact .usage-rate-label { font-size: 7px; letter-spacing: .02em; }
+.usage-rate-compact .usage-rate-metrics { gap: 8px 18px; margin-top: 8px; }
+.usage-rate-compact .usage-rate-cost > strong { font-size: 25px; }
+.usage-rate-compact .usage-rate-cost > span, .usage-rate-compact .usage-rate-tokens > span { font-size: 7px; }
+.usage-rate-compact .usage-rate-tokens > strong { font-size: 12px; }
+.usage-rate-compact .usage-rate-period { font-size: 7px; }
+@media (max-width: 600px) {
+  .usage-rate-metrics { gap: 10px 18px; }
+  .usage-rate-cost > strong { font-size: 29px; }
+  .usage-rate-tokens > strong { font-size: 15px; }
+  .usage-rate-compact .usage-rate-cost > strong { font-size: 25px; }
+  .usage-rate-compact .usage-rate-tokens > strong { font-size: 12px; }
+}

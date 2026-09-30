@@ -1,5 +1,6 @@
 import { Arrow } from "./icons";
 import useUsageSnapshot from "./useUsageSnapshot";
+import RecentUsageRate from "./RecentUsageRate";
 import "./tokenmaxxing-card.css";
 
 const number = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -27,6 +28,7 @@ export default function TokenMaxxingCard() {
             <strong className="compute-card-value">{snapshot ? currency.format(snapshot.totals.totalCost) : "—"}</strong>
             <div className="compute-card-tokens"><strong>{snapshot ? number.format(snapshot.totals.totalTokens) : "—"}</strong><span className="mono">TOKENS PROCESSED · INCLUDES CACHE READS</span></div>
             <span className="compute-card-note mono">API-rate estimate · not invoiced spend</span>
+            <RecentUsageRate snapshot={snapshot} compact />
           </div>
         </div>
         <div className="compute-card-bottom mono">
