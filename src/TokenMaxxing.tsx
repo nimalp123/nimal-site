@@ -76,7 +76,7 @@ function PageFrame({ children }: { children: ReactNode }) {
         <header className="tm-header">
           <a href="/" className="wordmark tm-wordmark" aria-label="Nimal — back to portfolio"><Spark /><span>NIMAL<span className="wordmark-dot">.</span></span></a>
           <span className="tm-header-label">THE COMPUTE LEDGER</span>
-          <a href="/" className="tm-back">Portfolio <Arrow diagonal={false} /></a>
+          <nav className="tm-header-nav" aria-label="Compute ledger navigation"><a href="#usage-ledger" className="tm-ledger-link">Usage ledger ↓</a><a href="/" className="tm-back">Portfolio <Arrow diagonal={false} /></a></nav>
         </header>
         {children}
         <footer className="tm-footer">

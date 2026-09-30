@@ -53,7 +53,7 @@ for (const button of [bottomPrevious, bottomNext]) {
 document.querySelector('.wrap > footer').before(bottom);
 
 function save() {
-  try { localStorage.setItem(storageKey, JSON.stringify({ mode, section: currentSection, family: currentFamily, theme: document.documentElement.dataset.theme || '' })); } catch { /* No account or storage permission is required. */ }
+  try { localStorage.setItem(storageKey, JSON.stringify({ mode, section: currentSection, family: currentFamily })); } catch { /* No account or storage permission is required. */ }
 }
 function targetId() { return currentSection === 'play' ? currentFamily : currentSection; }
 function currentIndex() { return validTargets.indexOf(targetId()); }
@@ -112,17 +112,16 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 window.addEventListener('hashchange', () => go(location.hash.slice(1), { updateHash: false }));
 
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-function activeTheme() { return document.documentElement.dataset.theme || (prefersDark.matches ? 'dark' : 'light'); }
+function activeTheme() { return document.documentElement.dataset.theme || 'dark'; }
 function updateThemeLabel() {
   const dark = activeTheme() === 'dark';
   themeButton.setAttribute('aria-label', dark ? 'Use light theme' : 'Use dark theme');
   themeButton.setAttribute('aria-pressed', String(dark));
   document.getElementById('studyThemeLabel').textContent = dark ? 'Light' : 'Dark';
 }
-if (saved.theme === 'light' || saved.theme === 'dark') document.documentElement.dataset.theme = saved.theme;
+// Every visit starts dark; the explicit switch only affects this reading session.
+document.documentElement.dataset.theme = 'dark';
 updateThemeLabel();
-prefersDark.addEventListener('change', updateThemeLabel);
 themeButton.addEventListener('click', () => {
   document.documentElement.dataset.theme = activeTheme() === 'dark' ? 'light' : 'dark';
   updateThemeLabel();

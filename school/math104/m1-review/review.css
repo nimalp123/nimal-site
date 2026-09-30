@@ -1,5 +1,5 @@
 /* Phone-first reading layer. Original artifact content and mathematical notation stay intact. */
-:root { --study-offset: 148px; color-scheme: light; }
+:root { --study-offset: 148px; color-scheme: dark; }
 :root[data-theme="light"] { color-scheme: light; }
 html { scroll-padding-top: var(--study-offset); }
 body { margin: 0; padding: 0; overflow-x: clip; -webkit-text-size-adjust: 100%; }

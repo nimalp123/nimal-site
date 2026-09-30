@@ -1,7 +1,8 @@
 :root {
   font-family: "Manrope Variable", sans-serif;
-  color: #171d27;
-  background: #f5f4ee;
+  color: #edf0e8;
+  background: #080a09;
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -13,11 +14,11 @@ body {
 }
 
 .school-page {
-  --school-paper: #f5f4ee;
-  --school-ink: #171d27;
-  --school-blue: #244bc4;
-  --school-muted: #596171;
-  --school-rule: #d2d5cf;
+  --school-paper: #080a09;
+  --school-ink: #edf0e8;
+  --school-accent: #c5f660;
+  --school-muted: #9ba198;
+  --school-rule: #2a2e27;
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--school-paper);
@@ -37,7 +38,7 @@ body {
 }
 
 .school-page a:focus-visible {
-  outline: 3px solid var(--school-blue);
+  outline: 3px solid var(--school-accent);
   outline-offset: 5px;
 }
 
@@ -62,8 +63,8 @@ body {
   z-index: 10;
   transform: translateY(-160%);
   padding: 12px 18px;
-  background: var(--school-blue);
-  color: white !important;
+  background: var(--school-accent);
+  color: var(--school-paper) !important;
   font-size: 14px;
 }
 
@@ -98,7 +99,7 @@ body {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  color: var(--school-blue) !important;
+  color: var(--school-accent) !important;
 }
 
 .school-topbar-note {
@@ -118,7 +119,7 @@ body {
   display: flex;
   align-items: center;
   min-height: 44px;
-  color: var(--school-blue);
+  color: var(--school-accent);
   text-decoration: underline;
   text-underline-offset: 5px;
 }
@@ -145,7 +146,7 @@ body {
 }
 
 .school-hero h1 span {
-  color: var(--school-blue);
+  color: var(--school-accent);
 }
 
 .school-intro {
@@ -224,20 +225,20 @@ body {
 
 .school-row-status {
   padding: 6px 9px;
-  background: #eceee6;
+  background: #171d14;
   color: var(--school-muted);
   letter-spacing: 0;
 }
 
 .school-row-status-ready {
-  color: var(--school-blue);
-  background: #e6ebff;
+  color: var(--school-accent);
+  background: #222b16;
 }
 
 .school-row-arrow {
   width: 24px;
   height: 24px;
-  color: var(--school-blue);
+  color: var(--school-accent);
 }
 
 .school-review-row {
@@ -246,7 +247,7 @@ body {
 }
 
 .school-review-action {
-  color: var(--school-blue);
+  color: var(--school-accent);
   font-size: 13px;
   font-weight: 700;
 }
@@ -263,7 +264,7 @@ body {
   font-family: "Syne", sans-serif;
   font-size: 46px;
   line-height: 1;
-  color: var(--school-blue);
+  color: var(--school-accent);
 }
 
 .school-empty h3 {
@@ -285,7 +286,7 @@ body {
   gap: 12px;
   min-height: 44px;
   margin-top: 18px;
-  color: var(--school-blue);
+  color: var(--school-accent);
   font-size: 13px;
   font-weight: 700;
 }
@@ -301,15 +302,15 @@ body {
 }
 
 .school-footer > span:last-child {
-  color: var(--school-blue);
+  color: var(--school-accent);
   font-size: 26px;
 }
 
 @media (hover: hover) {
   .school-course-row:hover,
   .school-review-row:hover {
-    color: var(--school-blue);
-    background: #ebeee6;
+    color: var(--school-accent);
+    background: #111410;
   }
 }
 

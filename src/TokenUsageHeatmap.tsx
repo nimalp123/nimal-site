@@ -42,6 +42,7 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
   const years = Array.from(new Set(snapshot.daily.map((day) => Number(day.date.slice(0, 4))))).sort((a, b) => b - a);
   const [chosenYear, setChosenYear] = useState<number | null>(null);
   const [metric, setMetric] = useState<HeatMetric>("cost");
+  const [mobilePanel, setMobilePanel] = useState<"agents" | "days">("agents");
   const [scope, setScope] = useState<"day" | "week">("day");
   const [chosenDate, setChosenDate] = useState<string | null>(null);
   const [chosenWeek, setChosenWeek] = useState<number | null>(null);
@@ -81,6 +82,8 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
   const buttons = useRef(new Map<string, HTMLButtonElement>());
   const weekButtons = useRef(new Map<number, HTMLButtonElement>());
   const scrollContainer = useRef<HTMLDivElement>(null);
+  const revealedDate = scope === "week" ? shownWeek?.coveredFrom ?? shownDate : shownDate;
+  const visibleDate = useRef(revealedDate);
   const totals = yearDays.reduce((sum, day) => ({ tokens: sum.tokens + day.totalTokens, cost: sum.cost + day.totalCost }), { tokens: 0, cost: 0 });
   const activeDays = yearDays.filter((day) => day.totalTokens > 0 || day.totalCost > 0).length;
   const weekMaximum = Math.max(...weeks.map((week) => metric === "cost" ? week.totalCost : week.totalTokens), 0);
@@ -105,6 +108,14 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
   }
 
   useEffect(() => { revealDate(latest); }, [latest, year]);
+  useEffect(() => { visibleDate.current = revealedDate; }, [revealedDate]);
+  useEffect(() => {
+    const container = scrollContainer.current;
+    if (!container) return;
+    const observer = new ResizeObserver(() => revealDate(visibleDate.current));
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   function inspectDay(date: string) {
     setChosenDate(date); setScope("day"); setChosenWeek(null);
@@ -145,7 +156,7 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
   }
 
   return (
-    <section className="th-activity" aria-labelledby="th-activity-title">
+    <section id="usage-ledger" className="th-activity" aria-labelledby="th-activity-title">
       <div className="th-heading">
         <div><span className="th-kicker">01 / THE DAILY PRACTICE</span><h2 id="th-activity-title">Daily compute. <i>Visible.</i></h2></div>
         <div className="th-controls">
@@ -157,7 +168,8 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
         </div>
       </div>
       <div className="th-topline"><span><strong>{usd.format(totals.cost)}</strong> API-EQUIVALENT <b>/</b> {number.format(totals.tokens)} TOKENS</span><span>{activeDays} ACTIVE DAYS IN {year}</span></div>
-      <div className="th-workspace">
+      <div className="th-workspace" data-mobile-panel={mobilePanel}>
+        <div className="th-mobile-detail-tabs" role="group" aria-label="Usage details"><button aria-pressed={mobilePanel === "agents"} onClick={() => setMobilePanel("agents")}>Agents & models</button><button aria-pressed={mobilePanel === "days"} onClick={() => setMobilePanel("days")}>{scope === "week" ? "Week’s days" : "Nearby days"}</button></div>
         <div className="th-map-panel">
           <div ref={scrollContainer} className="th-scroll" tabIndex={0} role="region" aria-label={`${year} daily usage heatmap and weekly totals. Scroll horizontally on small screens. Arrow keys navigate days or weeks when focused.`}>
             <div className="th-heatmap" style={{ "--th-weeks": calendar.weeks } as CSSProperties}>
@@ -202,7 +214,8 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
           <div className="th-neighbors">
             <div className="th-neighbor-heading"><h3>{scope === "week" ? "Inside this week." : "Day by day."}</h3><span>SELECT A ROW TO INSPECT</span></div>
             <div className="th-neighbor-labels" aria-hidden="true"><span>DAY</span><span>API VALUE</span><span>EXACT TOKENS</span></div>
-            {nearbyDays.map((cell) => <button key={cell.date} className={`th-neighbor-row${scope === "day" && shownDate === cell.date ? " th-neighbor-current" : ""}`} onClick={() => { inspectDay(cell.date); revealDate(cell.date); }} aria-label={`Inspect ${dateLabel(cell.date)}: ${usd.format(cell.day?.totalCost ?? 0)}, ${number.format(cell.day?.totalTokens ?? 0)} tokens`}><span>{new Intl.DateTimeFormat("en-US", { timeZone: "UTC", month: "short", day: "numeric" }).format(new Date(`${cell.date}T12:00:00Z`))}{referenceDate === cell.date && <small>REF</small>}</span><strong>{usd.format(cell.day?.totalCost ?? 0)}</strong><span>{number.format(cell.day?.totalTokens ?? 0)}</span></button>)}
+            <div className="th-neighbor-list" tabIndex={0} role="region" aria-label={scope === "week" ? "Days in inspected week" : "Nearby day comparisons"}>{nearbyDays.map((cell) => <button key={cell.date} className={`th-neighbor-row${scope === "day" && shownDate === cell.date ? " th-neighbor-current" : ""}`} onClick={() => { inspectDay(cell.date); revealDate(cell.date); }} aria-label={`Inspect ${dateLabel(cell.date)}: ${usd.format(cell.day?.totalCost ?? 0)}, ${number.format(cell.day?.totalTokens ?? 0)} tokens`}><span>{new Intl.DateTimeFormat("en-US", { timeZone: "UTC", month: "short", day: "numeric" }).format(new Date(`${cell.date}T12:00:00Z`))}{referenceDate === cell.date && <small>REF</small>}</span><strong>{usd.format(cell.day?.totalCost ?? 0)}</strong><span>{number.format(cell.day?.totalTokens ?? 0)}</span></button>)}</div>
+          {peaks.length > 0 && <div className="th-peaks"><span className="th-kicker">PEAK DAYS / {metric === "tokens" ? "TOKENS" : "API VALUE"}</span><div className="th-peak-list">{peaks.map((day, index) => <button key={day.date} onClick={() => { inspectDay(day.date); revealDate(day.date); }} aria-label={`Inspect peak day ${dateLabel(day.date)}: ${usd.format(day.totalCost)} API value, ${number.format(day.totalTokens)} tokens`}><span className="th-peak-rank">0{index + 1}</span><span className="th-peak-receipt"><span>{dateLabel(day.date)}</span><strong>{metric === "tokens" ? number.format(day.totalTokens) : usd.format(day.totalCost)}</strong></span><Arrow /></button>)}</div></div>}
           </div>
         </div>
         <aside className="th-inspector" aria-label="Usage inspector">
@@ -216,7 +229,7 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
             <div className="th-comparison"><div><span className="th-kicker">{reference ? "FIXED REFERENCE" : `VS. PREVIOUS ${scope.toUpperCase()}`}</span><strong>{baselineLabel}</strong></div><div className="th-baseline-values"><span>{baseline ? usd.format(baseline.totalCost) : "—"}</span><span>{baseline ? `${number.format(baseline.totalTokens)} tokens` : "Outside coverage"}</span></div>{scope === "week" && (shownWeek?.partial || weekBaseline?.partial) && <small>Partial coverage · totals aren’t normalized.</small>}</div>
             <div className="th-reference-actions"><button disabled={!available} onClick={() => { if (scope === "day") setReferenceDate(shownDate); else setReferenceWeek(shownWeek?.start ?? null); }}>{reference ? "Use this as reference" : `Compare from this ${scope}`}</button>{reference && <button className="th-clear-reference" onClick={() => { if (scope === "day") setReferenceDate(null); else setReferenceWeek(null); }}>Clear</button>}</div>
           </div>
-          <div className="th-inspector-details">
+          <div className="th-inspector-details" tabIndex={0} role="region" aria-label="Agent models and token details">
             <section className="th-day-agents" aria-labelledby="th-day-agents-title">
               <div className="th-day-agent-heading"><h4 id="th-day-agents-title">Agents & models</h4><span>{scope === "week" ? "THIS WEEK" : "THIS DAY"}</span></div>
               {dayAgents.length > 0 ? <ul className="th-day-agent-rows">{dayAgents.map((agent) => {
@@ -232,7 +245,6 @@ export default function TokenUsageHeatmap({ snapshot }: { snapshot: UsageSnapsho
           </div>
         </aside>
       </div>
-      {peaks.length > 0 && <div className="th-peaks"><span className="th-kicker">PEAK DAYS / {metric === "tokens" ? "TOKENS" : "API VALUE"}</span><div className="th-peak-list">{peaks.map((day, index) => <button key={day.date} onClick={() => { inspectDay(day.date); revealDate(day.date); }} aria-label={`Inspect peak day ${dateLabel(day.date)}: ${usd.format(day.totalCost)} API value, ${number.format(day.totalTokens)} tokens`}><span className="th-peak-rank">0{index + 1}</span><span className="th-peak-receipt"><span>{dateLabel(day.date)}</span><strong>{metric === "tokens" ? number.format(day.totalTokens) : usd.format(day.totalCost)}</strong></span><Arrow /></button>)}</div></div>}
     </section>
   );
 }
