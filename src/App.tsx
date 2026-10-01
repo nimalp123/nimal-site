@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Network from "./Network";
 import Rayaboy from "./Rayaboy";
+import Ppad from "./Ppad";
 import TokenMaxxingCard from "./TokenMaxxingCard";
 import { Arrow, GitHub, LinkedIn, Spark } from "./icons";
 import snapshot from "./data/repos.json";
@@ -139,7 +140,7 @@ export default function App() {
   useEffect(() => () => clearTimeout(copyTimer.current), []);
   useEffect(() => {
     const section = window.location.hash.slice(1);
-    if (!["main", "work", "rayaboy", "repos"].includes(section)) return;
+    if (!["main", "work", "rayaboy", "ppad", "repos"].includes(section)) return;
     const frame = window.requestAnimationFrame(() => {
       document.getElementById(section)?.scrollIntoView({ behavior: "instant" });
     });
@@ -190,8 +191,9 @@ export default function App() {
             </span>
           </a>
           <nav aria-label="Main navigation">
-            <a href="#work">The work</a>
+            <a href="#ppad">PPAD</a>
             <a href="#rayaboy">Rayaboy</a>
+            <a href="#work">Graph</a>
             <a href="#repos">Repo index</a>
           </nav>
           <div className="header-socials">
@@ -234,7 +236,7 @@ export default function App() {
                 <br />
                 Applied AI, research systems, and things people use.
               </p>
-              <a href="#work" className="button button-lime">
+              <a href="#ppad" className="button button-lime">
                 Explore the work <Arrow diagonal={false} />
               </a>
               <span className="hero-aside mono">
@@ -260,11 +262,15 @@ export default function App() {
                 <span className="small-star">✳</span> INDEPENDENT BUILDS.
                 UNREASONABLE CURIOSITY.
               </span>
-              <a href="#work" aria-label="Scroll to selected work">
+              <a href="#ppad" aria-label="Scroll to selected work">
                 SCROLL TO EXPLORE <span>↓</span>
               </a>
             </div>
           </section>
+
+          <Ppad />
+
+          <Rayaboy />
 
           <section
             className="selected-work section"
@@ -273,7 +279,7 @@ export default function App() {
           >
             <div className="section-heading">
               <div>
-                <p className="eyebrow">01 / SELECTED WORK</p>
+                <p className="eyebrow">INSTAGRAM / THE PUBLIC EXPERIMENT</p>
                 <h2 id="work-title">
                   Mapped. Still <span className="serif-word">curious.</span>
                 </h2>
@@ -381,8 +387,6 @@ export default function App() {
               </ul>
             </div>
           </section>
-
-          <Rayaboy />
 
           <TokenMaxxingCard />
 

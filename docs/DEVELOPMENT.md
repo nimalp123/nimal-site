@@ -1,6 +1,6 @@
 # Development notes
 
-Personal website for Nimal Periasamy. Selected public projects, ranked by a deliberately subjective aura order, with Instagram Friendship Graph featured first.
+Personal website for Nimal Periasamy. Featured projects appear in the order PPAD, Rayaboy, then Instagram Friendship Graph. The separate public repository archive uses a deliberately subjective aura order.
 
 ## Branches
 
@@ -9,7 +9,7 @@ Personal website for Nimal Periasamy. Selected public projects, ranked by a deli
 
 The initial website was reviewed locally before publication.
 
-Only public repository metadata and approved, high-level Rayaboy copy belong here. Never commit private project code, personal graph data, credentials, or internal learnings.
+Only public repository metadata and approved, high-level Rayaboy and PPAD copy belong here. Never commit private project code, personal graph data, credentials, or internal learnings.
 
 ## Local development
 

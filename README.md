@@ -9,6 +9,8 @@
   &nbsp; / &nbsp;
   <a href="https://github.com/nimalp123">GitHub ↗</a>
   &nbsp; / &nbsp;
+  <a href="https://ppad.fun">PPAD ↗</a>
+  &nbsp; / &nbsp;
   <a href="https://rayaboy.com">Rayaboy ↗</a>
 </p>
 
@@ -16,32 +18,42 @@
 
 ---
 
-`01 / SELECTED WORK`
+`01 / PPAD — FULL-STACK + PROTOCOL ENGINEERING`
 
-## Mapped. Still curious.
+## Pledge Capital
 
-### Instagram Friendship Graph
+**From interface to infrastructure. Built with my team.**
 
-**A completed mapping experiment. A starting point for bigger questions.**
+A Solana launchpad and fixed-term lending system. The product, the protocol, and the verification around both.
 
-I mapped my Instagram network into an explorable Obsidian vault. Mutual follows, shared connections, and paths across three degrees.
+[![Pledge Capital's chrome pi identity. Click to open PPAD at ppad.fun.](public/images/ppad-preview.webp)](https://ppad.fun)
 
-[![The published anonymous Instagram network: 5,347 accounts, 5,992 observed mutual-follow links, three degrees of connection.](public/images/actual-graph.png)](https://github.com/nimalp123/instagram-friendship-graph)
+**[OPEN PPAD.FUN ↗](https://ppad.fun)**
 
-| **5,347** | **5,992** | **3°** |
+| **393** | **36** | **39** |
 | :--- | :--- | :--- |
-| Anonymous accounts | Observed mutual-follow links | Degrees of connection |
+| Release tests passed | Compiled-program tests passed | Reconciled test-validator transactions |
 
-<sub>September 2026 snapshot. Second and third degree totals are observed lower bounds. Names stay private.</sub>
+- **Custody, end to end:** SOL escrow, collateral, borrowing, repayment, and default settlement in Rust / Anchor. SPL Token + Token-2022.
+- **Verify before signing:** canonical transactions, fresh release evidence, exact fees, and uncertain-confirmation recovery.
+- **Review → regression → release:** adversarial cases, compiled-program tests, reproducible artifact checks, and transaction receipts.
 
-**The graph is built. The questions keep coming.**
+<details>
+<summary><strong>Inside the build ↗</strong></summary>
 
-- Who could I become friends with?
-- Which mutuals connect us?
-- Who might I click with?
-- What patterns am I missing?
+| Layer | What we built |
+| :--- | :--- |
+| Protocol | **12 instructions** spanning administration, markets, offers, borrowing, settlement, and exposure cleanup |
+| Risk controls | Mint-wide exposure accounting, bounded offer lifetimes, repayment grace, and permissionless cleanup |
+| Wallet runtime | Transaction-message continuity, wallet-session checks, simulation, fee limits, and recovery for unresolved receipts |
+| Release infrastructure | Artifact/IDL pins, fresh deployed-code verification, bounded RPC gateway, native Node runtime, and deployment checks |
+| Product | Responsive graphite interface, launch drafts, financing tools, and verified chain-state views |
 
-**[Explore the experiment ↗](https://github.com/nimalp123/instagram-friendship-graph)** · [Try the interactive network ↗](https://nimalp123.com/#work)
+</details>
+
+<sub>October 1, 2026 recorded checkpoints. 393 release tests with two intentional skips; 36 tests against the exact production lending artifact; 39 reconciled transactions on a disposable validator. Separate scopes, not a combined count. [Receipt notes ↗](PPAD-RESULTS.md)</sub>
+
+**Shipped:** website + verified read API at [ppad.fun ↗](https://ppad.fun). Lending v0.2 deployed on mainnet with new lending paused. Public lending activation and token creation remain pending.
 
 ---
 
@@ -117,6 +129,35 @@ I mapped my Instagram network into an explorable Obsidian vault. Mutual follows,
 | Registered accounts | Scholarships in the catalog | Listed scholarship funding |
 
 <sub>September 29, 2026 snapshots. Accounts include admin, unverified, and retained test registrations. Funding is listed scholarship value. [See the live registration counter ↗](https://nimalp123.com/#rayaboy)</sub>
+
+---
+
+`INSTAGRAM / THE PUBLIC EXPERIMENT`
+
+## Mapped. Still curious.
+
+### Instagram Friendship Graph
+
+**A completed mapping experiment. A starting point for bigger questions.**
+
+I mapped my Instagram network into an explorable Obsidian vault. Mutual follows, shared connections, and paths across three degrees.
+
+[![The published anonymous Instagram network: 5,347 accounts, 5,992 observed mutual-follow links, three degrees of connection.](public/images/actual-graph.png)](https://github.com/nimalp123/instagram-friendship-graph)
+
+| **5,347** | **5,992** | **3°** |
+| :--- | :--- | :--- |
+| Anonymous accounts | Observed mutual-follow links | Degrees of connection |
+
+<sub>September 2026 snapshot. Second and third degree totals are observed lower bounds. Names stay private.</sub>
+
+**The graph is built. The questions keep coming.**
+
+- Who could I become friends with?
+- Which mutuals connect us?
+- Who might I click with?
+- What patterns am I missing?
+
+**[Explore the experiment ↗](https://github.com/nimalp123/instagram-friendship-graph)** · [Try the interactive network ↗](https://nimalp123.com/#work)
 
 ---
 

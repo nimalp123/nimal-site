@@ -1,0 +1,56 @@
+.ppad-section { border-top: 1px solid var(--line); }
+.ppad-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
+.ppad-heading .eyebrow { margin-bottom: 14px; }
+.ppad-heading h2 { font-size: clamp(36px, 4.2vw, 66px); font-weight: 600; line-height: 1.12; letter-spacing: -.055em; }
+.ppad-subtitle { font-size: clamp(20px, 2.2vw, 30px); margin-top: 16px; letter-spacing: -.03em; }
+.ppad-team { border: 1px solid var(--line); padding: 8px 12px; color: var(--muted); flex-shrink: 0; }
+.ppad-feature { display: grid; grid-template-columns: .85fr 1.15fr; border: 1px solid var(--line); background: #0e110e; }
+.ppad-copy { padding: clamp(24px, 3vw, 42px); display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.ppad-deck { max-width: 380px; font-size: 19px; line-height: 1.55; letter-spacing: -.025em; }
+.ppad-tags { display: flex; flex-wrap: wrap; gap: 7px; color: var(--muted); }
+.ppad-tags span { border: 1px solid var(--line); padding: 5px 8px; }
+.ppad-copy .button { margin-top: auto; }
+.ppad-status { font-size: 11px; color: var(--muted); line-height: 1.8; }
+.ppad-status .status-dot { width: 5px; height: 5px; margin-right: 5px; }
+.ppad-preview { display: flex; flex-direction: column; justify-content: center; border-left: 1px solid var(--line); background: #0c0c10; overflow: hidden; }
+.ppad-preview img { width: 100%; height: auto; transition: transform .6s ease; }
+.ppad-preview:hover img { transform: scale(1.025); }
+.ppad-preview-caption { display: flex; align-items: center; justify-content: space-between; padding: 19px 24px; border-top: 1px solid var(--line); color: var(--lime); margin-top: auto; }
+.ppad-preview-caption svg { width: 19px; height: 19px; }
+.ppad-receipts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); border-top: 0; }
+.ppad-receipt { padding: 28px; }
+.ppad-receipt + .ppad-receipt { border-left: 1px solid var(--line); }
+.ppad-receipt > strong { font-family: var(--display); font-size: clamp(48px, 5vw, 76px); color: var(--lime); font-weight: 600; letter-spacing: -.06em; line-height: 1.1; }
+.ppad-receipt h3 { font-family: inherit; font-size: 16px; margin: 10px 0; letter-spacing: -.02em; }
+.ppad-receipt p { color: var(--muted); font-size: 9px; line-height: 1.8; }
+.ppad-engineering { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; margin-top: 35px; }
+.ppad-engineering h3 { margin: 12px 0; font-size: 20px; letter-spacing: -.035em; }
+.ppad-engineering p { font-size: 12px; color: var(--muted); line-height: 1.8; max-width: 340px; }
+.ppad-footnote { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 18px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 9px; }
+.ppad-footnote a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 850px) {
+  .ppad-feature { grid-template-columns: 1fr 1fr; }
+  .ppad-deck { font-size: 16px; }
+  .ppad-copy { gap: 20px; }
+  .ppad-receipt { padding: 20px; }
+  .ppad-engineering { gap: 22px; }
+}
+@media (max-width: 600px) {
+  .ppad-heading { flex-direction: column; gap: 18px; }
+  .ppad-heading h2 { font-size: 37px; }
+  .ppad-feature { grid-template-columns: 1fr; }
+  .ppad-preview { border-left: 0; border-top: 1px solid var(--line); }
+  .ppad-preview-caption { padding: 17px 22px; font-size: 9px; }
+  .ppad-copy { padding: 26px 23px; }
+  .ppad-receipts { grid-template-columns: 1fr; }
+  .ppad-receipt { display: grid; grid-template-columns: 86px minmax(0, 1fr); column-gap: 19px; padding: 23px; }
+  .ppad-receipt + .ppad-receipt { border-left: 0; border-top: 1px solid var(--line); }
+  .ppad-receipt > strong { font-size: 46px; grid-row: span 2; align-self: center; }
+  .ppad-receipt h3 { margin: 0 0 6px; font-size: 15px; align-self: end; }
+  .ppad-engineering { grid-template-columns: 1fr; gap: 23px; }
+  .ppad-engineering > div { position: relative; padding-left: 34px; }
+  .ppad-engineering > div > span { position: absolute; left: 0; top: 4px; }
+  .ppad-engineering h3 { margin-top: 0; font-size: 20px; }
+  .ppad-engineering p { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) { .ppad-preview img { transition: none; } .ppad-preview:hover img { transform: none; } }

@@ -1437,7 +1437,8 @@ footer > a.mono > span {
     height: 21px;
   }
   nav {
-    gap: 17px;
+    gap: 12px;
+    font-size: 10px;
   }
   nav > a:last-child {
     display: none;
@@ -1864,7 +1865,7 @@ footer > a.mono > span {
   }
 }
 @media (max-width: 360px) {
-  .site-header nav > a:first-child {
+  .site-header nav > a[href="#work"] {
     display: none;
   }
   .page-shell {
