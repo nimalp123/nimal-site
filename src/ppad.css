@@ -12,6 +12,7 @@
 .ppad-copy .button { margin-top: auto; }
 .ppad-status { font-size: 11px; color: var(--muted); line-height: 1.8; }
 .ppad-status .status-dot { width: 5px; height: 5px; margin-right: 5px; }
+.ppad-status a { color: var(--lime); text-decoration: underline; text-underline-offset: 3px; }
 .ppad-preview { display: flex; flex-direction: column; justify-content: center; border-left: 1px solid var(--line); background: #0c0c10; overflow: hidden; }
 .ppad-preview img { width: 100%; height: auto; transition: transform .6s ease; }
 .ppad-preview:hover img { transform: scale(1.025); }
@@ -23,9 +24,26 @@
 .ppad-receipt > strong { font-family: var(--display); font-size: clamp(48px, 5vw, 76px); color: var(--lime); font-weight: 600; letter-spacing: -.06em; line-height: 1.1; }
 .ppad-receipt h3 { font-family: inherit; font-size: 16px; margin: 10px 0; letter-spacing: -.02em; }
 .ppad-receipt p { color: var(--muted); font-size: 9px; line-height: 1.8; }
+.ppad-outcomes { padding: 24px 28px; border: 1px solid var(--line); border-top: 0; background: #0e110e; }
+.ppad-outcomes-label { color: var(--lime); font-size: 10px; }
+.ppad-outcomes dl { display: grid; grid-template-columns: 1.4fr .8fr 1fr; gap: 24px; margin: 22px 0 18px; }
+.ppad-outcomes dt { color: var(--muted); font-size: 11px; margin-bottom: 10px; }
+.ppad-outcomes dd { margin: 0; font-size: clamp(24px, 2.5vw, 38px); font-weight: 600; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.ppad-outcomes-note { color: var(--muted); font-size: 9px; line-height: 1.8; }
+.ppad-outcomes-note a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 .ppad-engineering { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; margin-top: 35px; }
 .ppad-engineering h3 { margin: 12px 0; font-size: 20px; letter-spacing: -.035em; }
 .ppad-engineering p { font-size: 12px; color: var(--muted); line-height: 1.8; max-width: 340px; }
+.ppad-build { border: 1px solid var(--line); margin-top: 30px; }
+.ppad-build summary { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; color: var(--lime); cursor: pointer; list-style: none; }
+.ppad-build summary::-webkit-details-marker { display: none; }
+.ppad-build summary > span { font-size: 20px; line-height: 1; }
+.ppad-build[open] summary > span { transform: rotate(45deg); }
+.ppad-build summary:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+.ppad-build dl { margin: 0; padding: 0 24px; }
+.ppad-build dl > div { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 24px; padding: 18px 0; border-top: 1px solid var(--line); }
+.ppad-build dt { font-size: 13px; font-weight: 600; }
+.ppad-build dd { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.8; }
 .ppad-footnote { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 18px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 9px; }
 .ppad-footnote a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 850px) {
@@ -43,14 +61,21 @@
   .ppad-preview-caption { padding: 17px 22px; font-size: 9px; }
   .ppad-copy { padding: 26px 23px; }
   .ppad-receipts { grid-template-columns: 1fr; }
-  .ppad-receipt { display: grid; grid-template-columns: 86px minmax(0, 1fr); column-gap: 19px; padding: 23px; }
+  .ppad-receipt { display: grid; grid-template-columns: 110px minmax(0, 1fr); column-gap: 19px; padding: 23px; }
   .ppad-receipt + .ppad-receipt { border-left: 0; border-top: 1px solid var(--line); }
   .ppad-receipt > strong { font-size: 46px; grid-row: span 2; align-self: center; }
   .ppad-receipt h3 { margin: 0 0 6px; font-size: 15px; align-self: end; }
+  .ppad-outcomes { padding: 23px; }
+  .ppad-outcomes dl { grid-template-columns: 1fr 1fr; gap: 22px; }
+  .ppad-outcomes dl > div:first-child { grid-column: 1 / -1; }
+  .ppad-outcomes dd { font-size: 30px; }
   .ppad-engineering { grid-template-columns: 1fr; gap: 23px; }
   .ppad-engineering > div { position: relative; padding-left: 34px; }
   .ppad-engineering > div > span { position: absolute; left: 0; top: 4px; }
   .ppad-engineering h3 { margin-top: 0; font-size: 20px; }
   .ppad-engineering p { max-width: none; }
+  .ppad-build summary { padding: 19px 22px; }
+  .ppad-build dl { padding: 0 22px; }
+  .ppad-build dl > div { grid-template-columns: 1fr; gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) { .ppad-preview img { transition: none; } .ppad-preview:hover img { transform: none; } }

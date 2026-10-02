@@ -24,36 +24,47 @@
 
 **From interface to infrastructure. Built with my team.**
 
-A Solana launchpad and fixed-term lending system. The product, the protocol, and the verification around both.
+Token launches. Creator fee sharing. Collateral-backed lending on Solana. Built with my team, from interface to protocol.
 
 [![Pledge Capital's chrome pi identity. Click to open PPAD at ppad.fun.](public/images/ppad-preview.webp)](https://ppad.fun)
 
-**[OPEN PPAD.FUN ↗](https://ppad.fun)**
+**[OPEN PPAD.FUN ↗](https://ppad.fun)** · [Official $PPAD token ↗](https://solscan.io/token/2Pj812u3RsfRT3mirFNNdGXZBMSFFnMjw6EjF7iwc1Ev)
 
 | **393** | **36** | **39** |
 | :--- | :--- | :--- |
-| Release tests passed | Compiled-program tests passed | Reconciled test-validator transactions |
+| Recorded release tests | Compiled-program tests | Reconciled test transactions |
 
-- **Custody, end to end:** SOL escrow, collateral, borrowing, repayment, and default settlement in Rust / Anchor. SPL Token + Token-2022.
-- **Verify before signing:** canonical transactions, fresh release evidence, exact fees, and uncertain-confirmation recovery.
-- **Review → regression → release:** adversarial cases, compiled-program tests, reproducible artifact checks, and transaction receipts.
+<sub>Previously published engineering checkpoints. Separate test scopes; validator transactions are test activity. [Receipt notes ↗](PPAD-RESULTS.md)</sub>
+
+- **Launch, end to end:** artwork → wallet approval → token creation → optional first buy. Creator fee sharing with an immutable, wallet-approved split.
+- **Capital, on-chain:** individually funded SOL offers, fixed repayment terms, and token collateral returned on repayment or delivered to the lender at default.
+- **Make it inspectable:** accounts, terms, fees and expiry reviewed before signing. Public market APIs and linked transaction receipts.
+
+**On-chain / fees received**
+
+| **23.929338253 SOL** | **0.04 SOL** | **24** |
+| :--- | :--- | :--- |
+| Creator fees received | Launch fees received | Finalized fee transactions |
+
+<sub>October 1 treasury inflows from the public finalized fee ledger. [Open the receipts ↗](https://ppad.fun/api/launch/fees)</sub>
 
 <details>
 <summary><strong>Inside the build ↗</strong></summary>
 
 | Layer | What we built |
 | :--- | :--- |
-| Protocol | **12 instructions** spanning administration, markets, offers, borrowing, settlement, and exposure cleanup |
-| Risk controls | Mint-wide exposure accounting, bounded offer lifetimes, repayment grace, and permissionless cleanup |
-| Wallet runtime | Transaction-message continuity, wallet-session checks, simulation, fee limits, and recovery for unresolved receipts |
-| Release infrastructure | Artifact/IDL pins, fresh deployed-code verification, bounded RPC gateway, native Node runtime, and deployment checks |
-| Product | Responsive graphite interface, launch drafts, financing tools, and verified chain-state views |
+| Launch workspace | Artwork and metadata, an optional first buy, disclosed costs, and a separate wallet review |
+| Creator fee sharing | Creator-selected percentages, immutable recipients, and direct Pump payouts |
+| Lending lifecycle | Fund an offer → pledge tokens → repay to unlock collateral, or settle to the lender at default |
+| Wallet review | Verify accounts, exact terms, fees and expiry; reconcile an uncertain signature before another transaction |
+| Public data | Read-only APIs for release status, admitted mints, markets, funded offers, loan records and treasury snapshots |
+| Treasury receipts | Creator fees and launch fees tracked separately, with exact SOL amounts and transaction links |
+| Product | Launches, Lending and My vault — token creation, financing and wallet positions |
+| Published engineering | Rust / Anchor + TypeScript, compiled-program checks, and reconciled validator runs |
 
 </details>
 
-<sub>October 1, 2026 recorded checkpoints. 393 release tests with two intentional skips; 36 tests against the exact production lending artifact; 39 reconciled transactions on a disposable validator. Separate scopes, not a combined count. [Receipt notes ↗](PPAD-RESULTS.md)</sub>
-
-**Shipped:** website + verified read API at [ppad.fun ↗](https://ppad.fun). Lending v0.2 deployed on mainnet with new lending paused. Public lending activation and token creation remain pending.
+**Explore the product:** wallet-approved launches, creator fee sharing, and fixed-term SOL financing at **[ppad.fun ↗](https://ppad.fun)**.
 
 ---
 
