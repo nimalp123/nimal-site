@@ -11,6 +11,7 @@ const schoolArtifacts = JSON.parse(readFileSync(new URL("./src/data/school-artif
   slug: string;
 }[];
 const pageFiles: Record<string, string> = {
+  "/feud": "feud/index.html",
   "/tokenmaxxing": "tokenmaxxing/index.html",
   "/school": "school/index.html",
   "/school/math104": "school/math104/index.html",
