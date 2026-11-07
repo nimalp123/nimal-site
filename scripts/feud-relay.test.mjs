@@ -5,15 +5,29 @@ import { gameDestination, legacySeatRelay, LEGACY_GAME_ORIGIN, requestedGameRoom
 const seat = { code: "ABCDEF", playerId: "95daa33b-4d3c-4fb5-b1df-46549817cd1b", token: "A".repeat(43) };
 const gameOrigin = "https://managed-game.example.org";
 
-function relayFixture(requestedCode = seat.code) {
+function relayFixture(requestedCode = seat.code, migrated = new Set(), storage = {}) {
   const messages = [];
+  const inspected = [];
+  const marked = [];
   let closed = 0;
   const gameWindow = { postMessage: (...args) => messages.push(args) };
   const legacyWindow = {};
-  const relay = legacySeatRelay({ gameWindow, legacyWindow, gameOrigin, requestedCode, closeProbe: () => closed++ });
+  const relay = legacySeatRelay({
+    gameWindow, legacyWindow, gameOrigin, requestedCode,
+    isMigrated(metadata) {
+      inspected.push(metadata);
+      return migrated.has(JSON.stringify(metadata));
+    },
+    markMigrated(metadata) {
+      marked.push(metadata);
+      migrated.add(JSON.stringify(metadata));
+    },
+    ...storage,
+    closeProbe: () => closed++,
+  });
   const legacy = (session = seat) => ({ origin: LEGACY_GAME_ORIGIN, source: legacyWindow, data: { type: "feud:legacy-seat", session } });
   const ready = { origin: gameOrigin, source: gameWindow, data: { type: "feud:seat-ready" } };
-  return { relay, messages, legacy, ready, closed: () => closed };
+  return { relay, messages, legacy, ready, inspected, marked, closed: () => closed };
 }
 
 test("game destinations forward only a valid room code to separate fixed origins", () => {
@@ -65,14 +79,21 @@ test("a matching managed acknowledgement clears the probe and queued secret once
   const fixture = relayFixture();
   fixture.relay.receive(fixture.ready);
   fixture.relay.receive(fixture.legacy());
-  fixture.relay.receive({ ...fixture.ready, data: { type: "feud:seat-received", code: "UVWXYZ" } });
-  assert.equal(fixture.closed(), 0);
+  fixture.relay.receive({ ...fixture.ready, data: { type: "feud:seat-received", code: "UVWXYZ", playerId: seat.playerId } });
+  fixture.relay.receive({ ...fixture.ready, source: {}, data: { type: "feud:seat-received", code: seat.code, playerId: seat.playerId } });
+  fixture.relay.receive({ ...fixture.ready, origin: "https://attacker.example", data: { type: "feud:seat-received", code: seat.code, playerId: seat.playerId } });
   fixture.relay.receive({ ...fixture.ready, data: { type: "feud:seat-received", code: seat.code } });
+  fixture.relay.receive({ ...fixture.ready, data: { type: "feud:seat-received", code: seat.code, playerId: "another-player" } });
+  assert.equal(fixture.closed(), 0);
+  assert.deepEqual(fixture.marked, []);
+  fixture.relay.receive({ ...fixture.ready, data: { type: "feud:seat-received", code: seat.code, playerId: seat.playerId } });
+  assert.deepEqual(fixture.marked, [{ code: seat.code, playerId: seat.playerId }]);
   assert.equal(fixture.closed(), 1);
   fixture.relay.receive(fixture.ready);
   fixture.relay.receive(fixture.legacy());
   fixture.relay.dispose();
   assert.equal(fixture.messages.length, 1);
+  assert.equal(fixture.marked.length, 1);
   assert.equal(fixture.closed(), 1);
 });
 
@@ -82,6 +103,7 @@ test("an empty legacy result or timeout disposes the relay without transferring 
   empty.relay.receive(empty.ready);
   assert.equal(empty.closed(), 1);
   assert.equal(empty.messages.length, 0);
+  assert.deepEqual(empty.marked, []);
 
   const timedOut = relayFixture();
   timedOut.relay.receive(timedOut.legacy());
@@ -89,4 +111,43 @@ test("an empty legacy result or timeout disposes the relay without transferring 
   timedOut.relay.receive(timedOut.ready);
   assert.equal(timedOut.closed(), 1);
   assert.equal(timedOut.messages.length, 0);
+  assert.deepEqual(timedOut.marked, []);
+});
+
+test("a completed seat stays migrated on later page loads without suppressing another room or player", () => {
+  const migrated = new Set();
+  const first = relayFixture(seat.code, migrated);
+  first.relay.receive(first.ready);
+  first.relay.receive(first.legacy());
+  first.relay.receive({ ...first.ready, data: { type: "feud:seat-received", code: seat.code, playerId: seat.playerId } });
+  assert.deepEqual(first.inspected, [{ code: seat.code, playerId: seat.playerId }]);
+  assert.deepEqual([...migrated], [JSON.stringify({ code: seat.code, playerId: seat.playerId })]);
+
+  const reload = relayFixture(seat.code, migrated);
+  reload.relay.receive(reload.ready);
+  reload.relay.receive(reload.legacy());
+  assert.equal(reload.messages.length, 0);
+  assert.equal(reload.closed(), 1);
+
+  const otherRoom = relayFixture("UVWXYZ", migrated);
+  otherRoom.relay.receive(otherRoom.ready);
+  otherRoom.relay.receive(otherRoom.legacy({ ...seat, code: "UVWXYZ" }));
+  assert.equal(otherRoom.messages.length, 1);
+
+  const otherPlayer = relayFixture(seat.code, migrated);
+  otherPlayer.relay.receive(otherPlayer.ready);
+  otherPlayer.relay.receive(otherPlayer.legacy({ ...seat, playerId: "another-player" }));
+  assert.equal(otherPlayer.messages.length, 1);
+});
+
+test("blocked browser storage does not crash a transfer or leave its probe unresolved", () => {
+  const fixture = relayFixture(seat.code, new Set(), {
+    isMigrated() { throw new Error("Storage is blocked"); },
+    markMigrated() { throw new Error("Storage is blocked"); },
+  });
+  fixture.relay.receive(fixture.ready);
+  assert.doesNotThrow(() => fixture.relay.receive(fixture.legacy()));
+  assert.equal(fixture.messages.length, 1);
+  assert.doesNotThrow(() => fixture.relay.receive({ ...fixture.ready, data: { type: "feud:seat-received", code: seat.code, playerId: seat.playerId } }));
+  assert.equal(fixture.closed(), 1);
 });
