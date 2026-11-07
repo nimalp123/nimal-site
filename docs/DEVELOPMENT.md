@@ -73,6 +73,14 @@ vercel deploy --prod
 
 `nimalp123.com` is connected and redirects to the verified primary host `www.nimalp123.com`. Portfolio links use the custom domain; canonical and absolute social-image URLs use `https://www.nimalp123.com`.
 
+## Feud Night
+
+`/feud` embeds the production game, and `/s-feud` embeds its staging version. Both pages are part of `nimal-site`. The game source lives in `nimalp123/famfeud`, with `main` for production and `staging` for testing. Its GitHub Actions release workflow tests the game and deploys native Next.js builds to Vercel. Each environment uses its own free InsForge database, so staging rooms and test scores stay separate from production.
+
+The stable game destinations are defined in `src/feud-embed.ts`. Update that file if a destination changes. Room links use the public `/feud` or `/s-feud` page and carry only the room code.
+
+The production page can restore a saved seat from the previous `feud-night-nimz.boundlessnova2.chatgpt.site` origin through a hidden probe. The page verifies both frame windows and their origins, keeps the transferred credential in memory, and waits for the managed game to be ready. The game verifies the seat with its API before saving it. The probe is removed after acknowledgement, an empty result, or a timeout. The staging page has no production seat probe.
+
 ## Tokenmaxxing usage ledger
 
 The separate `/tokenmaxxing` HTML entry shares fonts and design tokens with the portfolio. A small footer link is its only mention on the main page. Its daily heatmap and tool-level totals use `America/Los_Angeles` date grouping.

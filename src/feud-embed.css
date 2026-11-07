@@ -1,0 +1,19 @@
+body {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100vh;
+  margin: 0;
+  background: #140b24;
+  color: #e8def4;
+  font: 0.875rem system-ui, sans-serif;
+}
+
+@supports (height: 100dvh) {
+  body { height: 100dvh; }
+}
+
+iframe { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; border: 0; }
+iframe[hidden] { display: none; }
+footer { padding: 0.5rem 1rem; text-align: center; }
+a { color: inherit; }
+.staging-label { color: #ffdf91; margin-right: 1rem; }
