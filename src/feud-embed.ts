@@ -7,12 +7,15 @@ export const LEGACY_GAME_ORIGIN = "https://feud-night-nimz.boundlessnova2.chatgp
 const PERSONAL_SITE_ORIGINS = ["https://www.nimalp123.com", "https://nimalp123.com"];
 
 type SavedSeat = { code: string; playerId: string; token: string };
+type MigratedSeat = Pick<SavedSeat, "code" | "playerId">;
 type RelayEvent = Pick<MessageEvent, "origin" | "source" | "data">;
 type RelayOptions = {
   gameWindow: Window;
   gameOrigin: string;
   legacyWindow: Window;
   requestedCode: string | null;
+  isMigrated: (seat: MigratedSeat) => boolean;
+  markMigrated: (seat: MigratedSeat) => void;
   closeProbe: () => void;
 };
 
@@ -64,6 +67,14 @@ export function legacySeatRelay(options: RelayOptions) {
       }
       const seat = savedSeat(event.data.session);
       if (!seat || (options.requestedCode && seat.code !== options.requestedCode)) return;
+      try {
+        if (options.isMigrated({ code: seat.code, playerId: seat.playerId })) {
+          dispose();
+          return;
+        }
+      } catch {
+        // A browser that blocks storage can still restore a seat on this page.
+      }
       pending = seat;
       forward();
       return;
@@ -72,12 +83,22 @@ export function legacySeatRelay(options: RelayOptions) {
     if (event.data.type === "feud:seat-ready") {
       ready = true;
       forward();
-    } else if (event.data.type === "feud:seat-received" && pending?.code === event.data.code) {
+    } else if (event.data.type === "feud:seat-received" && pending
+      && pending.code === event.data.code && pending.playerId === event.data.playerId) {
+      try {
+        options.markMigrated({ code: pending.code, playerId: pending.playerId });
+      } catch {
+        // The current transfer still completes when the browser blocks storage.
+      }
       dispose();
     }
   }
 
   return { receive, dispose };
+}
+
+function migratedSeatKey(seat: MigratedSeat): string {
+  return `feud-night-migrated-seat:${seat.code}:${seat.playerId}`;
 }
 
 function mountGame() {
@@ -102,6 +123,8 @@ function mountGame() {
       gameOrigin: destination.origin,
       legacyWindow: probe.contentWindow!,
       requestedCode: code,
+      isMigrated: (seat) => window.localStorage.getItem(migratedSeatKey(seat)) === "1",
+      markMigrated: (seat) => window.localStorage.setItem(migratedSeatKey(seat), "1"),
       closeProbe() {
         window.clearTimeout(timeout);
         window.removeEventListener("message", relay.receive);
