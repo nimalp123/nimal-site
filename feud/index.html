@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Play Feud Night with friends. Join with a room code and guess the top answers solo or in teams." />
+    <title>Feud Night</title>
+    <style>
+      body {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        height: 100vh;
+        height: 100dvh;
+        margin: 0;
+        background: #140b24;
+        color: #e8def4;
+        font: 0.875rem system-ui, sans-serif;
+      }
+      iframe { width: 100%; height: 100%; border: 0; }
+      footer { padding: 0.5rem 1rem; text-align: center; }
+      a { color: inherit; }
+    </style>
+  </head>
+  <body>
+    <iframe id="game" title="Feud Night" allow="clipboard-write"></iframe>
+    <footer><a id="direct-game" href="https://feud-night-nimz.boundlessnova2.chatgpt.site/">Open Feud Night directly</a></footer>
+    <script>
+      const directLink = document.getElementById('direct-game');
+      const gameUrl = new URL(directLink.href);
+      const room = new URLSearchParams(window.location.search).get('room')?.toUpperCase();
+      if (room && /^[A-Z0-9]{6}$/.test(room)) gameUrl.searchParams.set('room', room);
+      directLink.href = gameUrl.href;
+      document.getElementById('game').src = gameUrl.href;
+    </script>
+  </body>
+</html>

@@ -4,6 +4,8 @@
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/data/token-usage.json", "destination": "/api/token-usage" },
+    { "source": "/feud", "destination": "/feud/index.html" },
+    { "source": "/feud/", "destination": "/feud/index.html" },
     { "source": "/tokenmaxxing", "destination": "/tokenmaxxing/index.html" },
     { "source": "/tokenmaxxing/", "destination": "/tokenmaxxing/index.html" },
     { "source": "/school", "destination": "/school/index.html" },
